@@ -1,0 +1,102 @@
+{#
+  @file
+  Template for rendering a 3D Flipbox using vanilla JavaScript in a Drupal Views style plugin.
+
+  This template provides a structured way to render content as a 3D flipbox with accessibility considerations.
+
+  Available options:
+  - unique_id: A unique identifier for the flipbox.
+  - flip_trigger: The event that triggers the flip (click or hover).
+  - flip_direction: The direction of the flip (horizontal or vertical).
+  - flip_speed: The speed of the flip animation.
+  - front_bg_color: The background color for the front side.
+  - back_bg_color: The background color for the back side.
+  - enable_perspective: Whether 3D perspective is enabled.
+  - animation_easing: The easing function for the animation.
+  - available_breakpoints: Option to disable the flip effect entirely.
+
+  @see template_preprocess_views_view_vvjf_flipbox()
+#}
+
+{% set unique_id = options.unique_id %}
+{% set flip_id = 'pb-' ~ unique_id %}
+
+{# Retrieve additional options for use in the template. #}
+{% set box_width = options.box_width %}
+{% set flip_trigger = options.flip_trigger %}
+{% set flip_speed = options.flip_speed %}
+{% set flip_direction = options.flip_direction %}
+{% set front_bg_color = options.front_bg_color %}
+{% set back_bg_color = options.back_bg_color %}
+{% set enable_perspective = options.enable_perspective %}
+{% set animation_easing = options.animation_easing %}
+{% set box_height = options.box_height %}
+
+{# Set the classes for the flipbox based on the provided options. #}
+{% set classes = [
+  'vvjf',
+  flip_trigger,
+  flip_direction,
+] %}
+
+{# Render the main flipbox container. #}
+<div {{ attributes.addClass(classes).setAttribute('id', flip_id) }}
+     data-flip-trigger="{{ flip_trigger }}"
+     data-breakpoints="{{ options.available_breakpoints }}"
+     role="region"
+     aria-labelledby="{{ flip_id }}-label"
+     tabindex="0">
+
+  <h2 id="{{ flip_id }}-label" class="visually-hidden">
+    {{ 'Flipbox Container'|t }}
+  </h2>
+
+  <div class="flipbox-inner"
+       {% if box_width %}
+       style="display: grid; grid-template-columns: repeat(auto-fill, minmax({{ box_width }}px, 1fr));"
+       {% endif %}>
+
+    {% for key, row in rows %}
+      {% set row_content = row.content|render %}
+
+      {# Split the content to separate front and back sides. #}
+      {% set split_content = row_content|split('<div class="vvjf-separator"></div>') %}
+      {% set front_content = split_content[0] %}
+      {% set back_content = split_content[1]|default('') %}
+
+      <div class="flipbox-item {{ flip_direction }}"
+           style="height: {{ box_height }}px; perspective: {{ enable_perspective ? '1600px' : 'none' }};">
+
+        <div class="flipbox-item-inner"
+             style="transition: transform {{ flip_speed }}s {{ animation_easing }};">
+
+          <div class="flipbox-front {{ flip_direction }}"
+               style="background-color: {{ front_bg_color }};"
+               role="group"
+               aria-labelledby="{{ flip_id }}-front-{{ key }}"
+               aria-hidden="false">
+
+            <h3 id="{{ flip_id }}-front-{{ key }}" class="visually-hidden">
+              {{ 'Front Side Content'|t }}
+            </h3>
+            {{ front_content|safe_html }}
+          </div>
+
+          <div class="flipbox-back {{ flip_direction }}"
+               style="background-color: {{ back_bg_color }};"
+               role="group"
+               aria-labelledby="{{ flip_id }}-back-{{ key }}"
+               aria-hidden="true">
+
+            <h3 id="{{ flip_id }}-back-{{ key }}" class="visually-hidden">
+              {{ 'Back Side Content'|t }}
+            </h3>
+            {{ back_content|safe_html }}
+          </div>
+
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+</div>

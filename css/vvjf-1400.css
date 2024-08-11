@@ -1,0 +1,43 @@
+/**
+ * @file
+ * Views Tabs
+ *
+ * Filename:     vvjf-1400.css
+ * Website:      https://www.flashwebcenter.com
+ * Developer:    Alaa Haddad https://www.alaahaddad.com.
+ */
+
+@media (max-width: 87.5rem) {
+  .vvjf {
+    display: block;
+  }
+
+  .vvjf .flipbox-inner,
+  .vvjf .flipbox-item,
+  .vvjf .flipbox-item-inner {
+    display: block;
+    height: auto !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .vvjf .flipbox-front,
+  .vvjf .flipbox-back {
+    position: static;
+    display: block;
+    height: auto !important;
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
+  }
+
+  .vvjf.vertical .flipbox-item-inner.flipped,
+  .vvjf.horizontal .flipbox-item-inner.flipped {
+    transform: none !important;
+  }
+
+  .vvjf.vertical.hover .flipbox-item-inner:hover,
+  .vvjf.horizontal.hover .flipbox-item-inner:hover {
+    transform: none !important;
+    transition: none !important;
+  }
+}

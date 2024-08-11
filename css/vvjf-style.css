@@ -1,0 +1,30 @@
+/**
+ * @file
+ * VVj Flipbox.
+ *
+ * Filename:     vvjf-style.css
+ * Website:      https://www.flashwebcenter.com
+ * Developer:    Alaa Haddad https://www.alaahaddad.com.
+ */
+/* Custom */
+.vvjf .flipbox-item {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+   ransition: box-shadow 0.3s ease-in-out;
+}
+
+.vvjf .flipbox-item:hover,
+.vvjf .flipbox-item:focus {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.vvjf .flipbox-front {
+  padding: 20px;
+}
+
+
+.vvjf .flipbox-back {
+  padding: 20px;
+  border-radius: 10px;
+}
+

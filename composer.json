@@ -1,0 +1,22 @@
+{
+    "name": "drupal/vvjf",
+    "description": "Provides a Vanilla Javascript Flipbox format for Views.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Alaa Haddad (alaahaddad.com)",
+            "homepage": "https://www.drupal.org/u/flashwebcenter",
+            "role": "Maintainer"
+        }
+    ],
+    "homepage": "https://drupal.org/project/vvjf",
+    "require": {
+        "drupal/core": "*"
+    },
+    "support": {
+        "issues": "https://drupal.org/project/issues/vvjf",
+        "source": "https://git.drupalcode.org/project/vvjf"
+    }
+}
