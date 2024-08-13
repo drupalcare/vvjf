@@ -11,7 +11,7 @@
   - flip_speed: The speed of the flip animation.
   - front_bg_color: The background color for the front side.
   - back_bg_color: The background color for the back side.
-  - enable_perspective: Whether 3D perspective is enabled.
+  - perspective: Whether 3D perspective is enabled.
   - animation_easing: The easing function for the animation.
   - available_breakpoints: Option to disable the flip effect entirely.
 
@@ -19,16 +19,17 @@
 #}
 
 {% set unique_id = options.unique_id %}
-{% set flip_id = 'pb-' ~ unique_id %}
+{% set flip_id = 'vvjf-' ~ unique_id %}
 
 {# Retrieve additional options for use in the template. #}
+{% set grid_gap = options.grid_gap %}
 {% set box_width = options.box_width %}
 {% set flip_trigger = options.flip_trigger %}
 {% set flip_speed = options.flip_speed %}
 {% set flip_direction = options.flip_direction %}
 {% set front_bg_color = options.front_bg_color %}
 {% set back_bg_color = options.back_bg_color %}
-{% set enable_perspective = options.enable_perspective %}
+{% set perspective = options.perspective %}
 {% set animation_easing = options.animation_easing %}
 {% set box_height = options.box_height %}
 
@@ -50,11 +51,8 @@
   <h2 id="{{ flip_id }}-label" class="visually-hidden">
     {{ 'Flipbox Container'|t }}
   </h2>
+<div class="flipbox-inner" {% if box_width > 0 or grid_gap > 0 %} style="{% if box_width > 0 %}grid-template-columns: repeat(auto-fill, minmax({{ box_width }}px, 1fr));{% endif %}{% if grid_gap > 0 %} gap: {{ options.grid_gap }}px;{% endif %}"{% endif %}>
 
-  <div class="flipbox-inner"
-       {% if box_width %}
-       style="display: grid; grid-template-columns: repeat(auto-fill, minmax({{ box_width }}px, 1fr));"
-       {% endif %}>
 
     {% for key, row in rows %}
       {% set row_content = row.content|render %}
@@ -65,7 +63,7 @@
       {% set back_content = split_content[1]|default('') %}
 
       <div class="flipbox-item {{ flip_direction }}"
-           style="height: {{ box_height }}px; perspective: {{ enable_perspective ? '1600px' : 'none' }};">
+           style="height: {{ box_height }}px;{% if perspective != 0 %} perspective: {{ perspective }}px;{% endif %}">
 
         <div class="flipbox-item-inner"
              style="transition: transform {{ flip_speed }}s {{ animation_easing }};">

@@ -53,10 +53,10 @@ function vvjf_views_data_alter(array &$data): void {
         'label' => t('Back Background Color'),
         'description' => t('The background color for the back side of the flipbox.'),
       ],
-      'enable_perspective' => [
-        'type' => 'boolean',
-        'label' => t('Enable 3D Perspective'),
-        'description' => t('Whether 3D perspective is enabled.'),
+      'perspective' => [
+        'type' => 'integer',
+        'label' => t('Perspective'),
+        'description' => t('Update the 3D perspective.'),
       ],
       'animation_easing' => [
         'type' => 'string',
@@ -68,6 +68,13 @@ function vvjf_views_data_alter(array &$data): void {
         'label' => t('Enable CSS Library'),
         'description' => t('Check this box to include the CSS library for styling the flipbox.'),
       ],
+      'grid_gap' => [
+        'title' => t('Grid Gap (px)'),
+        'help' => t('Set the gap between grid in pixels.'),
+        'field' => [
+          'id' => 'numeric',
+        ],
+      ],
       'available_breakpoints' => [
         'type' => 'string',
         'label' => t('Responsive Breakpoints'),
@@ -76,4 +83,3 @@ function vvjf_views_data_alter(array &$data): void {
     ],
   ];
 }
-

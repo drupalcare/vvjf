@@ -6,10 +6,13 @@
  * Website:      https://www.flashwebcenter.com
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
-
-@media (max-width: 36rem) {
+@media (max-width:36rem) {
   .vvjf {
     display: block;
+  }
+
+  .vvjf.click .flipbox-item-inner {
+    cursor: initial;
   }
 
   .vvjf .flipbox-inner,
@@ -21,9 +24,15 @@
     transition: none !important;
   }
 
+  .vvjf .flipbox-inner {
+    display: grid;
+  }
+
   .vvjf .flipbox-front,
   .vvjf .flipbox-back {
-    position: static;
+    transform: none !important;
+    transition: none !important;
+    position: initial;
     display: block;
     height: auto !important;
     backface-visibility: visible !important;
@@ -40,4 +49,5 @@
     transform: none !important;
     transition: none !important;
   }
+
 }

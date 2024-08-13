@@ -11,6 +11,10 @@
     display: block;
   }
 
+  .vvjf.click .flipbox-item-inner {
+    cursor: initial;
+  }
+
   .vvjf .flipbox-inner,
   .vvjf .flipbox-item,
   .vvjf .flipbox-item-inner {
@@ -18,6 +22,10 @@
     height: auto !important;
     transform: none !important;
     transition: none !important;
+  }
+
+  .vvjf .flipbox-inner {
+    display: grid;
   }
 
   .vvjf .flipbox-front,

@@ -10,7 +10,7 @@
 .vvjf .flipbox-item {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-   ransition: box-shadow 0.3s ease-in-out;
+  overflow: hidden;
 }
 
 .vvjf .flipbox-item:hover,
@@ -18,13 +18,11 @@
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
-.vvjf .flipbox-front {
-  padding: 20px;
+.vvjf .flipbox-item-inner > div {
+  padding: 16px;
+  overflow: hidden;
 }
 
-
-.vvjf .flipbox-back {
-  padding: 20px;
-  border-radius: 10px;
+.vvjf .flipbox-inner {
+  padding: 16px;
 }
-

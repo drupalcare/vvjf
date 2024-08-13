@@ -34,16 +34,18 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
   protected function defineOptions(): array {
     $options = parent::defineOptions();
     $options['unique_id'] = ['default' => $this->generateUniqueId()];
-    $options['flip_trigger'] = ['default' => 'hover'];
-    $options['flip_direction'] = ['default' => 'horizontal'];
-    $options['flip_speed'] = ['default' => '0.6s'];
-    $options['front_bg_color'] = ['default' => '#bbb'];
-    $options['back_bg_color'] = ['default' => '#2980b9'];
-    $options['enable_perspective'] = ['default' => TRUE];
-    $options['available_breakpoints'] = ['default' => ['none']];
+    $options['flip_trigger'] = ['default' => 'click'];
+    $options['flip_direction'] = ['default' => 'vertical'];
+    $options['flip_speed'] = ['default' => '0.9'];
+    $options['front_bg_color'] = ['default' => '#f0fbff'];
+    $options['back_bg_color'] = ['default' => '#b8e7ff'];
+    $options['perspective'] = ['default' => 1600];
+    $options['available_breakpoints'] = ['default' => '576'];
     $options['animation_easing'] = ['default' => 'ease'];
+    $options['grid_gap'] = ['default' => 16];
     $options['enable_css'] = ['default' => TRUE];
-    $options['box_height'] = ['default' => 400];
+    $options['box_height'] = ['default' => 250];
+    $options['box_width'] = ['default' => 300];
     return $options;
   }
 
@@ -58,7 +60,6 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
       '#markup' => '<div class="messages messages--warning">' . $this->t('Note: The first field will be used as the front card, and the rest of the fields will be used as the back card. To see an example, check the vvjf_example view by clicking <a href="/admin/structure/views/view/vvjf_example" style="display: inline;">here</a> to edit it.', ['@url' => Url::fromRoute('entity.view.edit_form', ['view' => 'vvjf_example'])->toString()]) . '</div>',
     ];
 
-    // Responsive breakpoints configuration.
     $form['available_breakpoints'] = [
       '#type' => 'select',
       '#title' => $this->t('Available Breakpoints for Parallax'),
@@ -79,23 +80,29 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
       '#title' => $this->t('Box Height (in pixels)'),
       '#default_value' => $this->options['box_height'],
       '#description' => $this->t('Specify the height of the flip box in pixels.'),
-    // Minimum value allowed.
-      '#min' => 1,
-    // Increment step.
+      '#min' => 100,
       '#step' => 1,
       '#required' => TRUE,
     ];
 
     $form['box_width'] = [
       '#type' => 'number',
-      '#title' => $this->t('Box Width (px)'),
+      '#title' => $this->t('Box Min Width (px)'),
       '#default_value' => $this->options['box_width'],
-      '#description' => $this->t('Defines the minimum width for each grid box (flipbox). The grid automatically adjusts the number of columns to fit the available space, ensuring responsive and flexible layout.'),
+      '#description' => $this->t('Defines the minimum width for each grid box (flipbox). The grid automatically adjusts the number of columns to fit the available space, ensuring responsive and flexible layout. Enter "0" to disable this field.'),
+      '#step' => 1,
+      '#min' => 0,
+    ];
+
+    $form['grid_gap'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Grid Gap (px)'),
+      '#default_value' => $this->options['grid_gap'],
+      '#description' => $this->t('Set the gap between grid in pixels.'),
       '#step' => 1,
       '#min' => 1,
     ];
 
-    // Flip Trigger Option.
     $form['flip_trigger'] = [
       '#type' => 'select',
       '#title' => $this->t('Flip Trigger'),
@@ -107,7 +114,6 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
       '#description' => $this->t('Choose whether the flip box flips on hover or click.'),
     ];
 
-    // Flip Direction.
     $form['flip_direction'] = [
       '#type' => 'select',
       '#title' => $this->t('Flip Direction'),
@@ -119,7 +125,6 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
       '#description' => $this->t('Select the direction of the flip animation.'),
     ];
 
-    // Flip Speed.
     $form['flip_speed'] = [
       '#type' => 'number',
       '#title' => $this->t('Flip Speed'),
@@ -130,7 +135,6 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
       '#max' => 2,
     ];
 
-    // Front Side Background Color.
     $form['front_bg_color'] = [
       '#type' => 'color',
       '#title' => $this->t('Front Side Background Color'),
@@ -138,7 +142,6 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
       '#description' => $this->t('Select the background color for the front side of the flip box.'),
     ];
 
-    // Back Side Background Color.
     $form['back_bg_color'] = [
       '#type' => 'color',
       '#title' => $this->t('Back Side Background Color'),
@@ -146,15 +149,15 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
       '#description' => $this->t('Select the background color for the back side of the flip box.'),
     ];
 
-    // Enable/Disable 3D Perspective.
-    $form['enable_perspective'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Enable 3D Perspective'),
-      '#default_value' => $this->options['enable_perspective'],
-      '#description' => $this->t('Check this box to enable the 3D perspective effect.'),
+    $form['perspective'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Perspective'),
+      '#default_value' => $this->options['perspective'],
+      '#min' => 0,
+      '#description' => $this->t('The details of perspective may change based on the width of item in the 3D Flipbox. By default, this setting adjusts with each width selection.'),
+      '#required' => FALSE,
     ];
 
-    // Animation Easing Options.
     $form['animation_easing'] = [
       '#type' => 'select',
       '#title' => $this->t('Animation Easing'),

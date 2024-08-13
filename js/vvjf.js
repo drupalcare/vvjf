@@ -14,23 +14,26 @@
       flipboxes.forEach(flipbox => {
         const breakpoints = flipbox.getAttribute('data-breakpoints');
         const trigger = flipbox.getAttribute('data-flip-trigger');
+        const parsedBreakpoint = parseInt(breakpoints, 10);
+        const isBreakpointValid = !isNaN(parsedBreakpoint);
 
         function updateAccessibility(frontSide, backSide, isFlipped) {
-          frontSide.setAttribute('aria-hidden', isFlipped ? 'true' : 'false');
-          backSide.setAttribute('aria-hidden', isFlipped ? 'false' : 'true');
+          if (frontSide && backSide) {
+            frontSide.setAttribute('aria-hidden', isFlipped ? 'true' : 'false');
+            backSide.setAttribute('aria-hidden', isFlipped ? 'false' : 'true');
 
-          const frontTabbables = frontSide.querySelectorAll('a, button, input, select, textarea, [tabindex]');
-          const backTabbables = backSide.querySelectorAll('a, button, input, select, textarea, [tabindex]');
+            const frontTabbables = frontSide.querySelectorAll('a, button, input, select, textarea, [tabindex]');
+            const backTabbables = backSide.querySelectorAll('a, button, input, select, textarea, [tabindex]');
 
-          frontTabbables.forEach(el => el.setAttribute('tabindex', isFlipped ? '-1' : '0'));
-          backTabbables.forEach(el => el.setAttribute('tabindex', isFlipped ? '0' : '-1'));
+            frontTabbables.forEach(el => el.setAttribute('tabindex', isFlipped ? '-1' : '0'));
+            backTabbables.forEach(el => el.setAttribute('tabindex', isFlipped ? '0' : '-1'));
+          }
         }
 
         function applyFlipboxBehavior() {
           const currentWidth = window.innerWidth;
 
-          // Check if the current width meets the criteria for applying the flipbox behavior
-          if (breakpoints === 'none' || currentWidth >= parseInt(breakpoints, 10)) {
+          if (breakpoints === 'none' || (isBreakpointValid && currentWidth >= parsedBreakpoint)) {
             activateFlipbox(flipbox);
           } else {
             deactivateFlipbox(flipbox);
@@ -39,16 +42,20 @@
 
         function activateFlipbox(flipbox) {
           const flipboxItems = flipbox.querySelectorAll('.flipbox-item-inner');
+          if (!flipboxItems.length) return;
 
           flipboxItems.forEach(inner => {
             const frontSide = inner.querySelector('.flipbox-front');
             const backSide = inner.querySelector('.flipbox-back');
+            if (!frontSide || !backSide) return;
 
             function handleMouseEnter() {
+              inner.classList.add('flipped');
               updateAccessibility(frontSide, backSide, true);
             }
 
             function handleMouseLeave() {
+              inner.classList.remove('flipped');
               updateAccessibility(frontSide, backSide, false);
             }
 
@@ -76,13 +83,14 @@
 
             inner.addEventListener('keydown', handleKeyDown);
 
-            // Store the event handlers for later removal if necessary
             inner.flipboxHandlers = { handleMouseEnter, handleMouseLeave, handleClick, handleKeyDown };
           });
         }
 
         function deactivateFlipbox(flipbox) {
           const flipboxItems = flipbox.querySelectorAll('.flipbox-item-inner');
+          if (!flipboxItems.length) return;
+
           flipboxItems.forEach(inner => {
             inner.classList.remove('flipped');
             if (inner.flipboxHandlers) {
@@ -97,6 +105,8 @@
 
         function resetFlippedOnResize() {
           const flipboxItems = flipbox.querySelectorAll('.flipbox-item-inner');
+          if (!flipboxItems.length) return;
+
           flipboxItems.forEach(inner => {
             if (inner.classList.contains('flipped')) {
               inner.classList.remove('flipped');
@@ -105,19 +115,45 @@
               updateAccessibility(frontSide, backSide, false);
             }
           });
-          // Reapply event listeners after reset
           activateFlipbox(flipbox);
+        }
+
+        // Throttle the resize event handler
+        function throttle(func, limit) {
+          let lastFunc;
+          let lastRan;
+          return function() {
+            const context = this;
+            const args = arguments;
+            if (!lastRan) {
+              func.apply(context, args);
+              lastRan = Date.now();
+            } else {
+              clearTimeout(lastFunc);
+              lastFunc = setTimeout(function() {
+                if (Date.now() - lastRan >= limit) {
+                  func.apply(context, args);
+                  lastRan = Date.now();
+                }
+              }, limit - (Date.now() - lastRan));
+            }
+          };
         }
 
         // Initial check on load
         applyFlipboxBehavior();
 
-        // Check on window resize
-        window.addEventListener('resize', () => {
+        // Throttled resize event listener
+        const resizeHandler = throttle(() => {
           resetFlippedOnResize();
-          applyFlipboxBehavior(); // Ensure behavior is reapplied after resize
-        });
+          applyFlipboxBehavior();
+        }, 200);
+
+        window.addEventListener('resize', resizeHandler);
       });
     }
   };
 })(Drupal, drupalSettings, once);
+
+
+
