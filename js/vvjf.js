@@ -33,7 +33,7 @@
         function applyFlipboxBehavior() {
           const currentWidth = window.innerWidth;
 
-          if (breakpoints === 'none' || (isBreakpointValid && currentWidth >= parsedBreakpoint)) {
+          if (breakpoints === 'all' || (isBreakpointValid && currentWidth >= parsedBreakpoint)) {
             activateFlipbox(flipbox);
           } else {
             deactivateFlipbox(flipbox);
@@ -72,6 +72,13 @@
               }
             }
 
+            // Remove existing event listeners to prevent duplication
+            inner.removeEventListener('mouseenter', inner.flipboxHandlers?.handleMouseEnter);
+            inner.removeEventListener('mouseleave', inner.flipboxHandlers?.handleMouseLeave);
+            inner.removeEventListener('click', inner.flipboxHandlers?.handleClick);
+            inner.removeEventListener('keydown', inner.flipboxHandlers?.handleKeyDown);
+
+            // Attach event listeners based on the trigger type
             if (trigger === 'hover') {
               inner.addEventListener('mouseenter', handleMouseEnter);
               inner.addEventListener('mouseleave', handleMouseLeave);
@@ -115,7 +122,40 @@
               updateAccessibility(frontSide, backSide, false);
             }
           });
-          activateFlipbox(flipbox);
+        }
+
+        function updateAriaHiddenBasedOnWidth() {
+          const currentWidth = window.innerWidth;
+          const flipboxItems = flipbox.querySelectorAll('.flipbox-item-inner');
+
+          flipboxItems.forEach(inner => {
+            const frontSide = inner.querySelector('.flipbox-front');
+            const backSide = inner.querySelector('.flipbox-back');
+
+            if (currentWidth < parsedBreakpoint) {
+              // Small screen: both sides visible, disable flipping
+              frontSide.setAttribute('aria-hidden', 'false');
+              backSide.setAttribute('aria-hidden', 'false');
+
+              // Remove flip classes and event listeners
+              if (inner.classList.contains('flipped')) {
+                inner.classList.remove('flipped');
+              }
+              inner.removeEventListener('mouseenter', inner.flipboxHandlers?.handleMouseEnter);
+              inner.removeEventListener('mouseleave', inner.flipboxHandlers?.handleMouseLeave);
+              inner.removeEventListener('click', inner.flipboxHandlers?.handleClick);
+              inner.removeEventListener('keydown', inner.flipboxHandlers?.handleKeyDown);
+
+            } else {
+              // Large screen: standard behavior
+              const isFlipped = inner.classList.contains('flipped');
+              frontSide.setAttribute('aria-hidden', isFlipped ? 'true' : 'false');
+              backSide.setAttribute('aria-hidden', isFlipped ? 'false' : 'true');
+
+              // Reattach event listeners
+              activateFlipbox(flipbox);
+            }
+          });
         }
 
         // Throttle the resize event handler
@@ -142,11 +182,13 @@
 
         // Initial check on load
         applyFlipboxBehavior();
+        updateAriaHiddenBasedOnWidth();
 
         // Throttled resize event listener
         const resizeHandler = throttle(() => {
           resetFlippedOnResize();
           applyFlipboxBehavior();
+          updateAriaHiddenBasedOnWidth();
         }, 200);
 
         window.addEventListener('resize', resizeHandler);
@@ -154,6 +196,3 @@
     }
   };
 })(Drupal, drupalSettings, once);
-
-
-

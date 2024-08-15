@@ -64,7 +64,7 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
       '#type' => 'select',
       '#title' => $this->t('Available Breakpoints for Parallax'),
       '#options' => [
-        'none' => $this->t('Active on all screens'),
+        'all' => $this->t('Active on all screens'),
         '576' => $this->t('576px / 36rem'),
         '768' => $this->t('768px / 48rem'),
         '992' => $this->t('992px / 62rem'),
@@ -154,6 +154,7 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
       '#title' => $this->t('Perspective'),
       '#default_value' => $this->options['perspective'],
       '#min' => 0,
+      '#step' => 10,  // Step increment of 10
       '#description' => $this->t('The details of perspective may change based on the width of item in the 3D Flipbox. By default, this setting adjusts with each width selection.'),
       '#required' => FALSE,
     ];
@@ -213,7 +214,7 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
     }
 
     // Conditionally include the CSS library based on the option.
-    if ($this->options['available_breakpoints'] != 'none') {
+    if ($this->options['available_breakpoints']) {
       // Include the vvjp-style library.
       $libraries[] = 'vvjf/vvjf__' . $this->options['available_breakpoints'];
     }
