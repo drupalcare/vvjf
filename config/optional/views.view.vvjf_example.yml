@@ -11,7 +11,7 @@ dependencies:
 id: vvjf_example
 label: 'VVJF Example'
 module: views
-description: 'Render items in Vanilla JavaScript Flipbox.'
+description: 'Render items in Vanilla JavaScript 3D Flipbox.'
 tag: ''
 base_table: node_field_data
 base_field: nid
