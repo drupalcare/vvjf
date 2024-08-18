@@ -7,6 +7,10 @@
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
 @media (min-width:62rem) {
+  .vvjf .flipbox-item {
+    cursor: pointer;
+  }
+
   .vvjf .flipbox-item-inner {
     position: relative;
     width: 100%;
@@ -57,7 +61,7 @@
 @media (max-width:62rem) {
   .vvjf .flipbox-item {
     height: auto !important;
-    perspective: none!;
+    perspective: none !important;
   }
 
   .vvjf .flipbox-item-inner {
