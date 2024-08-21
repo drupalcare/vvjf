@@ -154,7 +154,7 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
       '#title' => $this->t('Perspective'),
       '#default_value' => $this->options['perspective'],
       '#min' => 0,
-      '#step' => 10,  // Step increment of 10
+      '#step' => 10,
       '#description' => $this->t('The details of perspective may change based on the width of item in the 3D Flipbox. By default, this setting adjusts with each width selection.'),
       '#required' => FALSE,
     ];
