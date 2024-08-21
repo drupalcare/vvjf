@@ -13,20 +13,34 @@
 
       flipboxes.forEach(flipbox => {
         const breakpoints = flipbox.getAttribute('data-breakpoints');
-        const trigger = flipbox.getAttribute('data-flip-trigger');
+        const trigger = flipbox.getAttribute('data-flip-trigger'); // Either 'hover' or 'click'
         const parsedBreakpoint = parseInt(breakpoints, 10);
         const isBreakpointValid = !isNaN(parsedBreakpoint);
 
         function updateAccessibility(frontSide, backSide, isFlipped) {
           if (frontSide && backSide) {
-            frontSide.setAttribute('aria-hidden', isFlipped ? 'true' : 'false');
-            backSide.setAttribute('aria-hidden', isFlipped ? 'false' : 'true');
+            const frontAriaHidden = isFlipped ? 'true' : 'false';
+            const backAriaHidden = isFlipped ? 'false' : 'true';
 
-            const frontTabbables = frontSide.querySelectorAll('a, button, input, select, textarea, [tabindex]');
-            const backTabbables = backSide.querySelectorAll('a, button, input, select, textarea, [tabindex]');
+            // Set aria-hidden and tabindex based on the flipped state
+            frontSide.setAttribute('aria-hidden', frontAriaHidden);
+            backSide.setAttribute('aria-hidden', backAriaHidden);
 
-            frontTabbables.forEach(el => el.setAttribute('tabindex', isFlipped ? '-1' : '0'));
-            backTabbables.forEach(el => el.setAttribute('tabindex', isFlipped ? '0' : '-1'));
+            frontSide.setAttribute('tabindex', frontAriaHidden === 'true' ? '-1' : '0');
+            backSide.setAttribute('tabindex', backAriaHidden === 'true' ? '-1' : '0');
+
+            // Adjust tabbable elements based on trigger and flipped state
+            frontSide.querySelectorAll('a, button, input, select, textarea, [tabindex]').forEach(el => {
+              el.setAttribute('tabindex', isFlipped ? '-1' : '0');
+            });
+
+            backSide.querySelectorAll('a, button, input, select, textarea, [tabindex]').forEach(el => {
+              if (trigger === 'click') {
+                el.setAttribute('tabindex', isFlipped ? '-1' : '0');
+              } else if (trigger === 'hover') {
+                el.setAttribute('tabindex', isFlipped ? '0' : '-1');
+              }
+            });
           }
         }
 
@@ -52,7 +66,7 @@
 
           if (breakpoints === 'all' || (isBreakpointValid && currentWidth >= parsedBreakpoint)) {
             activateFlipbox(flipbox);
-            disableLinksInsideFlipbox(flipbox, true); // Disable links when active
+            disableLinksInsideFlipbox(flipbox, trigger === 'click'); // Disable links when active and triggered by click
           } else {
             deactivateFlipbox(flipbox);
             disableLinksInsideFlipbox(flipbox, false); // Re-enable links when inactive
@@ -156,6 +170,14 @@
               frontSide.setAttribute('aria-hidden', 'false');
               backSide.setAttribute('aria-hidden', 'false');
 
+              // Remove tabindex from both sides
+              frontSide.removeAttribute('tabindex');
+              backSide.removeAttribute('tabindex');
+
+              // Ensure all elements are tabbable
+              const allTabbables = flipbox.querySelectorAll('a, button, input, select, textarea, [tabindex]');
+              allTabbables.forEach(el => el.setAttribute('tabindex', '0'));
+
               // Remove flip classes and event listeners
               if (inner.classList.contains('flipped')) {
                 inner.classList.remove('flipped');
@@ -170,12 +192,31 @@
             } else {
               // Large screen: standard behavior
               const isFlipped = inner.classList.contains('flipped');
-              frontSide.setAttribute('aria-hidden', isFlipped ? 'true' : 'false');
-              backSide.setAttribute('aria-hidden', isFlipped ? 'false' : 'true');
+              const frontAriaHidden = isFlipped ? 'true' : 'false';
+              const backAriaHidden = isFlipped ? 'false' : 'true';
+
+              frontSide.setAttribute('aria-hidden', frontAriaHidden);
+              backSide.setAttribute('aria-hidden', backAriaHidden);
+
+              frontSide.setAttribute('tabindex', frontAriaHidden === 'true' ? '-1' : '0');
+              backSide.setAttribute('tabindex', backAriaHidden === 'true' ? '-1' : '0');
+
+              // Adjust tabbable elements based on trigger and flipped state
+              frontSide.querySelectorAll('a, button, input, select, textarea, [tabindex]').forEach(el => {
+                el.setAttribute('tabindex', isFlipped ? '-1' : '0');
+              });
+
+              backSide.querySelectorAll('a, button, input, select, textarea, [tabindex]').forEach(el => {
+                if (trigger === 'click') {
+                  el.setAttribute('tabindex', isFlipped ? '-1' : '0');
+                } else if (trigger === 'hover') {
+                  el.setAttribute('tabindex', isFlipped ? '0' : '-1');
+                }
+              });
 
               // Reattach event listeners
               activateFlipbox(flipbox);
-              disableLinksInsideFlipbox(flipbox, true); // Disable links on large screens
+              disableLinksInsideFlipbox(flipbox, trigger === 'click'); // Disable links on large screens when clicked
             }
           });
         }
@@ -218,5 +259,4 @@
     }
   };
 })(Drupal, drupalSettings, once);
-
 
