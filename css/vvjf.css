@@ -18,9 +18,16 @@
   white-space: nowrap;
 }
 
-.vvjf,
-.vvjf * {
+.vvj-flipbox,
+.vvj-flipbox * {
   box-sizing: border-box;
+}
+
+.vvj-flipbox,
+.vvj-flipbox .view-content {
+  width: 100%;
+  min-width: 100%;
+  display: block!important;
 }
 
 .vvjf {
