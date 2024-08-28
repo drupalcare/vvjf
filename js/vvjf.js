@@ -9,11 +9,12 @@
 (function (Drupal, drupalSettings, once) {
   Drupal.behaviors.VVJFlipbox = {
     attach: function (context, settings) {
+      // Use 'once' to ensure the behavior is applied only once per element.
       const flipboxes = once('vvjFlipbox', '.vvjf', context);
 
       flipboxes.forEach(flipbox => {
         const breakpoints = flipbox.getAttribute('data-breakpoints');
-        const trigger = flipbox.getAttribute('data-flip-trigger'); // Either 'hover' or 'click'
+        const trigger = flipbox.getAttribute('data-flip-trigger');
         const parsedBreakpoint = parseInt(breakpoints, 10);
         const isBreakpointValid = !isNaN(parsedBreakpoint);
 
@@ -259,4 +260,3 @@
     }
   };
 })(Drupal, drupalSettings, once);
-

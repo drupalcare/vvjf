@@ -6,7 +6,7 @@
  * Website:      https://www.flashwebcenter.com
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
-.vvjf .flipbox-item-inner {
+.vvjf.br-all .flipbox-item-inner {
   position: relative;
   width: 100%;
   height: 100%;
@@ -15,26 +15,26 @@
   will-change: transform;
 }
 
-.vvjf.vertical .flipbox-item-inner.flipped {
+.vvjf.br-all.vertical .flipbox-item-inner.flipped {
   transform: rotateX(180deg);
 }
 
-.vvjf.horizontal .flipbox-item-inner.flipped {
+.vvjf.br-all.horizontal .flipbox-item-inner.flipped {
   transform: rotateY(180deg);
 }
 
-.vvjf.vertical.hover .flipbox-item-inner:hover {
+.vvjf.br-all.vertical.hover .flipbox-item-inner:hover {
   transform: rotateX(180deg);
   transition: transform 0.6s ease-in-out;
 }
 
-.vvjf.horizontal.hover .flipbox-item-inner:hover {
+.vvjf.br-all.horizontal.hover .flipbox-item-inner:hover {
   transform: rotateY(180deg);
   transition: transform 0.6s ease-in-out;
 }
 
-.vvjf .flipbox-front,
-.vvjf .flipbox-back {
+.vvjf.br-all .flipbox-front,
+.vvjf.br-all .flipbox-back {
   display: flex;
   position: absolute;
   width: 100%;
@@ -43,10 +43,10 @@
   backface-visibility: hidden !important;
 }
 
-.vvjf .flipbox-back.horizontal {
+.vvjf.br-all .flipbox-back.horizontal {
   transform: rotateY(180deg);
 }
 
-.vvjf .flipbox-back.vertical {
+.vvjf.br-all .flipbox-back.vertical {
   transform: rotateX(180deg);
 }

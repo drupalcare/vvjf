@@ -32,10 +32,12 @@
 {% set perspective = options.perspective %}
 {% set animation_easing = options.animation_easing %}
 {% set box_height = options.box_height %}
+{% set breakpoint = options.available_breakpoints %}
 
 {# Set the classes for the flipbox based on the provided options. #}
 {% set classes = [
   'vvjf',
+  'br-' ~ breakpoint,
   flip_trigger,
   flip_direction,
 ] %}
@@ -43,7 +45,7 @@
 {# Render the main flipbox container. #}
 <div {{ attributes.addClass(classes).setAttribute('id', flip_id) }}
      data-flip-trigger="{{ flip_trigger }}"
-     data-breakpoints="{{ options.available_breakpoints }}"
+     data-breakpoints="{{ breakpoint }}"
      role="region"
      aria-labelledby="{{ flip_id }}-label"
      tabindex="0">

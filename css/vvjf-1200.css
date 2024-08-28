@@ -7,11 +7,11 @@
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
 @media (min-width:75rem) {
-  .vvjf .flipbox-item {
+  .vvjf.br-1200 .flipbox-item {
     cursor: pointer;
   }
 
-  .vvjf .flipbox-item-inner {
+  .vvjf.br-1200 .flipbox-item-inner {
     position: relative;
     width: 100%;
     height: 100%;
@@ -20,26 +20,26 @@
     will-change: transform;
   }
 
-  .vvjf.vertical .flipbox-item-inner.flipped {
+  .vvjf.br-1200.vertical .flipbox-item-inner.flipped {
     transform: rotateX(180deg);
   }
 
-  .vvjf.horizontal .flipbox-item-inner.flipped {
+  .vvjf.br-1200.horizontal .flipbox-item-inner.flipped {
     transform: rotateY(180deg);
   }
 
-  .vvjf.vertical.hover .flipbox-item-inner:hover {
+  .vvjf.br-1200.vertical.hover .flipbox-item-inner:hover {
     transform: rotateX(180deg);
     transition: transform 0.6s ease-in-out;
   }
 
-  .vvjf.horizontal.hover .flipbox-item-inner:hover {
+  .vvjf.br-1200.horizontal.hover .flipbox-item-inner:hover {
     transform: rotateY(180deg);
     transition: transform 0.6s ease-in-out;
   }
 
-  .vvjf .flipbox-front,
-  .vvjf .flipbox-back {
+  .vvjf.br-1200 .flipbox-front,
+  .vvjf.br-1200 .flipbox-back {
     display: flex;
     position: absolute;
     width: 100%;
@@ -48,30 +48,30 @@
     backface-visibility: hidden !important;
   }
 
-  .vvjf .flipbox-back.horizontal {
+  .vvjf.br-1200 .flipbox-back.horizontal {
     transform: rotateY(180deg);
   }
 
-  .vvjf .flipbox-back.vertical {
+  .vvjf.br-1200 .flipbox-back.vertical {
     transform: rotateX(180deg);
   }
 
 }
 
 @media (max-width:75rem) {
-  .vvjf .flipbox-item {
+  .vvjf.br-1200 .flipbox-item {
     height: auto !important;
     perspective: none !important;
   }
 
-  .vvjf .flipbox-item-inner {
+  .vvjf.br-1200 .flipbox-item-inner {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     height: 100%;
   }
 
-  .vvjf .flipbox-item-inner > *:last-child {
+  .vvjf.br-1200 .flipbox-item-inner > *:last-child {
     align-self: stretch;
   }
 
