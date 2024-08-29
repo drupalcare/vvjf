@@ -39,7 +39,7 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
     $options['flip_speed'] = ['default' => '0.9'];
     $options['front_bg_color'] = ['default' => '#f0fbff'];
     $options['back_bg_color'] = ['default' => '#b8e7ff'];
-    $options['perspective'] = ['default' => 1600];
+    $options['perspective'] = ['default' => 1000];
     $options['available_breakpoints'] = ['default' => '576'];
     $options['animation_easing'] = ['default' => 'ease'];
     $options['grid_gap'] = ['default' => 16];
@@ -155,7 +155,7 @@ class ViewsVanillaJavascriptFlipbox extends StylePluginBase {
       '#default_value' => $this->options['perspective'],
       '#min' => 0,
       '#step' => 10,
-      '#description' => $this->t('The details of perspective may change based on the width of item in the 3D Flipbox. By default, this setting adjusts with each width selection.'),
+      '#description' => $this->t('The details of perspective may change based on the width of item in the 3D Flipbox. By default, this setting adjusts with each width selection. Set to zero to disable it.'),
       '#required' => FALSE,
     ];
 
