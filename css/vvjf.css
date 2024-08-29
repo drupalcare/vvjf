@@ -6,7 +6,7 @@
  * Website:      https://www.flashwebcenter.com
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
-.visually-hidden {
+.vvj-flipbox .visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -27,7 +27,7 @@
 .vvj-flipbox .view-content {
   width: 100%;
   min-width: 100%;
-  display: block!important;
+  display: block !important;
 }
 
 .vvjf {
@@ -46,4 +46,12 @@
   overflow: hidden;
   background-color: transparent;
   width: 100%;
+}
+
+.vvjf .flipbox-inner .flipbox-front {
+  background-color: var(--bg-color-front);
+}
+
+.vvjf .flipbox-inner .flipbox-back {
+  background-color: var(--bg-color-back);
 }

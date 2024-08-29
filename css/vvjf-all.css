@@ -6,6 +6,17 @@
  * Website:      https://www.flashwebcenter.com
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
+.vvjf.br-all .flipbox-inner {
+  grid-template-columns: repeat(auto-fill, minmax(calc(var(--box-width) * 1px), 1fr));
+  gap: calc(var(--grid-gap) * 1px);
+}
+
+.vvjf.br-all .flipbox-item {
+  cursor: pointer;
+  height: var(--box-height);
+  perspective: calc(var(--box-perspective) * 1px);
+}
+
 .vvjf.br-all .flipbox-item-inner {
   position: relative;
   width: 100%;

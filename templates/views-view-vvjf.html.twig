@@ -34,6 +34,18 @@
 {% set box_height = options.box_height %}
 {% set breakpoint = options.available_breakpoints %}
 
+{# Build the style attribute conditionally #}
+{% set style_attributes = [] %}
+{% if box_width > 0 %}
+  {% set style_attributes = style_attributes|merge(['--box-width: ' ~ box_width]) %}
+{% endif %}
+{% if grid_gap > 0 %}
+  {% set style_attributes = style_attributes|merge(['--grid-gap: ' ~ grid_gap]) %}
+{% endif %}
+
+{# Combine style attributes into a single string #}
+{% set style_string = style_attributes ? style_attributes|join('; ') : '' %}
+
 {# Set the classes for the flipbox based on the provided options. #}
 {% set classes = [
   'vvjf',
@@ -43,38 +55,21 @@
 ] %}
 
 {# Render the main flipbox container. #}
-<div {{ attributes.addClass(classes).setAttribute('id', flip_id) }}
-     data-flip-trigger="{{ flip_trigger }}"
-     data-breakpoints="{{ breakpoint }}"
-     role="region"
-     aria-labelledby="{{ flip_id }}-label"
-     tabindex="0">
-
+<div {{ attributes.addClass(classes).setAttribute('id', flip_id) }} data-flip-trigger="{{ flip_trigger }}" data-breakpoints="{{ breakpoint }}" role="region" aria-labelledby="{{ flip_id }}-label" tabindex="0">
   <h2 id="{{ flip_id }}-label" class="visually-hidden">
     {{ 'Flipbox Container'|t }}
   </h2>
-<div class="flipbox-inner" {% if box_width > 0 or grid_gap > 0 %} style="{% if box_width > 0 %}grid-template-columns: repeat(auto-fill, minmax({{ box_width }}px, 1fr));{% endif %}{% if grid_gap > 0 %} gap: {{ options.grid_gap }}px;{% endif %}"{% endif %}>
-
-
+  <div class="flipbox-inner"  {% if style_string %}style="{{ style_string }}"{% endif %}>
     {% for key, row in rows %}
       {% set row_content = row.content|render %}
-
       {# Split the content to separate front and back sides. #}
       {% set split_content = row_content|split('<div class="vvjf-separator"></div>') %}
       {% set front_content = split_content[0] %}
       {% set back_content = split_content[1]|default('') %}
+      <div class="flipbox-item {{ flip_direction }}" style="--box-height: {{ box_height > 0 ? box_height ~ 'px' : 'auto' }}; {% if perspective != 0 %} --box-perspective: {{ perspective }};{% endif %}">
+        <div class="flipbox-item-inner" style="transition: transform {{ flip_speed }}s {{ animation_easing }};">
 
-      <div class="flipbox-item {{ flip_direction }}"
-           style="height: {{ box_height }}px;{% if perspective != 0 %} perspective: {{ perspective }}px;{% endif %}">
-
-        <div class="flipbox-item-inner"
-             style="transition: transform {{ flip_speed }}s {{ animation_easing }};">
-
-          <div class="flipbox-front {{ flip_direction }}"
-               style="background-color: {{ front_bg_color }};"
-               role="group"
-               aria-labelledby="{{ flip_id }}-front-{{ key }}"
-               aria-hidden="false">
+          <div class="flipbox-front {{ flip_direction }}" style="--bg-color-front: {{ front_bg_color }};" role="group" aria-labelledby="{{ flip_id }}-front-{{ key }}" aria-hidden="false">
 
             <h3 id="{{ flip_id }}-front-{{ key }}" class="visually-hidden">
               {{ 'Front Side Content'|t }}
@@ -82,11 +77,7 @@
             {{ front_content|safe_html }}
           </div>
 
-          <div class="flipbox-back {{ flip_direction }}"
-               style="background-color: {{ back_bg_color }};"
-               role="group"
-               aria-labelledby="{{ flip_id }}-back-{{ key }}"
-               aria-hidden="true">
+          <div class="flipbox-back {{ flip_direction }}" style="--bg-color-back: {{ back_bg_color }};" role="group" aria-labelledby="{{ flip_id }}-back-{{ key }}" aria-hidden="true">
 
             <h3 id="{{ flip_id }}-back-{{ key }}" class="visually-hidden">
               {{ 'Back Side Content'|t }}
@@ -97,6 +88,5 @@
         </div>
       </div>
     {% endfor %}
-
   </div>
 </div>

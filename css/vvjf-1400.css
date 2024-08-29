@@ -7,8 +7,15 @@
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
 @media (min-width:87.5rem) {
+  .vvjf.br-1400 .flipbox-inner {
+    grid-template-columns: repeat(auto-fill, minmax(calc(var(--box-width) * 1px), 1fr));
+    gap: calc(var(--grid-gap) * 1px);
+  }
+
   .vvjf.br-1400 .flipbox-item {
     cursor: pointer;
+    height: var(--box-height);
+    perspective: var(--box-perspective);
   }
 
   .vvjf.br-1400 .flipbox-item-inner {
@@ -59,8 +66,13 @@
 }
 
 @media (max-width:87.5rem) {
+  .vvjf.br-1400 .flipbox-inner {
+    grid-template-columns: 1fr;
+    gap: calc(var(--grid-gap) * 1px);
+  }
+
   .vvjf.br-1400 .flipbox-item {
-    height: auto !important;
+    height: auto;
     perspective: none !important;
   }
 
