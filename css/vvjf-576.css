@@ -14,7 +14,7 @@
 
   .vvjf.br-576 .flipbox-item {
     cursor: pointer;
-    height: var(--box-height);
+    height: calc(var(--box-height) * 1px);
     perspective: calc(var(--box-perspective) * 1px);
   }
 

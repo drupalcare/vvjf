@@ -66,7 +66,7 @@
       {% set split_content = row_content|split('<div class="vvjf-separator"></div>') %}
       {% set front_content = split_content[0] %}
       {% set back_content = split_content[1]|default('') %}
-      <div class="flipbox-item {{ flip_direction }}" style="--box-height: {{ box_height > 0 ? box_height ~ 'px' : 'auto' }}; {% if perspective > 0 %} --box-perspective: {{ perspective }};{% endif %}">
+      <div class="flipbox-item {{ flip_direction }}" style="--box-height: {{ box_height > 0 ? box_height : 'auto' }}; {% if perspective > 0 %} --box-perspective: {{ perspective }};{% endif %}">
         <div class="flipbox-item-inner" style="transition: transform {{ flip_speed }}s {{ animation_easing }};">
 
           <div class="flipbox-front {{ flip_direction }}" style="--bg-color-front: {{ front_bg_color }};" role="group" aria-labelledby="{{ flip_id }}-front-{{ key }}" aria-hidden="false">
