@@ -28,7 +28,8 @@ After installing and enabling the module, you can configure it through the Views
 UI:
 
 1. **Flip Trigger**: Select whether the flip is triggered by hover or click.
-2. **Flip Direction**: Choose the direction of the flip (horizontal or vertical).
+2. **Flip Direction**: Choose the direction of the flip 
+(horizontal or vertical).
 3. **Flip Speed**: Set the speed of the flip animation (e.g., 0.6s).
 4. **Front/Back Background Colors**: Customize the background colors for the 
    front and back of the flipbox.
