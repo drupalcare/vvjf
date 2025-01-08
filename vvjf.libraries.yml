@@ -1,5 +1,4 @@
 vvjf:
-  version: VERSION
   css:
     theme:
       css/vvjf.css: { }
@@ -12,43 +11,36 @@ vvjf:
     - core/once
 
 vvjf__all:
-  version: VERSION
   css:
     theme:
       css/vvjf-all.css: { }
 
 vvjf-style:
-  version: VERSION
   css:
     theme:
       css/vvjf-style.css: { }
 
 vvjf__576:
-  version: VERSION
   css:
     theme:
       css/vvjf-576.css: { }
 
 vvjf__768:
-  version: VERSION
   css:
     theme:
       css/vvjf-768.css: { }
 
 vvjf__992:
-  version: VERSION
   css:
     theme:
       css/vvjf-992.css: { }
 
 vvjf__1200:
-  version: VERSION
   css:
     theme:
       css/vvjf-1200.css: { }
 
 vvjf__1400:
-  version: VERSION
   css:
     theme:
       css/vvjf-1400.css: { }
