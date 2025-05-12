@@ -65,7 +65,7 @@
 
 }
 
-@media (max-width:87.5rem) {
+@media (max-width:87.49875rem) {
   .vvjf.br-1400 .flipbox-inner {
     grid-template-columns: 1fr;
     gap: calc(var(--grid-gap) * 1px);
