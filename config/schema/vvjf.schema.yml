@@ -1,0 +1,43 @@
+views.style.views_vvjf:
+  type: views_style
+  label: 'Views Vanilla JavaScript 3D Flipbox'
+  mapping:
+    unique_id:
+      type: integer
+      label: 'Unique identifier for flipbox instance'
+    flip_trigger:
+      type: string
+      label: 'Flip trigger event'
+    flip_direction:
+      type: string
+      label: 'Flip direction'
+    flip_speed:
+      type: float
+      label: 'Flip animation speed'
+    front_bg_color:
+      type: string
+      label: 'Front side background color'
+    back_bg_color:
+      type: string
+      label: 'Back side background color'
+    perspective:
+      type: integer
+      label: '3D perspective depth'
+    available_breakpoints:
+      type: string
+      label: 'Responsive breakpoint'
+    animation_easing:
+      type: string
+      label: 'Animation easing function'
+    grid_gap:
+      type: integer
+      label: 'Grid gap in pixels'
+    enable_css:
+      type: boolean
+      label: 'Enable default CSS styling'
+    box_height:
+      type: integer
+      label: 'Box height in pixels'
+    box_width:
+      type: integer
+      label: 'Box minimum width in pixels'
