@@ -3,22 +3,27 @@ vvjf:
     theme:
       css/vvjf.css: { }
   js:
+    js/vvjf-flipbox-element.js: { }
     js/vvjf.js: {}
   dependencies:
     - core/drupal
     - core/drupal.ajax
     - core/drupalSettings
     - core/once
-
-vvjf__all:
-  css:
-    theme:
-      css/vvjf-all.css: { }
+    - vvj_core/tokens
+    - vvj_core/base
+    - vvj_core/a11y
+    - vvj_core/element-base
 
 vvjf-style:
   css:
     theme:
       css/vvjf-style.css: { }
+
+vvjf__all:
+  css:
+    theme:
+      css/vvjf-all.css: { }
 
 vvjf__576:
   css:

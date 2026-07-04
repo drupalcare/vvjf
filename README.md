@@ -1,96 +1,70 @@
-# Views Vanilla JavaScript 3D Flipbox
+# Views Vanilla JavaScript 3D Flipbox (VVJF)
 
-## Overview
-The **Views Vanilla JavaScript 3D Flipbox** module (machine name: `vvjf`) is a 
-versatile and dynamic Views style plugin designed to render content items in an 
-engaging 3D flipbox format using vanilla JavaScript. This module enhances your 
-site by adding a visually appealing, interactive flipbox effect to content 
-displayed through Drupal Views.
+A vanilla-JavaScript 3D flip-card grid **Views format** for Drupal 11.3+ / 12.
+Renders Views rows as flippable cards with hover or click triggers, configurable
+horizontal or vertical flip axis, breakpoint-gated activation, configurable
+front/back background colors, and AAA-conformant ARIA state management.
+
+v2.0 builds on the **`drupal/vvj_core` foundation** (composer auto-installs it).
+Behavior runs in a `<vvjf-flipbox>` custom element extending `VvjElementBase`.
 
 ## Features
-- **3D Flipbox Effect**: Renders content items in a 3D flipbox format, creating 
-  a captivating user experience.
-- **Customizable Flip Triggers**: Choose between hover or click to trigger the 
-  flip animation, allowing for interactive user engagement.
-- **Flip Direction Options**: Configure the flip direction (horizontal or 
-  vertical) to suit your design preferences.
-- **Adjustable Flip Speed**: Set the animation speed for the flip effect to 
-  control the pacing of transitions.
-- **Custom Background Colors**: Define background colors for both the front and 
-  back of the flipbox to match your site's theme.
-- **3D Perspective**: Optionally enable 3D perspective for a more immersive 
-  effect.
-- **Responsive Design**: Includes breakpoints to ensure the flipbox adapts 
-  seamlessly to different screen sizes or remains active across all screens.
 
-## Configuration
-After installing and enabling the module, you can configure it through the Views 
-UI:
-
-1. **Flip Trigger**: Select whether the flip is triggered by hover or click.
-2. **Flip Direction**: Choose the direction of the flip 
-(horizontal or vertical).
-3. **Flip Speed**: Set the speed of the flip animation (e.g., 0.6s).
-4. **Front/Back Background Colors**: Customize the background colors for the 
-   front and back of the flipbox.
-5. **Enable Perspective**: Check this option to enable 3D perspective.
-6. **Available Breakpoints**: Select the breakpoints at which the flipbox 
-   remains active or collapses for responsive design.
-
-## Token Support in Views Text Areas
-
-In Views headers, footers, or empty text areas—when using *Global: Text area* or
-*Global: Unfiltered text*—there is an option called **"Use replacement tokens
-from the first row."**
-
-The default Twig-style tokens (e.g., `{{ title }}` or `{{ field_image }}`)
-**will not work** with the VVJF style. Instead, use the custom tokens provided
-by VVJF:
-
-**Examples:**
-
-- `{{ title }}` → `[vvjf:title]`  
-- `{{ field_image }}` → `[vvjf:field_image]`
-
-To strip any HTML from the output, you can append `:plain` to the token:
-
-- `[vvjf:title:plain]`
-
-These tokens pull data from the **first row** of the View result and are
-designed to work seamlessly with the VVJF rendering system.
-
-## Example Usage
-1. Create a new view or edit an existing view.
-2. Under the "Format" section, select "Views Vanilla JavaScript 3D Flipbox" as 
-   the style.
-3. Configure the flip trigger, direction, speed, background colors, and 
-   perspective as needed.
-4. Save the view and see the 3D flipbox in action on the front end.
-
-## Additional Information
-- **Dependencies**: This module does not have any dependencies on other 
-  contributed modules.
-- **Compatibility**: Fully compatible with Drupal 10 and follows Drupal best 
-  practices.
+- Hover and click triggers (Enter/Space keyboard fallback)
+- Horizontal (Y-axis) or vertical (X-axis) flip direction
+- Configurable flip speed (0.1 - 2.0 s) + 5 easing curves
+- Configurable box height, min-width, grid gap, perspective
+- Front + back background colors (independent)
+- 6 responsive breakpoints (`all` / 576 / 768 / 992 / 1200 / 1400 px) — flipbox
+  active above the chosen viewport
+- ARIA `aria-hidden` and `tabindex` synchronized to the flipped state
+- On viewports below the breakpoint: both sides visible, flip disabled, every
+  nested element tabbable
+- Lazy IntersectionObserver hydration; AbortController-tracked listeners
+- Throttled resize handler keeps state in sync with viewport changes
+- **Views tokens** — `[vvjf:field]` / `[vvjf:field:plain]` in Views text areas
+  with *Use replacement tokens from the first row*
+- **Drupal admin help** — `/admin/help/vvjf`
 
 ## Installation
-1. Download and install the module from 
-   [Drupal.org](https://www.drupal.org/project/vvjf).
-2. Enable the module through the Drupal admin interface or using Drush: 
-   `drush en vvjf`
-3. Clear caches to ensure the new plugin is available: `drush cr`
 
-## Troubleshooting
-If you encounter any issues or have suggestions for improvements, please open an 
-issue in the module's issue queue on Drupal.org.
+```bash
+composer require drupal/vvjf:^2.0
+drush en vvjf
+```
 
-## Maintainers
-- [Alaa Haddad](https://www.drupal.org/u/flashwebcenter)
+## Usage
 
-## Support
-For issues, feature requests, and general support, please use the 
-[issue queue](https://www.drupal.org/project/issues/vvjf).
+1. Create or edit a View.
+2. Set **Format** to *Views Vanilla JavaScript 3D Flipbox*.
+3. Set **Show** to *Fields*.
+4. Place a `<div class="vvjf-separator"></div>` field (or a Custom field whose
+   output is that markup) between the front and back fields. Everything before
+   the separator becomes the front; everything after becomes the back.
+5. Configure dimensions / behavior / styling / animation / responsive in the
+   format settings.
+6. Save.
+
+**Sample view:** Optional config `views.view.vvjf_example` (`config/optional/`)
+installs when there is no ID conflict.
+
+## Drop-in upgrade from 1.x
+
+`composer update drupal/vvjf && drush updb && drush cr` is sufficient. v2
+preserves:
+
+- Plugin ID `views_vvjf`, theme hook `views_view_vvjf`
+- Twig template names
+- All option keys
+- Library names (`vvjf`, `vvjf-style`, `vvjf__all/576/768/992/1200/1400`)
+- JS behavior key `Drupal.behaviors.VVJFlipbox`
+- All CSS class names (`.vvjf`, `.flipbox-inner`, `.flipbox-item`, `.flipbox-
+  item-inner`, `.flipbox-front`, `.flipbox-back`, `.flipped`)
+- Separator marker `<div class="vvjf-separator"></div>`
+
+Outer rendered tag changed from `<div>` to `<vvjf-flipbox>`. Theme selectors
+targeting `.vvjf` keep matching.
 
 ## License
-This project is licensed under the 
-[GNU General Public License, version 2 or later](http://www.gnu.org/licenses/gpl-2.0.html).
+
+GPL-2.0-or-later.

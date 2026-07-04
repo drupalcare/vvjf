@@ -55,7 +55,7 @@
 ] %}
 
 {# Render the main flipbox container. #}
-<div {{ attributes.addClass(classes).setAttribute('id', flip_id) }} data-flip-trigger="{{ flip_trigger }}" data-breakpoints="{{ breakpoint }}" role="region" aria-labelledby="{{ flip_id }}-label" tabindex="0">
+<vvjf-flipbox {{ attributes.addClass(classes).setAttribute('id', flip_id) }} data-flip-trigger="{{ flip_trigger }}" data-breakpoints="{{ breakpoint }}" role="region" aria-labelledby="{{ flip_id }}-label" tabindex="0">
   <h2 id="{{ flip_id }}-label" class="visually-hidden">
     {{ 'Flipbox Container'|t }}
   </h2>
@@ -89,4 +89,4 @@
       </div>
     {% endfor %}
   </div>
-</div>
+</vvjf-flipbox>
