@@ -26,6 +26,20 @@ Behavior runs in a `<vvjf-flipbox>` custom element extending `VvjElementBase`.
   with *Use replacement tokens from the first row*
 - **Drupal admin help** — `/admin/help/vvjf`
 
+## Token Support in Views Text Areas
+
+In Views headers, footers, or empty text with *Use replacement tokens from the
+first row*, default Twig tokens (`{{ title }}`) do not work. Use VVJF tokens
+instead:
+
+- `{{ title }}` → `[vvjf:title]`
+- `{{ field_image }}` → `[vvjf:field_image]`
+- Append `:plain` for plain text: `[vvjf:title:plain]`
+
+v2 resolves tokens through the shared `vvj_core.token_resolver` service; syntax
+is unchanged from v1. Tokens read from the **first row** of rendered View
+fields. Complex field rewrites are not supported.
+
 ## Installation
 
 ```bash
