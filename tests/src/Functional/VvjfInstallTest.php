@@ -8,11 +8,13 @@ use Drupal\Tests\BrowserTestBase;
 use Drupal\user\Entity\User;
 use Drupal\views\Views;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Confirms vvjf installs, ships its example view, and appears in Views UI.
  */
 #[Group('vvjf')]
+#[RunTestsInSeparateProcesses]
 final class VvjfInstallTest extends BrowserTestBase {
 
   /**
@@ -21,6 +23,9 @@ final class VvjfInstallTest extends BrowserTestBase {
    * @var list<string>
    */
   protected static $modules = [
+    // `help` serves /admin/help/{name}; without it testHelpPageRenders can
+    // only ever 404, whatever this module does.
+    'help',
     'node',
     'views',
     'views_ui',
@@ -65,6 +70,10 @@ final class VvjfInstallTest extends BrowserTestBase {
   public function testHelpPageRenders(): void {
     $admin = $this->drupalCreateUser([
       'access administration pages',
+      // The route requires `access help pages`, not merely
+      // `access administration pages` — checked against core's
+      // help.routing.yml rather than assumed.
+      'access help pages',
     ]);
     $this->assertInstanceOf(User::class, $admin);
     $this->drupalLogin($admin);
