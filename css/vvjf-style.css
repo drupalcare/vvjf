@@ -8,19 +8,19 @@
  */
 
 .vvjf .flipbox-item {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
   overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgb(0, 0, 0, 0.1);
 }
 
 .vvjf .flipbox-item:hover,
 .vvjf .flipbox-item:focus {
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 12px rgb(0, 0, 0, 0.15);
 }
 
 .vvjf .flipbox-item-inner > div {
-  padding: 16px;
   overflow: hidden;
+  padding: 16px;
 }
 
 .vvjf .flipbox-inner {

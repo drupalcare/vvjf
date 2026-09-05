@@ -10,8 +10,6 @@
 // phpcs:disable Squiz.WhiteSpace.OperatorSpacing
 
 ((Drupal, once) => {
-  'use strict';
-
   Drupal.behaviors.VVJFlipbox = {
     attach(context) {
       once('vvjf-flipbox-marker', 'vvjf-flipbox', context);

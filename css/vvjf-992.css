@@ -6,15 +6,15 @@
  * Website:      https://www.flashwebcenter.com
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
-@media (min-width:62rem) {
+@media (min-width: 62rem) {
   .vvjf.br-992 .flipbox-inner {
     grid-template-columns: repeat(auto-fill, minmax(calc(var(--box-width) * 1px), 1fr));
     gap: calc(var(--grid-gap) * 1px);
   }
 
   .vvjf.br-992 .flipbox-item {
-    cursor: pointer;
     height: calc(var(--box-height) * 1px);
+    cursor: pointer;
     perspective: calc(var(--box-perspective) * 1px);
   }
 
@@ -36,29 +36,29 @@
   }
 
   .vvjf.br-992.vertical.hover .flipbox-item-inner:hover {
-    transform: rotateX(180deg);
     transition: transform 0.6s ease-in-out;
+    transform: rotateX(180deg);
   }
 
   .vvjf.br-992.horizontal.hover .flipbox-item-inner:hover {
-    transform: rotateY(180deg);
     transition: transform 0.6s ease-in-out;
+    transform: rotateY(180deg);
   }
 
   .vvjf.br-992 .flipbox-front,
   .vvjf.br-992 .flipbox-back {
+    position: absolute;
     display: flex;
+    overflow-x: hidden;
+    overflow-y: auto;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    box-sizing: border-box;
     width: 100%;
+    max-width: 100%;
     height: 100%;
     inset: 0;
-    box-sizing: border-box;
-    max-width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
     backface-visibility: hidden !important;
   }
 
@@ -69,10 +69,9 @@
   .vvjf.br-992 .flipbox-back.vertical {
     transform: rotateX(180deg);
   }
-
 }
 
-@media (max-width:61.99875rem) {
+@media (max-width: 61.99875rem) {
   .vvjf.br-992 .flipbox-inner {
     grid-template-columns: 1fr;
     gap: calc(var(--grid-gap) * 1px);
@@ -85,8 +84,8 @@
 
   .vvjf.br-992 .flipbox-item-inner {
     display: grid;
-    grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
     height: 100%;
   }
 
@@ -98,5 +97,4 @@
   .vvjf.br-992 .flipbox-item-inner > *:last-child {
     align-self: stretch;
   }
-
 }

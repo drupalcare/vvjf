@@ -22,8 +22,6 @@
 // phpcs:disable Squiz.WhiteSpace.OperatorSpacing
 
 ((Drupal) => {
-  'use strict';
-
   const { ElementBase } = Drupal.Vvj;
 
   const TABBABLE = 'a, button, input, select, textarea, [tabindex]';
@@ -36,21 +34,23 @@
       if (!lastRan || now - lastRan >= limit) {
         fn(...args);
         lastRan = now;
-      }
-      else {
+      } else {
         clearTimeout(lastFn);
-        lastFn = setTimeout(() => {
-          fn(...args);
-          lastRan = Date.now();
-        }, limit - (now - lastRan));
+        lastFn = setTimeout(
+          () => {
+            fn(...args);
+            lastRan = Date.now();
+          },
+          limit - (now - lastRan),
+        );
       }
     };
   }
 
   class VvjfFlipboxElement extends ElementBase {
-
     static get patternSlug() {
- return 'vvjf'; }
+      return 'vvjf';
+    }
 
     constructor() {
       super();
@@ -67,10 +67,12 @@
       const parsed = parseInt(breakpointAttr, 10);
       this._breakpoint = Number.isFinite(parsed) ? parsed : 576;
 
-      this._trigger = this.getAttribute('data-flip-trigger') === 'hover' ? 'hover' : 'click';
+      this._trigger =
+        this.getAttribute('data-flip-trigger') === 'hover' ? 'hover' : 'click';
 
       this._items = this.querySelectorAll('.flipbox-item-inner');
-      if (!this._items.length) { return;
+      if (!this._items.length) {
+        return;
       }
 
       this._applyState();
@@ -93,8 +95,7 @@
         this._activate();
         this._setAriaForActive();
         this._disableNestedLinks(this._trigger === 'click');
-      }
-      else {
+      } else {
         this._deactivate();
         this._setAriaForInactive();
         this._disableNestedLinks(false);
@@ -102,7 +103,8 @@
     }
 
     _isActiveAtCurrentWidth() {
-      if (this._breakpointAll) { return true;
+      if (this._breakpointAll) {
+        return true;
       }
       return window.innerWidth >= this._breakpoint;
     }
@@ -143,7 +145,8 @@
 
       const front = inner.querySelector('.flipbox-front');
       const back = inner.querySelector('.flipbox-back');
-      if (!front || !back) { return;
+      if (!front || !back) {
+        return;
       }
 
       /** @type {AbortController} */
@@ -151,7 +154,8 @@
       this._cardListeners.set(inner, cardAbort);
 
       const flip = (value) => {
-        const isFlipped = value !== undefined ? value : inner.classList.toggle('flipped');
+        const isFlipped =
+          value !== undefined ? value : inner.classList.toggle('flipped');
         if (value !== undefined) {
           inner.classList.toggle('flipped', isFlipped);
         }
@@ -166,17 +170,26 @@
       };
 
       if (this._trigger === 'hover') {
-        inner.addEventListener('mouseenter', () => flip(true), { signal: cardAbort.signal });
-        inner.addEventListener('mouseleave', () => flip(false), { signal: cardAbort.signal });
+        inner.addEventListener('mouseenter', () => flip(true), {
+          signal: cardAbort.signal,
+        });
+        inner.addEventListener('mouseleave', () => flip(false), {
+          signal: cardAbort.signal,
+        });
+      } else {
+        inner.addEventListener('click', () => flip(), {
+          signal: cardAbort.signal,
+        });
       }
-      else {
-        inner.addEventListener('click', () => flip(), { signal: cardAbort.signal });
-      }
-      inner.addEventListener('keydown', onKeydown, { signal: cardAbort.signal });
+      inner.addEventListener('keydown', onKeydown, {
+        signal: cardAbort.signal,
+      });
 
       // The card-scoped controller is also aborted when the host element
       // disconnects, via the parent signal.
-      this.signal.addEventListener('abort', () => cardAbort.abort(), { once: true });
+      this.signal.addEventListener('abort', () => cardAbort.abort(), {
+        once: true,
+      });
     }
 
     _unbindCard(inner) {
@@ -195,7 +208,8 @@
       this._items.forEach((inner) => {
         const front = inner.querySelector('.flipbox-front');
         const back = inner.querySelector('.flipbox-back');
-        if (!front || !back) { return;
+        if (!front || !back) {
+          return;
         }
         const isFlipped = inner.classList.contains('flipped');
         this._updateAccessibility(front, back, isFlipped);
@@ -207,7 +221,8 @@
       this._items.forEach((inner) => {
         const front = inner.querySelector('.flipbox-front');
         const back = inner.querySelector('.flipbox-back');
-        if (!front || !back) { return;
+        if (!front || !back) {
+          return;
         }
         front.setAttribute('aria-hidden', 'false');
         back.setAttribute('aria-hidden', 'false');
@@ -220,7 +235,8 @@
     }
 
     _updateAccessibility(front, back, isFlipped) {
-      if (!front || !back) { return;
+      if (!front || !back) {
+        return;
       }
       const frontHidden = isFlipped ? 'true' : 'false';
       const backHidden = isFlipped ? 'false' : 'true';
@@ -235,8 +251,7 @@
       back.querySelectorAll(TABBABLE).forEach((el) => {
         if (this._trigger === 'click') {
           el.setAttribute('tabindex', isFlipped ? '0' : '-1');
-        }
-        else {
+        } else {
           el.setAttribute('tabindex', isFlipped ? '0' : '-1');
         }
       });
@@ -257,8 +272,7 @@
         if (disable) {
           link.setAttribute('tabindex', '-1');
           link.dataset.vvjfDisabled = 'true';
-        }
-        else if (link.dataset.vvjfDisabled === 'true') {
+        } else if (link.dataset.vvjfDisabled === 'true') {
           link.removeAttribute('tabindex');
           delete link.dataset.vvjfDisabled;
         }
@@ -268,22 +282,27 @@
       // click guard once — it honors the current _nestedLinksDisabled flag.
       if (!this._nestedLinkGuardBound) {
         this._nestedLinkGuardBound = true;
-        this.addEventListener('click', (event) => {
-          if (!this._nestedLinksDisabled) { return;
-          }
-          const target = event.target;
-          if (target instanceof Element
-            && target.closest('.flipbox-front a, .flipbox-back a')) {
-            event.preventDefault();
-          }
-        }, { signal: this.signal });
+        this.addEventListener(
+          'click',
+          (event) => {
+            if (!this._nestedLinksDisabled) {
+              return;
+            }
+            const target = event.target;
+            if (
+              target instanceof Element &&
+              target.closest('.flipbox-front a, .flipbox-back a')
+            ) {
+              event.preventDefault();
+            }
+          },
+          { signal: this.signal },
+        );
       }
     }
-
   }
 
   if (!customElements.get('vvjf-flipbox')) {
     customElements.define('vvjf-flipbox', VvjfFlipboxElement);
   }
-
 })(Drupal);
