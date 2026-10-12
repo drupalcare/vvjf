@@ -15,16 +15,16 @@ Behavior runs in a `<vvjf-flipbox>` custom element extending `VvjElementBase`.
 - Configurable flip speed (0.1 - 2.0 s) + 5 easing curves
 - Configurable box height, min-width, grid gap, perspective
 - Front + back background colors (independent)
-- 6 responsive breakpoints (`all` / 576 / 768 / 992 / 1200 / 1400 px) — flipbox
+- 6 responsive breakpoints (`all` / 576 / 768 / 992 / 1200 / 1400 px). Flipbox
   active above the chosen viewport
 - ARIA `aria-hidden` and `tabindex` synchronized to the flipped state
 - On viewports below the breakpoint: both sides visible, flip disabled, every
   nested element tabbable
 - Lazy IntersectionObserver hydration; AbortController-tracked listeners
 - Throttled resize handler keeps state in sync with viewport changes
-- **Views tokens** — `[vvjf:field]` / `[vvjf:field:plain]` in Views text areas
+- **Views tokens**: `[vvjf:field]` / `[vvjf:field:plain]` in Views text areas
   with *Use replacement tokens from the first row*
-- **Drupal admin help** — `/admin/help/vvjf`
+- **Drupal admin help**: `/admin/help/vvjf`
 
 ## Token Support in Views Text Areas
 
@@ -96,10 +96,10 @@ export SIMPLETEST_DB="mysql://user:pass@localhost/dbname"
 ../vendor/bin/phpunit -c core modules/contrib/vvjf/tests/src/Kernel
 ```
 
-The **Functional** and **FunctionalJavascript** suites additionally need
+The **Functional** and **FunctionalJavascript** suites also need
 `SIMPLETEST_BASE_URL` pointing at a running web server, and the JavaScript ones
 need chromedriver. Without those they error rather than fail, and the errors
-name missing infrastructure rather than anything about this module — so don't
+name missing infrastructure rather than anything about this module, so don't
 read them as test failures. The drupal.org pipeline provides both.
 
 ## License

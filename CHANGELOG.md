@@ -1,17 +1,17 @@
 # Changelog
 
-## [2.0.0] — UNRELEASED
+## [2.0.0] (UNRELEASED)
 
-**Drop-in upgrade for 1.x sites.** v2 modernizes internals — extends `vvj_core`
+**Drop-in upgrade for 1.x sites.** v2 modernizes internals: extends `vvj_core`
 foundation, ships `<vvjf-flipbox>` custom element extending `VvjElementBase`,
-AbortController-tracked listeners, throttled resize — while preserving every CSS
+AbortController-tracked listeners, throttled resize, while preserving every CSS
 rule, library name, option key, plugin ID, theme hook, JS behavior key from 1.x.
 
 ### Fixed
 
 - Update 10002 converts v1 views to the v2 option shape (value types:
   strings and integers stored where v2 declares integer, boolean and float).
-- Click-trigger flipboxes again suppress navigation on nested links — a mouse
+- Click-trigger flipboxes again suppress navigation on nested links. A mouse
   click on a link inside a click-to-flip card now flips the card without also
   following the link (v1 parity). `tabindex="-1"` alone only blocked keyboard
   focus, not mouse clicks.
