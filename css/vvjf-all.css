@@ -11,7 +11,7 @@
   gap: calc(var(--grid-gap) * 1px);
 }
 
-.vvjf.br-all .flipbox-item {
+:where(.vvjf.br-all) .flipbox-item {
   height: calc(var(--box-height) * 1px);
   cursor: pointer;
   perspective: calc(var(--box-perspective) * 1px);
@@ -61,10 +61,10 @@
   backface-visibility: hidden !important;
 }
 
-.vvjf.br-all .flipbox-back.horizontal {
+:where(.vvjf.br-all) .flipbox-back.horizontal {
   transform: rotateY(180deg);
 }
 
-.vvjf.br-all .flipbox-back.vertical {
+:where(.vvjf.br-all) .flipbox-back.vertical {
   transform: rotateX(180deg);
 }

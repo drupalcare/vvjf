@@ -12,20 +12,20 @@
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-front::after { content: ""; position: absolute; inset: 0; height: 2px; margin: auto 0; background: var(--vvj-stage-bg); opacity: 0.65; pointer-events: none; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-item:hover .flipbox-front { background: color-mix(in srgb, var(--vvj-stage-color) 11%, var(--vvj-stage-bg)); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-group { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(14px, 2.5vw, 30px); width: 100%; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board :is(.vvj-kicker, .vvj-title) { display: inline-flex; flex-wrap: wrap; gap: 3px; font: 700 clamp(16px, 2vw, 24px)/1 ui-monospace, "SF Mono", menlo, consolas, monospace; text-transform: uppercase; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-kicker { color: var(--vvj-stage-muted); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-char { display: inline-grid; place-items: center; min-width: 1.15em; padding: 0.32em 0.12em; border-radius: 4px;
+.vvj-pattern--vvjf-board :is(.vvj-kicker, .vvj-title) { display: inline-flex; flex-wrap: wrap; gap: 3px; font: 700 clamp(16px, 2vw, 24px)/1 ui-monospace, "SF Mono", menlo, consolas, monospace; text-transform: uppercase; }
+.vvj-pattern--vvjf-board .vvj-kicker { color: var(--vvj-stage-muted); }
+.vvj-pattern--vvjf-board .vvj-char { display: inline-grid; place-items: center; min-width: 1.15em; padding: 0.32em 0.12em; border-radius: 4px;
   background: linear-gradient(color-mix(in srgb, var(--vvj-stage-color) 16%, var(--vvj-stage-bg)) 0 50%, color-mix(in srgb, var(--vvj-stage-color) 11%, var(--vvj-stage-bg)) 50% 100%); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-media { flex: 0 0 88px; height: 88px; border-radius: 8px; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-summary { font-size: clamp(15px, 1.4vw, 17px); line-height: 1.45; max-width: 70ch; }
+.vvj-pattern--vvjf-board .vvj-summary { font-size: clamp(15px, 1.4vw, 17px); line-height: 1.45; max-width: 70ch; }
 /* Letters flip in once, letter by letter and row by row, when the board scrolls in. */
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-char { transform-origin: 50% 50%; }
+.vvj-pattern--vvjf-board .vvj-char { transform-origin: 50% 50%; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board:not(.vvjf-board-in) .vvj-char { transform: rotateX(-90deg); opacity: 0; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board.vvjf-board-in .vvj-char { animation: vvjf-board-flap 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) backwards; animation-delay: calc(var(--vvjf-row, 0) * 110ms + var(--vvj-i, 0) * 35ms); }
+:where(.vvj-pattern--vvjf-board.vvjf-board-in) .vvj-char { animation: vvjf-board-flap 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) backwards; animation-delay: calc(var(--vvjf-row, 0) * 110ms + var(--vvj-i, 0) * 35ms); }
 @keyframes vvjf-board-flap { 0% { transform: rotateX(-90deg); opacity: 0; } 60% { transform: rotateX(12deg); opacity: 1; } }
 /* Stacked below the breakpoint. */
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board.vvjf-off .flipbox-front,
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board.vvjf-off .flipbox-back { padding: 18px; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board.vvjf-off .flipbox-front::after { display: none; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board.vvjf-off .flipbox-back { align-items: flex-start; }
-@media (prefers-reduced-motion: reduce) { .vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-char { transform: none !important; opacity: 1 !important; } }
+@media (prefers-reduced-motion: reduce) { .vvj-pattern--vvjf-board .vvj-char { transform: none !important; opacity: 1 !important; } }

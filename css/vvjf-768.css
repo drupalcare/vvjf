@@ -12,7 +12,7 @@
     gap: calc(var(--grid-gap) * 1px);
   }
 
-  .vvjf.br-768 .flipbox-item {
+  :where(.vvjf.br-768) .flipbox-item {
     height: calc(var(--box-height) * 1px);
     cursor: pointer;
     perspective: calc(var(--box-perspective) * 1px);
@@ -62,11 +62,11 @@
     backface-visibility: hidden !important;
   }
 
-  .vvjf.br-768 .flipbox-back.horizontal {
+  :where(.vvjf.br-768) .flipbox-back.horizontal {
     transform: rotateY(180deg);
   }
 
-  .vvjf.br-768 .flipbox-back.vertical {
+  :where(.vvjf.br-768) .flipbox-back.vertical {
     transform: rotateX(180deg);
   }
 }
@@ -77,7 +77,7 @@
     gap: calc(var(--grid-gap) * 1px);
   }
 
-  .vvjf.br-768 .flipbox-item {
+  :where(.vvjf.br-768) .flipbox-item {
     height: auto;
     perspective: none !important;
   }
@@ -89,12 +89,12 @@
     height: 100%;
   }
 
-  .vvjf.br-768 .flipbox-item-inner > * {
+  .vvjf.br-768 :where(.flipbox-item-inner) > * {
     min-width: 0;
     min-height: 0;
   }
 
-  .vvjf.br-768 .flipbox-item-inner > *:last-child {
+  :where(.vvjf.br-768) :where(.flipbox-item-inner) > *:last-child {
     align-self: stretch;
   }
 }
