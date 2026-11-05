@@ -1,0 +1,21 @@
+label: 'Hand'
+description: 'Cards fanned like a hand of playing cards; they deal in, lift when pointed at, and turn over sideways with a round turn button.'
+weight: 0
+options:
+  flip_trigger: 'click'
+  flip_direction: 'horizontal'
+  flip_speed: 0.8
+  animation_easing: 'ease-in-out'
+  front_bg_color: '#000000'
+  back_bg_color: '#f2f2f2'
+  perspective: 1400
+  box_height: 440
+  box_width: 260
+  grid_gap: 16
+  available_breakpoints: '768'
+  enable_css: false
+features: []
+needs:
+  - 'Row style Fields. Every field excluded except two Custom text fields: the first is the front, the second the back.'
+  - 'Front: div.vvj-group > div.vvj-media (image, style vvj_landscape_1200) + div.vvj-caption (p.vvj-kicker, p.vvj-title). Back: p.vvj-title + div.vvj-back-text (summary).'
+  - 'No link on a face: click mode blocks links inside cards.'

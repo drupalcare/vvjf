@@ -91,6 +91,12 @@
 
     _applyState() {
       const active = this._isActiveAtCurrentWidth();
+      // Patterns only (class `vvj-pattern`): mark the stacked state below
+      // the breakpoint so Pattern CSS and scripts can follow it. A view
+      // without a Pattern never gets the class.
+      if (this.classList.contains('vvj-pattern')) {
+        this.classList.toggle('vvjf-off', !active);
+      }
       if (active) {
         this._activate();
         this._setAriaForActive();

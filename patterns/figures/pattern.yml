@@ -1,0 +1,20 @@
+label: 'Figures'
+description: 'Number tiles, the first twice the size; the photo shows inside the digits, the numbers count up, and a tile tips back to the photo and one sentence.'
+weight: 3
+options:
+  flip_trigger: 'hover'
+  flip_direction: 'vertical'
+  flip_speed: 0.7
+  animation_easing: 'ease-out'
+  front_bg_color: '#000000'
+  back_bg_color: '#000000'
+  perspective: 1200
+  box_height: 300
+  box_width: 260
+  grid_gap: 16
+  available_breakpoints: '768'
+  enable_css: false
+features: []
+needs:
+  - 'Row style Fields. Every field excluded except two Custom text fields: the first is the front, the second the back.'
+  - 'Front: div.vvj-group > p.vvj-figure (span.vvj-count holding a whole number) + p.vvj-title. Back: div.vvj-media (image, style vvj_landscape_1200) + p.vvj-back-text.'

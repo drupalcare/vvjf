@@ -1,0 +1,20 @@
+label: 'Rail'
+description: 'A sideways row of tall portrait cards that snap as you scroll; a card turns to its words, and a bottom bar shows where you are.'
+weight: 2
+options:
+  flip_trigger: 'click'
+  flip_direction: 'horizontal'
+  flip_speed: 0.9
+  animation_easing: 'ease'
+  front_bg_color: '#000000'
+  back_bg_color: '#f2f2f2'
+  perspective: 1600
+  box_height: 480
+  box_width: 340
+  grid_gap: 20
+  available_breakpoints: 'all'
+  enable_css: false
+features: []
+needs:
+  - 'Row style Fields. Every field excluded except two Custom text fields: the first is the front, the second the back.'
+  - 'Front: div.vvj-group > div.vvj-media (image, style vvj_square_800) + div.vvj-caption (p.vvj-title, p.vvj-kicker). Back: blockquote.vvj-back-text (summary) + p.vvj-cite (title, kicker).'

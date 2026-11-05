@@ -1,0 +1,20 @@
+label: 'Plans'
+description: 'Plan cards with the second raised; a segmented control turns every card in a wave from the overview to what is included, and each card turns on its own.'
+weight: 4
+options:
+  flip_trigger: 'click'
+  flip_direction: 'horizontal'
+  flip_speed: 0.8
+  animation_easing: 'ease-in-out'
+  front_bg_color: '#ffffff'
+  back_bg_color: '#000000'
+  perspective: 1800
+  box_height: 470
+  box_width: 300
+  grid_gap: 24
+  available_breakpoints: '992'
+  enable_css: false
+features: []
+needs:
+  - 'Row style Fields. Every field excluded except two Custom text fields: the first is the front, the second the back.'
+  - 'Front: div.vvj-group > div.vvj-media (image, style vvj_landscape_1200) + p.vvj-kicker + p.vvj-title. Back: p.vvj-title + div.vvj-back-text (summary).'

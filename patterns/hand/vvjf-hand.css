@@ -1,0 +1,48 @@
+/**
+ * @file
+ * Pattern Hand: cards fanned like playing cards, dealt in, turned sideways.
+ */
+
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand { max-width: 1200px; margin: 0 auto; padding: clamp(40px, 7vw, 96px) 20px clamp(32px, 5vw, 64px); background: var(--vvj-surface); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-item-inner { border-radius: var(--vvj-radius); box-shadow: var(--vvj-glass-shadow); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-front { padding: 0; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-back { padding: 30px 26px 80px; gap: 14px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-group { display: flex; flex-direction: column; height: 100%; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-media { flex: 0 0 58%; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-media img { transition: transform 0.9s var(--vvj-ease-out); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-item:hover .vvj-media img { transform: scale(1.06); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-caption { padding: 18px 22px 76px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-kicker { font: 600 12px/1.2 var(--vvj-font-ui); letter-spacing: 0.18em; text-transform: uppercase; color: var(--vvj-stage-muted); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-title { margin: 8px 0 0; font: 500 clamp(1.5rem, 2.4vw, 2rem)/1.05 var(--vvj-font-display); letter-spacing: -0.01em; }
+/* Ink, not muted: muted measured 3.75:1 and 4.18:1 on the card back (audit 2026-11-04). */
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-back-text { font-size: 15px; line-height: 1.5; color: var(--vvj-ink); }
+/* Light sweep as the back lands. */
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-back::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: linear-gradient(105deg, transparent 35%, color-mix(in srgb, var(--vvj-surface) 70%, transparent) 50%, transparent 65%); background-size: 250% 100%; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipped .flipbox-back::after { animation: vvjf-hand-sweep 1.1s 0.45s ease-out both; }
+@keyframes vvjf-hand-sweep { from { opacity: 1; background-position: 120% 0; } to { opacity: 0; background-position: -60% 0; } }
+/* Turn button: bottom right of each card, white on the photo card. */
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvjf-turn { inset: auto 16px 16px auto; background: var(--vvj-stage-color); color: var(--vvj-stage-bg); box-shadow: var(--vvj-glass-shadow); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvjf-turn[aria-pressed="true"] { background: var(--vvj-ink); color: var(--vvj-surface); }
+/* The fan, where the flip is live. */
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-inner { display: flex; justify-content: center; gap: 0; padding: 24px 0 8px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-item { flex: 0 1 calc(var(--box-width, 260) * 1px); min-width: 0; margin: 0 -18px; transform-origin: 50% 120%;
+  transform: translateY(var(--vvjf-y, 0)) rotate(var(--vvjf-r, 0deg)); transition: transform 0.6s var(--vvj-ease-out); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-item:nth-child(1) { --vvjf-r: -8deg; --vvjf-y: 22px; --vvjf-from: 200%; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-item:nth-child(2) { --vvjf-r: -4deg; --vvjf-y: 6px; --vvjf-from: 100%; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-item:nth-child(3) { --vvjf-r: 0deg; --vvjf-y: 0px; --vvjf-from: 0%; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-item:nth-child(4) { --vvjf-r: 4deg; --vvjf-y: 6px; --vvjf-from: -100%; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-item:nth-child(5) { --vvjf-r: 8deg; --vvjf-y: 22px; --vvjf-from: -200%; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-item:is(:hover, :focus-within) { --vvjf-r: 0deg; --vvjf-y: -26px; z-index: 5; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-hand-in:not(.vvjf-off) .flipbox-item { animation: vvjf-hand-deal 0.9s var(--vvj-ease-out) backwards; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-item:nth-child(2) { animation-delay: 0.08s; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-item:nth-child(3) { animation-delay: 0.16s; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-item:nth-child(4) { animation-delay: 0.24s; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-item:nth-child(5) { animation-delay: 0.32s; }
+@keyframes vvjf-hand-deal { from { transform: translateX(var(--vvjf-from)) translateY(60px) rotate(0deg); opacity: 0; } }
+/* Stacked below the breakpoint: one card, front over back. */
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .flipbox-item-inner { box-shadow: none; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .vvj-media { aspect-ratio: 3 / 2; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .vvj-caption { padding: 18px 22px 20px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .flipbox-back { padding: 30px 26px 26px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .flipbox-back .vvj-title { display: none; }

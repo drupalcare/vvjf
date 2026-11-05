@@ -34,6 +34,9 @@
 {% set box_height = options.box_height %}
 {% set breakpoint = options.available_breakpoints %}
 
+{# A Pattern chosen in the style settings (vvj_patterns enabled). #}
+{% set vvj_pattern = options.vvj_pattern_active|default('') %}
+
 {# Build the style attribute conditionally #}
 {% set style_attributes = [] %}
 {% if box_width > 0 %}
@@ -52,12 +55,14 @@
   'br-' ~ breakpoint,
   flip_trigger,
   flip_direction,
+  vvj_pattern ? 'vvj-pattern',
+  vvj_pattern ? vvj_pattern,
 ] %}
 
 {# Render the main flipbox container. #}
 <vvjf-flipbox {{ attributes.addClass(classes).setAttribute('id', flip_id) }} data-flip-trigger="{{ flip_trigger }}" data-breakpoints="{{ breakpoint }}" role="region" aria-labelledby="{{ flip_id }}-label" tabindex="0">
   <h2 id="{{ flip_id }}-label" class="visually-hidden">
-    {{ 'Flipbox Container'|t }}
+    {{ vvj_pattern and options.vvj_pattern_label ? options.vvj_pattern_label : 'Flipbox Container'|t }}
   </h2>
   <div class="flipbox-inner"  {% if style_string %}style="{{ style_string }}"{% endif %}>
     {% for key, row in rows %}

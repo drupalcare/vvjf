@@ -1,0 +1,20 @@
+label: 'Board'
+description: 'A departure board: one row per item, code and name in split-flap letters that cascade in; a row flips top to bottom to the detail.'
+weight: 1
+options:
+  flip_trigger: 'click'
+  flip_direction: 'vertical'
+  flip_speed: 0.6
+  animation_easing: 'ease-in-out'
+  front_bg_color: '#000000'
+  back_bg_color: '#1d1d1d'
+  perspective: 900
+  box_height: 120
+  box_width: 300
+  grid_gap: 8
+  available_breakpoints: '992'
+  enable_css: false
+features: []
+needs:
+  - 'Row style Fields. Every field excluded except two Custom text fields: the first is the front, the second the back.'
+  - 'Front: div.vvj-group > span.vvj-kicker + span.vvj-title (short words read best). Back: div.vvj-media (image, style vvj_thumb_240) + p.vvj-summary.'

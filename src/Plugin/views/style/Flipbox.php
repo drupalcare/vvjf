@@ -59,6 +59,15 @@ class Flipbox extends VvjStylePluginBase {
 
   /**
    * {@inheritdoc}
+   *
+   * The Patterns select appears only while vvj_patterns is enabled.
+   */
+  protected function supportsPatterns(): bool {
+    return TRUE;
+  }
+
+  /**
+   * {@inheritdoc}
    */
   protected function definePatternOptions(array $options): array {
     $options['flip_trigger'] = ['default' => VvjfConstants::DEFAULT_FLIP_TRIGGER];
@@ -362,6 +371,9 @@ class Flipbox extends VvjStylePluginBase {
     }
 
     $flattened['unique_id'] = $this->options['unique_id'] ?? $this->generateUniqueId();
+
+    // Patterns: the shared logic lives in vvj_patterns.
+    $this->flattenPatternChoice($values, $flattened);
 
     return $flattened;
   }

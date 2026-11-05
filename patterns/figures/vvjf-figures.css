@@ -1,0 +1,30 @@
+/**
+ * @file
+ * Pattern Figures: number tiles, the first one large; tiles tip back to a photo.
+ */
+
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures { max-width: 1200px; margin: 0 auto; padding: clamp(32px, 6vw, 80px) 20px; background: var(--vvj-surface); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-front { justify-content: flex-end; padding: 22px 24px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-group { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-figure { display: flex; align-items: baseline; gap: 6px; margin: 0; line-height: 0.82; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-count { font: 800 clamp(5rem, 11vw, 8.5rem)/0.82 var(--vvj-font-display); letter-spacing: -0.05em; font-variant-numeric: tabular-nums; color: var(--vvj-stage-color); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-count.vvjf-count--photo { background: var(--vvjf-photo) 50% 40% / 260% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  filter: grayscale(1) brightness(1.6) contrast(1.1); animation: vvjf-figures-drift 18s ease-in-out infinite alternate; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-front .vvj-title { margin: 14px 0 0; max-width: 18ch; font-size: 17px; font-weight: 600; color: var(--vvj-stage-color); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-front::before { content: ""; position: absolute; inset: 20px auto auto 24px; width: 28px; height: 3px; border-radius: 3px; background: var(--vvj-stage-muted); transition: width 0.6s var(--vvj-ease-out); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures.vvjf-figures-in .flipbox-front::before { width: 64px; }
+@keyframes vvjf-figures-drift { to { background-position: 50% 70%; } }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-back { justify-content: flex-end; background: var(--vvj-stage-bg); color: var(--vvj-stage-color); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-back .vvj-media { position: absolute; inset: 0; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-back .vvj-media img { transform: scale(1.08); transition: transform 1.2s var(--vvj-ease-out); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipped .vvj-media img { transform: none; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-back-text { position: relative; margin: 12px; padding: 14px 16px; border-radius: 12px; background: var(--vvj-glass-bg); font-size: 15px; line-height: 1.45; }
+@media (min-width: 62rem) {
+  .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-inner { grid-template-columns: repeat(4, 1fr); }
+  .vvj-pattern.vvjf.vvj-pattern--vvjf-figures:not(.vvjf-off) .flipbox-item:first-child { grid-column: span 2; grid-row: span 2; height: calc(var(--box-height, 300) * 2px + var(--grid-gap, 16) * 1px); }
+  .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-item:first-child .vvj-count { font-size: clamp(8rem, 16vw, 15rem); }
+  .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-item:first-child .flipbox-front .vvj-title { font-size: 22px; }
+}
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures.vvjf-off .flipbox-front { min-height: 200px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures.vvjf-off .flipbox-back { min-height: 220px; }
+@media (prefers-reduced-motion: reduce) { .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-count { animation: none; } }

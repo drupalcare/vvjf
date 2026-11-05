@@ -49,3 +49,84 @@ vvjf__1400:
   css:
     theme:
       css/vvjf-1400.css: { }
+
+# Patterns. Each depends on vvjf/vvjf so its CSS loads after the module CSS,
+# and the weights put it after the breakpoint files.
+vvjf-pattern-base:
+  css:
+    theme:
+      patterns/vvjf-pattern-base.css: { weight: 205 }
+  dependencies:
+    - vvjf/vvjf
+    - vvj_patterns/base
+
+pattern-turn:
+  js:
+    patterns/vvjf-turn.js: {}
+  dependencies:
+    - core/drupal
+
+pattern.hand:
+  css:
+    theme:
+      patterns/hand/vvjf-hand.css: { weight: 210 }
+  js:
+    patterns/hand/vvjf-hand.js: {}
+  dependencies:
+    - vvjf/vvjf-pattern-base
+    - vvjf/pattern-turn
+    - core/drupal
+    - core/once
+
+pattern.board:
+  css:
+    theme:
+      patterns/board/vvjf-board.css: { weight: 210 }
+  js:
+    patterns/board/vvjf-board.js: {}
+  dependencies:
+    - vvjf/vvjf-pattern-base
+    - vvj_core/element-base
+    - core/drupal
+    - core/once
+    - vvj_patterns/split-text
+
+pattern.rail:
+  css:
+    theme:
+      patterns/rail/vvjf-rail.css: { weight: 210 }
+  js:
+    patterns/rail/vvjf-rail.js: {}
+  dependencies:
+    - vvjf/vvjf-pattern-base
+    - vvj_core/element-base
+    - core/drupal
+    - core/once
+    - vvj_patterns/scroll-strip
+
+pattern.figures:
+  css:
+    theme:
+      patterns/figures/vvjf-figures.css: { weight: 210 }
+  js:
+    patterns/figures/vvjf-figures.js: {}
+  dependencies:
+    - vvjf/vvjf-pattern-base
+    - vvj_core/element-base
+    - core/drupal
+    - core/once
+    - vvj_patterns/count-up
+
+pattern.plans:
+  css:
+    theme:
+      patterns/plans/vvjf-plans.css: { weight: 210 }
+  js:
+    patterns/plans/vvjf-plans.js: {}
+  dependencies:
+    - vvjf/vvjf-pattern-base
+    - vvj_core/element-base
+    - vvjf/pattern-turn
+    - core/drupal
+    - core/once
+    - vvj_patterns/segmented
