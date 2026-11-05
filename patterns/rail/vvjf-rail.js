@@ -1,7 +1,7 @@
 /**
  * @file
- * Pattern Rail: a bottom bar with previous, next, a position track and a counter,
- * and a sideways swipe on touch screens.
+ * Pattern Rail: a bottom bar with previous, next, a position track and a
+ * counter. The touch swipe comes from the shared vvj_patterns/scroll-strip.
  *
  * Only runs on views with this Pattern; with JS off the cards still turn and
  * read as plain text.
@@ -62,65 +62,10 @@
             );
           };
           strip.addEventListener('scroll', update, { passive: true, signal });
-          const scroller = new Drupal.Vvj.ScrollStrip(strip, {
-            prev,
-            next,
-            root,
-            signal,
-          });
-          // The row does not scroll by itself (overflow-x: hidden, see
-          // vvjf-rail.css), so a sideways swipe on a touch screen or pen
-          // turns the page like the bottom bar. Vertical swipes still scroll
-          // the page (touch-action: pan-y). A swipe never turns a card.
-          let start = null;
-          strip.addEventListener(
-            'pointerdown',
-            (event) => {
-              start =
-                event.pointerType === 'mouse'
-                  ? null
-                  : { x: event.clientX, y: event.clientY };
-            },
-            { passive: true, signal },
-          );
-          strip.addEventListener(
-            'pointercancel',
-            () => {
-              start = null;
-            },
-            { signal },
-          );
-          strip.addEventListener(
-            'pointerup',
-            (event) => {
-              if (!start) {
-                return;
-              }
-              const dx = event.clientX - start.x;
-              const dy = event.clientY - start.y;
-              start = null;
-              if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy)) {
-                return;
-              }
-              const rtl = scroller.direction === -1;
-              scroller.scrollByPage((dx < 0) !== rtl ? 1 : -1);
-              const swallow = (click) => {
-                click.preventDefault();
-                click.stopPropagation();
-              };
-              strip.addEventListener('click', swallow, {
-                capture: true,
-                once: true,
-                signal,
-              });
-              setTimeout(
-                () =>
-                  strip.removeEventListener('click', swallow, { capture: true }),
-                400,
-              );
-            },
-            { signal },
-          );
+          // The swipe on touch screens comes from Drupal.Vvj.ScrollStrip,
+          // because this row is overflow-x: hidden (see vvjf-rail.css).
+          // eslint-disable-next-line no-new
+          new Drupal.Vvj.ScrollStrip(strip, { prev, next, root, signal });
           update();
           signal.addEventListener('abort', () => bar.remove(), { once: true });
         },

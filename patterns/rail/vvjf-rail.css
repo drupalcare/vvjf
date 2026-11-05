@@ -7,7 +7,7 @@
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-inner { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(calc(var(--box-width, 340) * 1px), 82%);
   overflow-x: hidden; scroll-snap-type: x mandatory; scroll-padding-inline: 20px; padding: 8px 20px 24px; scrollbar-width: none; overscroll-behavior-x: contain; touch-action: pan-y pinch-zoom; }
 /* The row is never a user scroller (owner 2026-11-04: no horizontal scroll may become active, page or Pattern):
-   `hidden` still lets the bottom bar, a swipe (vvjf-rail.js) and keyboard focus move it, and snapping still applies. */
+   `hidden` still lets the bottom bar, a swipe (vvj_patterns/scroll-strip) and keyboard focus move it, and snapping still applies. */
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-inner::-webkit-scrollbar { display: none; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-item { scroll-snap-align: start; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-front,

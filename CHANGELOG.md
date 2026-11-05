@@ -18,6 +18,7 @@ rule, library name, option key, plugin ID, theme hook, JS behavior key from 1.x.
 
 ### Added
 
+- **Patterns**: 5 ready-made designs for this format (Hand, Board, Rail, Figures, Plans). Pick one in the "Patterns" section of the format settings and its layout, animation, styling and deep linking settings are applied to the view. Needs the `vvj_patterns` module from `vvj_core`; the optional `vvj_patterns_demo` module adds example views.
 - `drupal/vvj_core` dependency (auto-installed).
 - `vvjf.install` with `vvjf_update_10001()` to auto-enable vvj_core during
   `drush updb`.
