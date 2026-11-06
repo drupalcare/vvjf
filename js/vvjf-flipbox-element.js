@@ -65,7 +65,9 @@
    */
   function turnButton(inner) {
     const item = inner.closest('.flipbox-item');
-    return item ? item.querySelector(':scope > .vvjf-turn') : null;
+    return item
+      ? item.querySelector(':scope > :is(.vvjf-turn--click, .vvjf-turn--hover)')
+      : null;
   }
 
   function throttle(fn, limit) {
