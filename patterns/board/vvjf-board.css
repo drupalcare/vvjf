@@ -3,10 +3,11 @@
  * Pattern Board: a departure board with split-flap letters; rows flip down.
  */
 
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board { max-width: 1200px; margin: 0 auto; padding: 14px; border-radius: calc(var(--vvj-radius) + 6px); background: var(--vvj-stage-bg); color: var(--vvj-stage-color); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-board { max-width: 1200px; margin: 0 auto; padding: 14px; border-radius: calc(var(--vvj-radius) + 6px); background: var(--vvj-stage-bg); color: var(--vvj-stage-color);
+  --vvjf-cue-back: var(--vvj-stage-color); --vvjf-cue-back-halo: var(--vvj-stage-bg); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-inner { grid-template-columns: 1fr; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-front,
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-back { flex-direction: row; align-items: center; gap: 22px; padding: 16px 22px; border-radius: 10px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-back { flex-direction: row; align-items: center; gap: 22px; padding: 16px var(--vvjf-cue-zone) 16px 22px; border-radius: 10px; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-front { position: relative; min-height: calc(var(--box-height) * 1px); background: color-mix(in srgb, var(--vvj-stage-color) 6%, var(--vvj-stage-bg)); }
 /* A row grows with its letters: the front sits in the flow and sets the height (Box height is the minimum); the back still covers it. */
 .vvj-pattern--vvjf-board .flipbox-item { height: auto; }
@@ -24,7 +25,8 @@
 :where(.vvj-pattern--vvjf-board :is(.vvj-kicker, .vvj-title)) > :not([class]) { display: none; }
 .vvj-pattern--vvjf-board .vvj-char { display: inline-grid; place-items: center; min-width: 1.15em; padding: 0.32em 0.12em; border-radius: 4px; line-height: 1;
   background: linear-gradient(color-mix(in srgb, var(--vvj-stage-color) 16%, var(--vvj-stage-bg)) 0 calc(50% - 0.5px), var(--vvj-stage-bg) calc(50% - 0.5px) calc(50% + 0.5px), color-mix(in srgb, var(--vvj-stage-color) 11%, var(--vvj-stage-bg)) calc(50% + 0.5px) 100%); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-media { flex: 0 0 88px; height: 88px; border-radius: 8px; }
+/* An 88px square in both layouts: the width keeps it square when the stacked back is a column. */
+.vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-media { flex: 0 0 88px; width: 88px; height: 88px; border-radius: 8px; }
 .vvj-pattern--vvjf-board .vvj-summary { font-size: clamp(15px, 1.4vw, 17px); line-height: 1.45; max-width: 70ch; }
 /* Letters flip in once, letter by letter and row by row, when the board scrolls in. */
 .vvj-pattern--vvjf-board .vvj-char { transform-origin: 50% 50%; }
@@ -36,5 +38,3 @@
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board.vvjf-off .flipbox-back { padding: 18px; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board.vvjf-off .flipbox-back { align-items: flex-start; }
 @media (prefers-reduced-motion: reduce) { .vvj-pattern--vvjf-board .vvj-char { transform: none !important; opacity: 1 !important; } }
-/* Turn button: bottom-right corner of each row, as in Hand. */
-:where(.vvj-pattern--vvjf-board) .vvjf-turn { inset: auto 16px 16px auto; }

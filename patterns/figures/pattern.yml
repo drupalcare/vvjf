@@ -12,7 +12,7 @@ options:
   box_height: 300
   box_width: 260
   grid_gap: 16
-  available_breakpoints: '768'
+  available_breakpoints: 'all'
   enable_css: false
 features: []
 needs:

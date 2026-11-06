@@ -3,7 +3,8 @@
  * Pattern Plans: plan cards, the second raised; a segmented control turns all.
  */
 
-.vvj-pattern--vvjf-plans { max-width: 1100px; margin: 0 auto; padding: clamp(32px, 6vw, 80px) 20px; background: var(--vvj-surface); }
+.vvj-pattern--vvjf-plans { max-width: 1100px; margin: 0 auto; padding: clamp(32px, 6vw, 80px) 20px; background: var(--vvj-surface);
+  --vvjf-cue-front: var(--vvj-ink); --vvjf-cue-front-halo: var(--vvj-surface); --vvjf-cue-back: var(--vvj-stage-color); --vvjf-cue-back-halo: var(--vvj-stage-bg); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-plans .vvjf-flipall { display: flex; width: max-content; max-width: 100%; margin: 0 auto 40px; padding: 5px; border-radius: 999px; background: var(--vvjf-tab-bg); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-plans .vvjf-flipall button { display: inline-grid; place-items: center; text-align: center; min-height: 44px; margin: 0; padding: 0 22px; cursor: pointer; border: 0; border-radius: 999px; background: none; color: var(--vvjf-tab-text); font: 600 15px/1 var(--vvj-font-ui);
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; }
@@ -13,9 +14,9 @@
 .vvj-pattern.vvjf.vvj-pattern--vvjf-plans.vvjf-off .vvjf-flipall { display: none; }
 .vvj-pattern--vvjf-plans .flipbox-item-inner { border-radius: 26px; box-shadow: var(--vvj-glass-shadow); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-plans .flipbox-front,
-.vvj-pattern.vvjf.vvj-pattern--vvjf-plans .flipbox-back { border-radius: 26px; padding: 16px 16px 80px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-plans .flipbox-back { border-radius: 26px; padding: 16px 16px 24px; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-plans .flipbox-front { background: var(--vvj-surface); color: var(--vvj-ink); box-shadow: inset 0 0 0 1px var(--vvj-line); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-plans .flipbox-back { padding: 34px 28px 80px; background: var(--vvj-stage-bg); color: var(--vvj-stage-color); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-plans .flipbox-back { padding: var(--vvjf-cue-zone) 28px 28px; background: var(--vvj-stage-bg); color: var(--vvj-stage-color); }
 .vvj-pattern--vvjf-plans .vvj-media { aspect-ratio: 4 / 3; clip-path: inset(0 round 140px 140px 14px 14px); transition: clip-path 0.7s var(--vvj-ease-out); }
 .vvj-pattern--vvjf-plans :where(.flipbox-item:hover) .vvj-media { clip-path: inset(0 round 14px); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-plans .vvj-kicker { margin: 18px 8px 0; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--vvj-muted); }
@@ -29,9 +30,6 @@
   :where(.vvj-pattern--vvjf-plans) .flipbox-item:nth-child(3n + 2) { transform: translateY(-18px); }
   .vvj-pattern.vvjf.vvj-pattern--vvjf-plans .flipbox-item:nth-child(3n + 2) .flipbox-front { box-shadow: inset 0 0 0 2px var(--vvj-ink); }
 }
-/* Turn button: centred at the bottom, a rounded square. */
-.vvj-pattern.vvjf.vvj-pattern--vvjf-plans .vvjf-turn { inset: auto 0 16px 0; margin: 0 auto; border-radius: 14px; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-plans .vvjf-turn[aria-pressed="true"] { background: var(--vvj-stage-color); color: var(--vvj-stage-bg); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-plans.vvjf-off .flipbox-inner { max-width: 460px; margin: 0 auto; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-plans.vvjf-off .flipbox-item-inner { box-shadow: none; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-plans.vvjf-off .flipbox-front { padding: 16px 16px 20px; }

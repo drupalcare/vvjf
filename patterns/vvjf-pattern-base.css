@@ -33,7 +33,16 @@
    black-and-white values from the --vvj-* tokens. Zero specificity, so a
    theme bridge (patterns/bridge/) loaded after this file replaces them. */
 :where(.vvj-pattern.vvjf) {
-  /* Round buttons the Pattern scripts add, and the pressed turn button. */
+  /* Turn cue: icon color and halo per face (the face's own text pair). */
+  --vvjf-cue-front: var(--vvj-stage-color);
+  --vvjf-cue-front-halo: var(--vvj-stage-bg);
+  --vvjf-cue-back: var(--vvj-ink);
+  --vvjf-cue-back-halo: var(--vvj-raised);
+  /* Cue geometry: 8px inset + 40px box + 8px gap = the corner a Pattern keeps text out of. */
+  --vvjf-cue-inset: 8px;
+  --vvjf-cue-size: 40px;
+  --vvjf-cue-zone: calc(var(--vvjf-cue-inset) + var(--vvjf-cue-size) + 8px);
+  /* Round buttons the Pattern scripts add (previous, next). */
   --vvjf-btn-bg: var(--vvj-ink);
   --vvjf-btn-text: var(--vvj-surface);
   /* Segmented tabs (Plans): the track, an idle label, the active chip. */
@@ -274,11 +283,31 @@
   cursor: default;
   opacity: 0.3;
 }
+/* The turn cue: the whole card turns on click, so this is a quiet signal, not a
+   filled button. The icon alone, top right, where no Pattern puts text; a halo of
+   the face's own ground keeps it readable over a photo. Still a real button for
+   keyboard and screen readers. */
 .vvj-pattern.vvjf .vvjf-turn {
   --vvjf-icon: var(--vvjf-icon-turn);
 
   position: absolute;
   z-index: 3;
+  inset: var(--vvjf-cue-inset) var(--vvjf-cue-inset) auto auto;
+  width: var(--vvjf-cue-size);
+  height: var(--vvjf-cue-size);
+  transition:
+    color 0s linear 0.3s,
+    filter 0s linear 0.3s;
+  filter: drop-shadow(0 0 1px var(--vvjf-cue-now-halo, var(--vvjf-cue-front-halo))) drop-shadow(0 0 2px var(--vvjf-cue-now-halo, var(--vvjf-cue-front-halo)));
+  color: var(--vvjf-cue-now, var(--vvjf-cue-front));
+  background: none;
+  font-size: 22px;
+}
+/* The back is showing: the cue takes the back face's text pair. */
+:where(.vvj-pattern.vvjf .vvjf-turn[aria-pressed="true"]),
+:where(.vvj-pattern.vvjf.hover:not(.vvjf-off) .flipbox-item:hover > .vvjf-turn) {
+  --vvjf-cue-now: var(--vvjf-cue-back);
+  --vvjf-cue-now-halo: var(--vvjf-cue-back-halo);
 }
 :where(.vvj-pattern.vvjf .vvjf-turn)::before {
   transition: transform 0.4s var(--vvj-ease-out);
@@ -290,6 +319,9 @@
 @media (prefers-reduced-motion: reduce) {
   :where(.vvj-pattern.vvjf .vvjf-turn)::before {
     transition: none;
+  }
+  .vvj-pattern.vvjf .vvjf-turn {
+    transition-delay: 0.1s;
   }
 }
 :where(.vvj-pattern.vvjf) .vvjf-prev {
@@ -341,5 +373,18 @@
   }
   .vvj-pattern.vvjf:not(.vvjf-off) .flipped > .flipbox-front {
     opacity: 0;
+  }
+}
+
+/* Forced colors: the icon is a mask painted with currentColor; keep it the system button text. */
+@media (forced-colors: active) {
+  .vvj-pattern.vvjf .vvjf-turn {
+    --vvjf-cue-front: ButtonText;
+    --vvjf-cue-back: ButtonText;
+
+    filter: none;
+  }
+  :where(.vvj-pattern.vvjf .vvjf-turn)::before {
+    forced-color-adjust: none;
   }
 }

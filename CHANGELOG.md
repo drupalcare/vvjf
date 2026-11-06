@@ -9,6 +9,10 @@ rule, library name, option key, plugin ID, theme hook, JS behavior key from 1.x.
 
 ### Fixed
 
+- Pattern Board: the split-flap letters show when any part of the Board is on screen (they waited for 30% of the whole Board, which never came when the Board was taller than the screen), and the picture on the back stays an 88px square in the stacked layout.
+- Patterns Board, Hand, Figures and Plans: flip on click at every width (their breakpoint is now "all", like Rail). Below 768px or 992px it used to switch the flip off and show both faces stacked, so in a narrow front-end region the card never turned. Sites that already have the demo view keep their saved setting; set Breakpoints to All in the view to match.
+- Pattern Hand: cards keep their set width, so the text on the back is never cut off. They fan five to a row where five fit, and wrap flat and apart in narrower regions.
+- Flip Patterns: the turn button is a transparent icon in the top right corner of every card, on both faces, and no text sits under or against it at any width. The whole card still flips on click; the button stays for keyboard and screen readers.
 - Patterns under APEX: the Rail progress track reads the shared track role, so the progress fill stays visible when the region's border is left to APEX (the full text color).
 - Patterns: the stacked state (`.vvjf-off`) now follows the Pattern's own width (a ResizeObserver on the element) instead of the window, so a Pattern in a narrow column stacks its cards like its `@container` CSS. Views without a Pattern still use the window width.
 - A Pattern no longer takes layout from the module's breakpoint files: their rules now skip any element with `vvj-pattern` (same specificity, classic rendering unchanged), and the flip geometry a Pattern needs (3D faces, perspective, flipped and hover turn, stacked two-row grid) lives in `vvjf-pattern-base.css` with the same values, split by `.vvjf-off`.

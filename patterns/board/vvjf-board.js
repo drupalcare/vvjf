@@ -50,7 +50,10 @@
                 observer.disconnect();
               }
             },
-            { threshold: 0.3 },
+            // Any part of the Board on screen starts the cascade: a ratio
+            // of the whole Board never comes when it is taller than the
+            // screen (the stacked layout often is).
+            { rootMargin: '0px 0px -15% 0px' },
           );
           observer.observe(root);
           signal.addEventListener('abort', () => observer.disconnect(), {

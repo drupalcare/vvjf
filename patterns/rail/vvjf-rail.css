@@ -18,6 +18,7 @@
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-caption .vvj-title { font: 600 19px/1.2 var(--vvj-font-ui); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-caption .vvj-kicker { margin: 2px 0 0; font-size: 14px; color: var(--vvj-stage-muted); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-back { justify-content: space-between; padding: 34px 30px; }
+/* The tall opening quote mark (::before, top left) keeps the first line of the quote below the turn cue's corner. */
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-back-text { margin: 0; font: 400 clamp(1.35rem, 2.2vw, 1.75rem)/1.28 var(--vvj-font-display); letter-spacing: -0.01em; text-wrap: pretty; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-back-text::before { content: "\201C"; display: block; font-size: 3em; line-height: 0.8; color: var(--vvj-muted); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-cite { margin: 0; font-size: 15px; color: var(--vvj-muted); }
@@ -43,5 +44,3 @@
 .vvj-pattern--vvjf-rail .vvjf-rail-now { color: var(--vvj-ink); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail.vvj-strip--static .vvjf-railnav { display: none; }
 @media (prefers-reduced-motion: reduce) { .vvj-pattern--vvjf-rail .flipbox-item { animation: none !important; } }
-/* Turn button: bottom-right corner of each card, as in Hand. */
-:where(.vvj-pattern--vvjf-rail) .vvjf-turn { inset: auto 16px 16px auto; }

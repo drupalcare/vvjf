@@ -3,9 +3,10 @@
  * Pattern Figures: number tiles, the first one large; tiles tip back to a photo.
  */
 
-.vvj-pattern--vvjf-figures { max-width: 1200px; margin: 0 auto; padding: clamp(32px, 6vw, 80px) 20px; background: var(--vvj-surface); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-front { justify-content: flex-end; padding: 22px 24px; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-group { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.vvj-pattern--vvjf-figures { max-width: 1200px; margin: 0 auto; padding: clamp(32px, 6vw, 80px) 20px; background: var(--vvj-surface);
+  --vvjf-cue-back: var(--vvj-stage-color); --vvjf-cue-back-halo: var(--vvj-stage-bg); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-front { justify-content: safe flex-end; padding: var(--vvjf-cue-zone) 24px 22px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-group { display: flex; flex-direction: column; justify-content: safe flex-end; height: 100%; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-figure { display: flex; align-items: baseline; gap: 6px; margin: 0; line-height: 0.82; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-count { font: 800 clamp(5rem, 11vw, 8.5rem)/0.82 var(--vvj-font-display); letter-spacing: -0.05em; font-variant-numeric: tabular-nums; color: var(--vvj-stage-color); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-count.vvjf-count--photo { background: var(--vvjf-photo) 50% 40% / 260% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
@@ -14,7 +15,7 @@
 .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-front::before { content: ""; position: absolute; inset: 20px auto auto 24px; width: 28px; height: 3px; border-radius: 3px; background: var(--vvj-stage-muted); transition: width 0.6s var(--vvj-ease-out); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-figures.vvjf-figures-in .flipbox-front::before { width: 64px; }
 @keyframes vvjf-figures-drift { to { background-position: 50% 70%; } }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-back { justify-content: flex-end; background: var(--vvj-stage-bg); color: var(--vvj-stage-color); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-back { justify-content: safe flex-end; padding-top: var(--vvjf-cue-zone); background: var(--vvj-stage-bg); color: var(--vvj-stage-color); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-back .vvj-media { position: absolute; inset: 0; }
 .vvj-pattern--vvjf-figures :where(.flipbox-back) :where(.vvj-media) img { transform: scale(1.08); transition: transform 1.2s var(--vvj-ease-out); }
 .vvj-pattern--vvjf-figures :where(.flipped) :where(.vvj-media) img { transform: none; }
@@ -28,5 +29,3 @@
 :where(.vvj-pattern--vvjf-figures.vvjf-off) .flipbox-front { min-height: 200px; }
 :where(.vvj-pattern--vvjf-figures.vvjf-off) .flipbox-back { min-height: 220px; }
 @media (prefers-reduced-motion: reduce) { .vvj-pattern--vvjf-figures .vvj-count { animation: none; } }
-/* Turn button: bottom-right corner of each card, as in Hand. */
-:where(.vvj-pattern--vvjf-figures) .vvjf-turn { inset: auto 12px 12px auto; }
