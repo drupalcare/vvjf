@@ -9,6 +9,7 @@ rule, library name, option key, plugin ID, theme hook, JS behavior key from 1.x.
 
 ### Fixed
 
+- Patterns under APEX: the Rail progress track reads the shared track role, so the progress fill stays visible when the region's border is left to APEX (the full text color).
 - Patterns: the stacked state (`.vvjf-off`) now follows the Pattern's own width (a ResizeObserver on the element) instead of the window, so a Pattern in a narrow column stacks its cards like its `@container` CSS. Views without a Pattern still use the window width.
 - A Pattern no longer takes layout from the module's breakpoint files: their rules now skip any element with `vvj-pattern` (same specificity, classic rendering unchanged), and the flip geometry a Pattern needs (3D faces, perspective, flipped and hover turn, stacked two-row grid) lives in `vvjf-pattern-base.css` with the same values, split by `.vvjf-off`.
 - Accessibility: links and buttons on the showing face work by mouse and keyboard (the hidden face stays out of the tab order), hover cards stay turned while focus is inside them, the per-card "Front/Back Side Content" labels are no longer headings, and Board, Figures and Rail cards have a Turn button like Hand and Plans.
@@ -21,7 +22,7 @@ rule, library name, option key, plugin ID, theme hook, JS behavior key from 1.x.
 ### Added
 
 - Patterns: the bridge reads the shared `--vvj-theme-*` roles instead of spelling theme names.
-- Pattern theme bridges for Solo and APEX (`pattern-bridge-solo`, `pattern-bridge-apex`): they map the module's own colour tokens to the region colours, and the Pattern colours that were hard-coded are now declared once in the pattern base file. Black and white stays the default under any other theme.
+- Pattern theme bridges for Solo and APEX (`pattern-bridge-solo`, `pattern-bridge-apex`): they map the module's own color tokens to the region colors, and the Pattern colors that were hard-coded are now declared once in the pattern base file. Black and white stays the default under any other theme.
 
 - **Patterns**: 5 ready-made designs for this format (Hand, Board, Rail, Figures, Plans). Pick one in the "Patterns" section of the format settings and its layout, animation, styling and deep linking settings are applied to the view. Needs the `vvj_patterns` module from `vvj_core`; the optional `vvj_patterns_demo` module adds example views.
 - `drupal/vvj_core` dependency (auto-installed).

@@ -2,10 +2,10 @@
  * @file
  * Shared by every vvjf Pattern: faces, words, buttons and the stacked state.
  *
- * Colours come only from the --vvj-* tokens (vvj_patterns/base). Every
+ * Colors come only from the --vvj-* tokens (vvj_patterns/base). Every
  * selector starts at the view's own element, so nothing reaches the page or
  * the theme. Icons are Google Material paths drawn as masks, so they take
- * the button's text colour.
+ * the button's text color.
  */
 
 .vvj-pattern.vvjf {
@@ -29,7 +29,7 @@
   box-sizing: border-box;
 }
 
-/* vvjf colour tokens: the ONE place each is declared. Defaults are the
+/* vvjf color tokens: the ONE place each is declared. Defaults are the
    black-and-white values from the --vvj-* tokens. Zero specificity, so a
    theme bridge (patterns/bridge/) loaded after this file replaces them. */
 :where(.vvj-pattern.vvjf) {
@@ -213,7 +213,7 @@
   background: var(--vvj-raised);
 }
 
-/* Words: titles beat the theme's h1-h6 colour and never hyphenate. */
+/* Words: titles beat the theme's h1-h6 color and never hyphenate. */
 :where(.vvj-pattern.vvjf) :is(.vvj-kicker, .vvj-title, .vvj-summary, .vvj-back-text, .vvj-back-text p) {
   margin: 0;
 }
@@ -235,7 +235,7 @@
   object-fit: cover;
 }
 
-/* Buttons the Pattern scripts add (turn, previous, next): round, icon in text colour. */
+/* Buttons the Pattern scripts add (turn, previous, next): round, icon in text color. */
 .vvj-pattern.vvjf .vvjf-btn {
   display: inline-grid;
   place-items: center;
