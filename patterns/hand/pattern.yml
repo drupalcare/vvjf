@@ -18,4 +18,4 @@ features: []
 needs:
   - 'Row style Fields. Every field excluded except two Custom text fields: the first is the front, the second the back.'
   - 'Front: div.vvj-group > div.vvj-media (image, style vvj_landscape_1200) + div.vvj-caption (p.vvj-kicker, p.vvj-title). Back: p.vvj-title + div.vvj-back-text (summary).'
-  - 'No link on a face: click mode blocks links inside cards.'
+  - 'A link on a face works on the side that shows; the turn button turns the card.'

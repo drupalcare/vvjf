@@ -12,89 +12,334 @@
   --vvjf-icon-turn: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='104 -800 752 640'%3E%3Cpath d='M480-160q-134 0-227-93t-93-227v-7l-64 64-56-56 160-160 160 160-56 56-64-64v7q0 100 70 170t170 70q26 0 51-6t49-18l60 60q-38 22-78 33t-82 11Zm247-123L567-443l56-56 64 64v-7q0-100-70-170t-170-70q-26 0-51 6t-49 18l-60-60q38-22 78-33t82-11q134 0 227 93t93 227v7l64-64 56 56-160 160Z'/%3E%3C/svg%3E");
   --vvjf-icon-prev: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='160 -800 640 640'%3E%3Cpath d='M313-440l224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z'/%3E%3C/svg%3E");
   --vvjf-icon-next: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='160 -800 640 640'%3E%3Cpath d='M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z'/%3E%3C/svg%3E");
+
   display: block;
   color: var(--vvj-ink);
   font-family: var(--vvj-font-ui);
 }
-.vvj-pattern.vvjf:focus-visible { outline: 3px solid currentColor; outline-offset: 6px; }
+.vvj-pattern.vvjf:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 6px;
+}
 
 .vvj-pattern.vvjf,
 :where(.vvj-pattern.vvjf) *,
 :where(.vvj-pattern.vvjf) *::before,
-:where(.vvj-pattern.vvjf) *::after { box-sizing: border-box; }
+:where(.vvj-pattern.vvjf) *::after {
+  box-sizing: border-box;
+}
+
+/* vvjf colour tokens: the ONE place each is declared. Defaults are the
+   black-and-white values from the --vvj-* tokens. Zero specificity, so a
+   theme bridge (patterns/bridge/) loaded after this file replaces them. */
+:where(.vvj-pattern.vvjf) {
+  /* Round buttons the Pattern scripts add, and the pressed turn button. */
+  --vvjf-btn-bg: var(--vvj-ink);
+  --vvjf-btn-text: var(--vvj-surface);
+  /* Segmented tabs (Plans): the track, an idle label, the active chip. */
+  --vvjf-tab-bg: var(--vvj-raised);
+  --vvjf-tab-text: var(--vvj-ink);
+  --vvjf-tab-active-bg: var(--vvj-surface);
+  --vvjf-tab-active-text: var(--vvj-ink);
+  /* Rail progress: the thumb and its track. */
+  --vvjf-progress: var(--vvj-ink);
+  --vvjf-progress-track: var(--vvj-line);
+}
 
 /* Theme resets: headings, paragraphs, lists, figures, images, links, buttons. */
-:where(.vvj-pattern.vvjf) :is(h1, h2, h3, h4, h5, h6, p) { margin: 0; padding: 0; font-size: inherit; line-height: inherit; color: inherit; hyphens: manual; overflow-wrap: normal; word-break: normal; }
-:where(.vvj-pattern.vvjf) :is(ul, ol, li) { list-style: none; margin: 0; padding: 0; }
-.vvj-pattern.vvjf figure { margin: 0; padding: 0; }
-:where(.vvj-pattern.vvjf) :is(img, svg) { display: block; max-width: 100%; height: auto; }
-.vvj-pattern.vvjf .vvj-link a { appearance: none; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; color: inherit; font: inherit; line-height: inherit; letter-spacing: normal; text-transform: none; text-decoration: none; text-align: start; width: auto; height: auto; min-width: 0; min-height: 0; vertical-align: middle; outline: 0; cursor: pointer; }
-:where(.vvj-pattern.vvjf) :is(button, .vvjf-btn) { appearance: none; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; color: inherit; font: inherit; line-height: inherit; letter-spacing: normal; text-transform: none; text-decoration: none; text-align: center; width: auto; height: auto; min-width: 0; min-height: 0; vertical-align: middle; outline: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+:where(.vvj-pattern.vvjf) :is(h1, h2, h3, h4, h5, h6, p) {
+  margin: 0;
+  padding: 0;
+  word-break: normal;
+  hyphens: manual;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  overflow-wrap: normal;
+}
+:where(.vvj-pattern.vvjf) :is(ul, ol, li) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.vvj-pattern.vvjf figure {
+  margin: 0;
+  padding: 0;
+}
+:where(.vvj-pattern.vvjf) :is(img, svg) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.vvj-pattern.vvjf .vvj-link a {
+  width: auto;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: start;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: normal;
+  text-transform: none;
+  color: inherit;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  font: inherit;
+  line-height: inherit;
+  appearance: none;
+}
+:where(.vvj-pattern.vvjf) :is(button, .vvjf-btn) {
+  width: auto;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: normal;
+  text-transform: none;
+  color: inherit;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  font: inherit;
+  line-height: inherit;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* The flip itself. The module's breakpoint files (vvjf-NNN.css, vvjf-all.css)
+   no longer match a Pattern, so the geometry lives here, with the values those
+   files had. The wide state is the one without .vvjf-off, the stacked state is
+   .vvjf-off (vvjf-flipbox-element.js sets it below the same breakpoint the CSS
+   used). Specificity is kept at or under 0,2,0; a Pattern rule always wins. */
+:where(.vvj-pattern.vvjf) .flipbox-inner {
+  gap: calc(var(--grid-gap) * 1px);
+}
+.vvj-pattern:where(.vvjf:not(.vvjf-off)) .flipbox-inner {
+  grid-template-columns: repeat(auto-fill, minmax(calc(var(--box-width) * 1px), 1fr));
+}
+:where(.vvj-pattern.vvjf:not(.vvjf-off)) .flipbox-item {
+  height: calc(var(--box-height) * 1px);
+  cursor: pointer;
+  perspective: calc(var(--box-perspective) * 1px);
+}
+:where(.vvj-pattern.vvjf:not(.vvjf-off)) .flipbox-item-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  will-change: transform;
+}
+:where(.vvj-pattern.vvjf:not(.vvjf-off).vertical) .flipbox-item-inner.flipped {
+  transform: rotateX(180deg);
+}
+:where(.vvj-pattern.vvjf:not(.vvjf-off).horizontal) .flipbox-item-inner.flipped {
+  transform: rotateY(180deg);
+}
+:where(.vvj-pattern.vvjf:not(.vvjf-off).vertical.hover .flipbox-item:hover) > .flipbox-item-inner {
+  transition: transform 0.6s ease-in-out;
+  transform: rotateX(180deg);
+}
+:where(.vvj-pattern.vvjf:not(.vvjf-off).horizontal.hover .flipbox-item:hover) > .flipbox-item-inner {
+  transition: transform 0.6s ease-in-out;
+  transform: rotateY(180deg);
+}
+:where(.vvj-pattern.vvjf:not(.vvjf-off)) :is(.flipbox-front, .flipbox-back) {
+  position: absolute;
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  inset: 0;
+  backface-visibility: hidden !important;
+}
+:where(.vvj-pattern.vvjf:not(.vvjf-off)) .flipbox-back.horizontal {
+  transform: rotateY(180deg);
+}
+:where(.vvj-pattern.vvjf:not(.vvjf-off)) .flipbox-back.vertical {
+  transform: rotateX(180deg);
+}
+/* Stacked: a grid of two rows, and the children may shrink. */
+:where(.vvj-pattern.vvjf.vvjf-off) .flipbox-item-inner {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  height: 100%;
+}
+.vvj-pattern.vvjf:where(.vvjf-off) :where(.flipbox-item-inner) > * {
+  min-width: 0;
+  min-height: 0;
+}
+:where(.vvj-pattern.vvjf.vvjf-off .flipbox-item-inner) > *:last-child {
+  align-self: stretch;
+}
 
 /* Faces: a dark stage front and a light back, unless the Pattern says otherwise. */
 .vvj-pattern.vvjf .flipbox-front,
-.vvj-pattern.vvjf .flipbox-back { box-sizing: border-box; overflow: hidden; border-radius: var(--vvj-radius); }
-.vvj-pattern.vvjf .flipbox-front { justify-content: flex-start; align-items: stretch; background: var(--vvj-stage-bg); color: var(--vvj-stage-color); }
-.vvj-pattern.vvjf .flipbox-back { justify-content: flex-start; align-items: stretch; background: var(--vvj-raised); color: var(--vvj-ink); }
+.vvj-pattern.vvjf .flipbox-back {
+  overflow: hidden;
+  box-sizing: border-box;
+  border-radius: var(--vvj-radius);
+}
+.vvj-pattern.vvjf .flipbox-front {
+  align-items: stretch;
+  justify-content: flex-start;
+  color: var(--vvj-stage-color);
+  background: var(--vvj-stage-bg);
+}
+.vvj-pattern.vvjf .flipbox-back {
+  align-items: stretch;
+  justify-content: flex-start;
+  color: var(--vvj-ink);
+  background: var(--vvj-raised);
+}
 
 /* Words: titles beat the theme's h1-h6 colour and never hyphenate. */
-:where(.vvj-pattern.vvjf) :is(.vvj-kicker, .vvj-title, .vvj-summary, .vvj-back-text, .vvj-back-text p) { margin: 0; }
+:where(.vvj-pattern.vvjf) :is(.vvj-kicker, .vvj-title, .vvj-summary, .vvj-back-text, .vvj-back-text p) {
+  margin: 0;
+}
 .vvj-pattern.vvjf .vvj-title,
-.vvj-pattern.vvjf .vvj-title a { color: inherit; hyphens: manual; overflow-wrap: normal; word-break: normal; text-decoration: none; }
-.vvj-pattern.vvjf .vvj-media { overflow: hidden; }
-.vvj-pattern.vvjf .vvj-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.vvj-pattern.vvjf .vvj-title a {
+  text-decoration: none;
+  word-break: normal;
+  hyphens: manual;
+  color: inherit;
+  overflow-wrap: normal;
+}
+.vvj-pattern.vvjf .vvj-media {
+  overflow: hidden;
+}
+.vvj-pattern.vvjf .vvj-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /* Buttons the Pattern scripts add (turn, previous, next): round, icon in text colour. */
 .vvj-pattern.vvjf .vvjf-btn {
-  box-sizing: border-box;
   display: inline-grid;
   place-items: center;
+  box-sizing: border-box;
   width: 48px;
   height: 48px;
   margin: 0;
   padding: 0;
   cursor: pointer;
+  transition:
+    transform 0.4s var(--vvj-ease-out),
+    opacity 0.2s;
+  text-align: center;
+  color: var(--vvjf-btn-text);
   border: 0;
   border-radius: 50%;
-  background: var(--vvj-ink);
-  color: var(--vvj-surface);
+  background: var(--vvjf-btn-bg);
   font: inherit;
   font-size: 20px;
   line-height: 1;
-  text-align: center;
-  transition: transform 0.4s var(--vvj-ease-out), opacity 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
 .vvj-pattern.vvjf .vvjf-btn::before {
-  content: "";
   width: 1em;
   height: 1em;
+  content: "";
   background: currentColor;
   -webkit-mask: var(--vvjf-icon) center / contain no-repeat;
   mask: var(--vvjf-icon) center / contain no-repeat;
 }
-.vvj-pattern.vvjf .vvjf-btn:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
-.vvj-pattern.vvjf .vvjf-btn[aria-disabled="true"] { cursor: default; opacity: 0.3; }
-.vvj-pattern.vvjf .vvjf-turn { --vvjf-icon: var(--vvjf-icon-turn); position: absolute; z-index: 3; }
-.vvj-pattern.vvjf .vvjf-turn:hover { transform: rotate(180deg); }
-:where(.vvj-pattern.vvjf) .vvjf-prev { --vvjf-icon: var(--vvjf-icon-prev); }
-:where(.vvj-pattern.vvjf) .vvjf-next { --vvjf-icon: var(--vvjf-icon-next); }
+.vvj-pattern.vvjf .vvjf-btn:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
+.vvj-pattern.vvjf .vvjf-btn[aria-disabled="true"] {
+  cursor: default;
+  opacity: 0.3;
+}
+.vvj-pattern.vvjf .vvjf-turn {
+  --vvjf-icon: var(--vvjf-icon-turn);
+
+  position: absolute;
+  z-index: 3;
+}
+:where(.vvj-pattern.vvjf .vvjf-turn)::before {
+  transition: transform 0.4s var(--vvj-ease-out);
+}
+/* The icon turns, not the button: the button box never leaves the cursor. Click mode only (JS-RULES.md 1, 11). */
+:where(.vvj-pattern.vvjf .vvjf-turn--click:hover)::before {
+  transform: rotate(180deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.vvj-pattern.vvjf .vvjf-turn)::before {
+    transition: none;
+  }
+}
+:where(.vvj-pattern.vvjf) .vvjf-prev {
+  --vvjf-icon: var(--vvjf-icon-prev);
+}
+:where(.vvj-pattern.vvjf) .vvjf-next {
+  --vvjf-icon: var(--vvjf-icon-next);
+}
 
 /* Below the breakpoint vvjf turns the flip off: both faces show, stacked. */
 .vvj-pattern.vvjf.vvjf-off .flipbox-front,
-.vvj-pattern.vvjf.vvjf-off .flipbox-back { position: relative; transform: none; backface-visibility: visible; }
-.vvj-pattern.vvjf.vvjf-off .flipbox-front { border-radius: var(--vvj-radius) var(--vvj-radius) 0 0; }
-.vvj-pattern.vvjf.vvjf-off .flipbox-back { border-radius: 0 0 var(--vvj-radius) var(--vvj-radius); }
-.vvj-pattern.vvjf.vvjf-off .vvjf-turn { display: none; }
+.vvj-pattern.vvjf.vvjf-off .flipbox-back {
+  position: relative;
+  transform: none;
+  backface-visibility: visible;
+}
+.vvj-pattern.vvjf.vvjf-off .flipbox-front {
+  border-radius: var(--vvj-radius) var(--vvj-radius) 0 0;
+}
+.vvj-pattern.vvjf.vvjf-off .flipbox-back {
+  border-radius: 0 0 var(--vvj-radius) var(--vvj-radius);
+}
+.vvj-pattern.vvjf.vvjf-off .vvjf-turn {
+  display: none;
+}
 
 /* Reduced motion: faces swap with a short fade instead of turning. */
 @media (prefers-reduced-motion: reduce) {
   :where(.vvj-pattern.vvjf) *,
   :where(.vvj-pattern.vvjf) *::before,
-  :where(.vvj-pattern.vvjf) *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
-  :where(.vvj-pattern.vvjf:not(.vvjf-off)) .flipbox-item-inner { transform: none !important; transition: none !important; }
-  .vvj-pattern.vvjf:not(.vvjf-off) .flipbox-back { transform: none; opacity: 0; transition: opacity 0.2s linear; }
-  :where(.vvj-pattern.vvjf:not(.vvjf-off)) .flipbox-front { transition: opacity 0.2s linear; }
-  .vvj-pattern.vvjf:not(.vvjf-off) .flipped > .flipbox-back { opacity: 1; }
-  .vvj-pattern.vvjf:not(.vvjf-off) .flipped > .flipbox-front { opacity: 0; }
+  :where(.vvj-pattern.vvjf) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  :where(.vvj-pattern.vvjf:not(.vvjf-off)) .flipbox-item-inner {
+    transition: none !important;
+    transform: none !important;
+  }
+  .vvj-pattern.vvjf:not(.vvjf-off) .flipbox-back {
+    transition: opacity 0.2s linear;
+    transform: none;
+    opacity: 0;
+  }
+  :where(.vvj-pattern.vvjf:not(.vvjf-off)) .flipbox-front {
+    transition: opacity 0.2s linear;
+  }
+  .vvj-pattern.vvjf:not(.vvjf-off) .flipped > .flipbox-back {
+    opacity: 1;
+  }
+  .vvj-pattern.vvjf:not(.vvjf-off) .flipped > .flipbox-front {
+    opacity: 0;
+  }
 }

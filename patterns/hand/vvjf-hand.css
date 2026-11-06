@@ -23,22 +23,22 @@
 @keyframes vvjf-hand-sweep { from { opacity: 1; background-position: 120% 0; } to { opacity: 0; background-position: -60% 0; } }
 /* Turn button: bottom right of each card, white on the photo card. */
 .vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvjf-turn { inset: auto 16px 16px auto; background: var(--vvj-stage-color); color: var(--vvj-stage-bg); box-shadow: var(--vvj-glass-shadow); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvjf-turn[aria-pressed="true"] { background: var(--vvj-ink); color: var(--vvj-surface); }
-/* The fan, where the flip is live. */
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-inner { display: flex; justify-content: center; gap: 0; padding: 24px 0 8px; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-item { flex: 0 1 calc(var(--box-width, 260) * 1px); min-width: 0; margin: 0 -18px; transform-origin: 50% 120%;
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvjf-turn[aria-pressed="true"] { background: var(--vvjf-btn-bg); color: var(--vvjf-btn-text); }
+/* The fan, where the flip is live: five cards to a hand (each card keeps its width); a sixth card starts the next hand below. */
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-inner { display: flex; flex-wrap: wrap; justify-content: center; gap: 48px 0; padding: 24px 0 8px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-item { flex: 0 0 min(calc(var(--box-width, 260) * 1px), calc((100% + 180px) / 5)); min-width: 0; margin: 0 -18px; transform-origin: 50% 120%;
   transform: translateY(var(--vvjf-y, 0)) rotate(var(--vvjf-r, 0deg)); transition: transform 0.6s var(--vvj-ease-out); }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(1) { --vvjf-r: -8deg; --vvjf-y: 22px; --vvjf-from: 200%; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(2) { --vvjf-r: -4deg; --vvjf-y: 6px; --vvjf-from: 100%; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(3) { --vvjf-r: 0deg; --vvjf-y: 0px; --vvjf-from: 0%; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(4) { --vvjf-r: 4deg; --vvjf-y: 6px; --vvjf-from: -100%; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5) { --vvjf-r: 8deg; --vvjf-y: 22px; --vvjf-from: -200%; }
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 1) { --vvjf-r: -8deg; --vvjf-y: 22px; --vvjf-from: 200%; }
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 2) { --vvjf-r: -4deg; --vvjf-y: 6px; --vvjf-from: 100%; }
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 3) { --vvjf-r: 0deg; --vvjf-y: 0px; --vvjf-from: 0%; }
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 4) { --vvjf-r: 4deg; --vvjf-y: 6px; --vvjf-from: -100%; }
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 5) { --vvjf-r: 8deg; --vvjf-y: 22px; --vvjf-from: -200%; }
 :where(.vvj-pattern--vvjf-hand:not(.vvjf-off)) .flipbox-item:is(:hover, :focus-within) { --vvjf-r: 0deg; --vvjf-y: -26px; z-index: 5; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-hand-in:not(.vvjf-off) .flipbox-item { animation: vvjf-hand-deal 0.9s var(--vvj-ease-out) backwards; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(2) { animation-delay: 0.08s; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(3) { animation-delay: 0.16s; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(4) { animation-delay: 0.24s; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5) { animation-delay: 0.32s; }
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 2) { animation-delay: 0.08s; }
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 3) { animation-delay: 0.16s; }
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 4) { animation-delay: 0.24s; }
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 5) { animation-delay: 0.32s; }
 @keyframes vvjf-hand-deal { from { transform: translateX(var(--vvjf-from)) translateY(60px) rotate(0deg); opacity: 0; } }
 /* Stacked below the breakpoint: one card, front over back. */
 .vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .flipbox-item-inner { box-shadow: none; }

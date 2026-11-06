@@ -19,6 +19,7 @@
           const controller = new AbortController();
           controllers.set(root, controller);
           const { signal } = controller;
+          Drupal.Vvjf.addTurnButtons(root, signal);
           const strip = root.querySelector('.flipbox-inner');
           const cards = root.querySelectorAll('.flipbox-item');
           if (!strip || !cards.length) {
@@ -53,10 +54,18 @@
           const update = () => {
             const max = strip.scrollWidth - strip.clientWidth;
             const offset = Math.abs(strip.scrollLeft);
-            const size = strip.scrollWidth ? strip.clientWidth / strip.scrollWidth : 1;
-            thumb.style.setProperty('--vvjf-rail-p', max > 0 ? (offset / max).toFixed(3) : '0');
-            thumb.style.setProperty('--vvjf-rail-size', Math.min(1, size).toFixed(3));
+            const size = strip.scrollWidth
+              ? strip.clientWidth / strip.scrollWidth
+              : 1;
             const step = cards[0].getBoundingClientRect().width || 1;
+            thumb.style.setProperty(
+              '--vvjf-rail-p',
+              max > 0 ? (offset / max).toFixed(3) : '0',
+            );
+            thumb.style.setProperty(
+              '--vvjf-rail-size',
+              Math.min(1, size).toFixed(3),
+            );
             now.textContent = String(
               Math.min(cards.length, Math.round(offset / step) + 1),
             );

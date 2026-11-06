@@ -50,6 +50,18 @@ vvjf__1400:
     theme:
       css/vvjf-1400.css: { }
 
+# Theme bridges: token mapping only. vvj_patterns adds the one that matches the
+# active theme as a dependency of vvjf-pattern-base; neutral loads neither.
+pattern-bridge-solo:
+  css:
+    theme:
+      patterns/bridge/vvjf-bridge-solo.css: { weight: 206 }
+
+pattern-bridge-apex:
+  css:
+    theme:
+      patterns/bridge/vvjf-bridge-apex.css: { weight: 206 }
+
 # Patterns. Each depends on vvjf/vvjf so its CSS loads after the module CSS,
 # and the weights put it after the breakpoint files.
 vvjf-pattern-base:
@@ -86,6 +98,7 @@ pattern.board:
     patterns/board/vvjf-board.js: {}
   dependencies:
     - vvjf/vvjf-pattern-base
+    - vvjf/pattern-turn
     - vvj_core/element-base
     - core/drupal
     - core/once
@@ -99,6 +112,7 @@ pattern.rail:
     patterns/rail/vvjf-rail.js: {}
   dependencies:
     - vvjf/vvjf-pattern-base
+    - vvjf/pattern-turn
     - vvj_core/element-base
     - core/drupal
     - core/once
@@ -112,6 +126,7 @@ pattern.figures:
     patterns/figures/vvjf-figures.js: {}
   dependencies:
     - vvjf/vvjf-pattern-base
+    - vvjf/pattern-turn
     - vvj_core/element-base
     - core/drupal
     - core/once

@@ -32,12 +32,16 @@
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav { display: flex; align-items: center; gap: 14px; max-width: 1200px; margin: 6px auto 0; padding: 0 20px; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-btn { width: 52px; height: 52px; border-radius: 16px; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-btn:hover { transform: translateY(-2px); }
+/* Hit-area guard (JS-RULES.md rule 1); ::before is the icon. */
+:where(.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-btn:hover)::after { content: ""; position: absolute; inset: -4px; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-btn:active { transform: scale(0.92); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-btn[aria-disabled="true"] { transform: none; }
-.vvj-pattern--vvjf-rail .vvjf-rail-track { position: relative; flex: 1; height: 4px; overflow: hidden; border-radius: 4px; background: var(--vvj-line); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-rail-thumb { position: absolute; inset: 0 auto 0 0; border-radius: 4px; background: var(--vvj-ink);
+.vvj-pattern--vvjf-rail .vvjf-rail-track { position: relative; flex: 1; height: 4px; overflow: hidden; border-radius: 4px; background: var(--vvjf-progress-track); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-rail-thumb { position: absolute; inset: 0 auto 0 0; border-radius: 4px; background: var(--vvjf-progress);
   width: calc(var(--vvjf-rail-size, 0.3) * 100%); transform: translateX(calc(var(--vvjf-rail-p, 0) * (1 / var(--vvjf-rail-size, 0.3) - 1) * 100%)); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-rail-count { margin: 0; min-width: 3.5em; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--vvj-muted); }
 .vvj-pattern--vvjf-rail .vvjf-rail-now { color: var(--vvj-ink); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail.vvj-strip--static .vvjf-railnav { display: none; }
 @media (prefers-reduced-motion: reduce) { .vvj-pattern--vvjf-rail .flipbox-item { animation: none !important; } }
+/* Turn button: bottom-right corner of each card, as in Hand. */
+:where(.vvj-pattern--vvjf-rail) .vvjf-turn { inset: auto 16px 16px auto; }

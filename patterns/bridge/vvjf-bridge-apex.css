@@ -1,0 +1,41 @@
+/**
+ * @file
+ * vvjf Pattern bridge for APEX: maps the module's colour tokens to the
+ * theme's region colours.
+ *
+ * Token mapping ONLY. Every Pattern rule keeps reading the vvjf tokens
+ * declared in vvjf-pattern-base.css; nothing here paints an element.
+ * `:where()` keeps this at zero specificity, and it loads just after the
+ * base file (weight 206), so it replaces the black-and-white defaults. Each
+ * mapping keeps the black-and-white value as its fallback, so a region that
+ * leaves a colour unset still renders. The Pattern inherits the region it
+ * sits in.
+ */
+/* Colours come from the shared --vvj-theme-* roles (vvj_patterns bridge), so the
+   theme's own colour spelling lives once, there. Each role keeps its black-and-white fallback. */
+:where(.vvj-pattern.vvjf) {
+  --vvjf-btn-bg: var(--vvj-theme-button-bg, var(--vvj-ink));
+  --vvjf-btn-text: var(--vvj-theme-button-text, var(--vvj-surface));
+  --vvjf-tab-bg: var(--vvj-theme-menu-bg, var(--vvj-raised));
+  --vvjf-tab-text: var(--vvj-theme-menu-text, var(--vvj-ink));
+  --vvjf-tab-active-bg: var(--vvj-theme-menu-bg-hover, var(--vvj-surface));
+  --vvjf-tab-active-text: var(--vvj-theme-menu-text-hover, var(--vvj-ink));
+  --vvjf-progress: var(--vvj-theme-button-bg, var(--vvj-ink));
+  --vvjf-progress-track: var(--vvj-theme-border, var(--vvj-line));
+
+  /* APEX extra colours: the owner will name the five; none are mapped yet.
+     Add them here, one token each, with a black-and-white fallback. */
+}
+
+@media (forced-colors: active) {
+  :where(.vvj-pattern.vvjf) {
+    --vvjf-btn-bg: ButtonText;
+    --vvjf-btn-text: ButtonFace;
+    --vvjf-tab-bg: Canvas;
+    --vvjf-tab-text: CanvasText;
+    --vvjf-tab-active-bg: Highlight;
+    --vvjf-tab-active-text: HighlightText;
+    --vvjf-progress: CanvasText;
+    --vvjf-progress-track: GrayText;
+  }
+}

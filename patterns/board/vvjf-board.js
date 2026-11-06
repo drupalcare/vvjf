@@ -13,37 +13,51 @@
 
   Drupal.behaviors.vvjPatternVvjfBoard = {
     attach(context) {
-      once('vvj-pattern-vvjf-board', '.vvj-pattern--vvjf-board', context).forEach(
-        (root) => {
-          const controller = new AbortController();
-          controllers.set(root, controller);
-          const { signal } = controller;
-          root
-            .querySelectorAll('.flipbox-front :is(.vvj-kicker, .vvj-title)')
-            .forEach((el) => Drupal.Vvj.splitText(el, { unit: 'char' }));
-          root.querySelectorAll('.flipbox-item').forEach((item, row) => {
-            item.style.setProperty('--vvjf-row', String(row));
-          });
-          const reveal = () => root.classList.add('vvjf-board-in');
-          if (Drupal.Vvj.reducedMotion() || !('IntersectionObserver' in window)) {
-            reveal();
-          } else {
-            const observer = new IntersectionObserver(
-              (entries) => {
-                if (entries[0].isIntersecting) {
-                  reveal();
-                  observer.disconnect();
-                }
-              },
-              { threshold: 0.3 },
+      once(
+        'vvj-pattern-vvjf-board',
+        '.vvj-pattern--vvjf-board',
+        context,
+      ).forEach((root) => {
+        const controller = new AbortController();
+        controllers.set(root, controller);
+        const { signal } = controller;
+        Drupal.Vvjf.addTurnButtons(root, signal);
+        root
+          .querySelectorAll('.flipbox-front :is(.vvj-kicker, .vvj-title)')
+          .forEach((el) => {
+            // Words first, then the letters inside each word, so a line
+            // breaks between words, never inside one. The cascade order
+            // (--vvj-i) then runs over every letter of the line.
+            Drupal.Vvj.splitText(el, { unit: 'word' });
+            el.querySelectorAll('.vvj-word > span').forEach((word) =>
+              Drupal.Vvj.splitText(word, { unit: 'char' }),
             );
-            observer.observe(root);
-            signal.addEventListener('abort', () => observer.disconnect(), {
-              once: true,
+            el.querySelectorAll('.vvj-char').forEach((char, index) => {
+              char.style.setProperty('--vvj-i', String(index));
             });
-          }
-        },
-      );
+          });
+        root.querySelectorAll('.flipbox-item').forEach((item, row) => {
+          item.style.setProperty('--vvjf-row', String(row));
+        });
+        const reveal = () => root.classList.add('vvjf-board-in');
+        if (Drupal.Vvj.reducedMotion() || !('IntersectionObserver' in window)) {
+          reveal();
+        } else {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              if (entries[0].isIntersecting) {
+                reveal();
+                observer.disconnect();
+              }
+            },
+            { threshold: 0.3 },
+          );
+          observer.observe(root);
+          signal.addEventListener('abort', () => observer.disconnect(), {
+            once: true,
+          });
+        }
+      });
     },
     detach(context, settings, trigger) {
       if (trigger !== 'unload') {

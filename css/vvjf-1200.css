@@ -7,18 +7,18 @@
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
 @media (min-width: 75rem) {
-  .vvjf.br-1200 .flipbox-inner {
+  .vvjf.br-1200:where(:not(.vvj-pattern)) .flipbox-inner {
     grid-template-columns: repeat(auto-fill, minmax(calc(var(--box-width) * 1px), 1fr));
     gap: calc(var(--grid-gap) * 1px);
   }
 
-  :where(.vvjf.br-1200) .flipbox-item {
+  :where(.vvjf.br-1200:where(:not(.vvj-pattern))) .flipbox-item {
     height: calc(var(--box-height) * 1px);
     cursor: pointer;
     perspective: calc(var(--box-perspective) * 1px);
   }
 
-  .vvjf.br-1200 .flipbox-item-inner {
+  .vvjf.br-1200:where(:not(.vvj-pattern)) .flipbox-item-inner {
     position: relative;
     width: 100%;
     height: 100%;
@@ -27,26 +27,26 @@
     will-change: transform;
   }
 
-  .vvjf.br-1200.vertical .flipbox-item-inner.flipped {
+  .vvjf.br-1200:where(:not(.vvj-pattern)).vertical .flipbox-item-inner.flipped {
     transform: rotateX(180deg);
   }
 
-  .vvjf.br-1200.horizontal .flipbox-item-inner.flipped {
+  .vvjf.br-1200:where(:not(.vvj-pattern)).horizontal .flipbox-item-inner.flipped {
     transform: rotateY(180deg);
   }
 
-  .vvjf.br-1200.vertical.hover .flipbox-item-inner:hover {
+  .vvjf.br-1200:where(:not(.vvj-pattern)).vertical.hover .flipbox-item:hover > .flipbox-item-inner {
     transition: transform 0.6s ease-in-out;
     transform: rotateX(180deg);
   }
 
-  .vvjf.br-1200.horizontal.hover .flipbox-item-inner:hover {
+  .vvjf.br-1200:where(:not(.vvj-pattern)).horizontal.hover .flipbox-item:hover > .flipbox-item-inner {
     transition: transform 0.6s ease-in-out;
     transform: rotateY(180deg);
   }
 
-  .vvjf.br-1200 .flipbox-front,
-  .vvjf.br-1200 .flipbox-back {
+  .vvjf.br-1200:where(:not(.vvj-pattern)) .flipbox-front,
+  .vvjf.br-1200:where(:not(.vvj-pattern)) .flipbox-back {
     position: absolute;
     display: flex;
     overflow-x: hidden;
@@ -62,39 +62,39 @@
     backface-visibility: hidden !important;
   }
 
-  :where(.vvjf.br-1200) .flipbox-back.horizontal {
+  :where(.vvjf.br-1200:where(:not(.vvj-pattern))) .flipbox-back.horizontal {
     transform: rotateY(180deg);
   }
 
-  :where(.vvjf.br-1200) .flipbox-back.vertical {
+  :where(.vvjf.br-1200:where(:not(.vvj-pattern))) .flipbox-back.vertical {
     transform: rotateX(180deg);
   }
 }
 
 @media (max-width: 74.99875rem) {
-  .vvjf.br-1200 .flipbox-inner {
+  .vvjf.br-1200:where(:not(.vvj-pattern)) .flipbox-inner {
     grid-template-columns: 1fr;
     gap: calc(var(--grid-gap) * 1px);
   }
 
-  :where(.vvjf.br-1200) .flipbox-item {
+  :where(.vvjf.br-1200:where(:not(.vvj-pattern))) .flipbox-item {
     height: auto;
     perspective: none !important;
   }
 
-  .vvjf.br-1200 .flipbox-item-inner {
+  .vvjf.br-1200:where(:not(.vvj-pattern)) .flipbox-item-inner {
     display: grid;
     grid-template-rows: auto 1fr;
     grid-template-columns: 1fr;
     height: 100%;
   }
 
-  .vvjf.br-1200 :where(.flipbox-item-inner) > * {
+  .vvjf.br-1200:where(:not(.vvj-pattern)) :where(.flipbox-item-inner) > * {
     min-width: 0;
     min-height: 0;
   }
 
-  :where(.vvjf.br-1200) :where(.flipbox-item-inner) > *:last-child {
+  :where(.vvjf.br-1200:where(:not(.vvj-pattern))) :where(.flipbox-item-inner) > *:last-child {
     align-self: stretch;
   }
 }

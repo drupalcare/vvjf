@@ -19,7 +19,7 @@
 .vvj-pattern--vvjf-figures :where(.flipbox-back) :where(.vvj-media) img { transform: scale(1.08); transition: transform 1.2s var(--vvj-ease-out); }
 .vvj-pattern--vvjf-figures :where(.flipped) :where(.vvj-media) img { transform: none; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .vvj-back-text { position: relative; margin: 12px; padding: 14px 16px; border-radius: 12px; background: var(--vvj-glass-bg); font-size: 15px; line-height: 1.45; }
-@media (min-width: 62rem) {
+@container vvj-region (min-width: 58rem) {
   .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-inner { grid-template-columns: repeat(4, 1fr); }
   :where(.vvj-pattern--vvjf-figures:not(.vvjf-off)) .flipbox-item:first-child { grid-column: span 2; grid-row: span 2; height: calc(var(--box-height, 300) * 2px + var(--grid-gap, 16) * 1px); }
   .vvj-pattern.vvjf.vvj-pattern--vvjf-figures .flipbox-item:first-child .vvj-count { font-size: clamp(8rem, 16vw, 15rem); }
@@ -28,3 +28,5 @@
 :where(.vvj-pattern--vvjf-figures.vvjf-off) .flipbox-front { min-height: 200px; }
 :where(.vvj-pattern--vvjf-figures.vvjf-off) .flipbox-back { min-height: 220px; }
 @media (prefers-reduced-motion: reduce) { .vvj-pattern--vvjf-figures .vvj-count { animation: none; } }
+/* Turn button: bottom-right corner of each card, as in Hand. */
+:where(.vvj-pattern--vvjf-figures) .vvjf-turn { inset: auto 12px 12px auto; }

@@ -76,17 +76,18 @@
 
           <div class="flipbox-front {{ flip_direction }}" style="--bg-color-front: {{ front_bg_color }};" role="group" aria-labelledby="{{ flip_id }}-front-{{ key }}" aria-hidden="false">
 
-            <h3 id="{{ flip_id }}-front-{{ key }}" class="visually-hidden">
-              {{ 'Front Side Content'|t }}
-            </h3>
+            {# A label for the group, not a heading: one per card would fill the heading outline. #}
+            <span id="{{ flip_id }}-front-{{ key }}" class="visually-hidden" aria-hidden="true">
+              {{- 'Front Side Content'|t -}}
+            </span>
             {{ front_content|safe_html }}
           </div>
 
           <div class="flipbox-back {{ flip_direction }}" style="--bg-color-back: {{ back_bg_color }};" role="group" aria-labelledby="{{ flip_id }}-back-{{ key }}" aria-hidden="true">
 
-            <h3 id="{{ flip_id }}-back-{{ key }}" class="visually-hidden">
-              {{ 'Back Side Content'|t }}
-            </h3>
+            <span id="{{ flip_id }}-back-{{ key }}" class="visually-hidden" aria-hidden="true">
+              {{- 'Back Side Content'|t -}}
+            </span>
             {{ back_content|safe_html }}
           </div>
 

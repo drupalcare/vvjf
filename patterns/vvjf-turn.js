@@ -6,7 +6,9 @@
  * click does not reach the card. It turns the card through the card's own
  * click handler, so vvjf keeps aria-hidden and tabindex in step, and its
  * aria-pressed follows the card however it was turned. Focus stays on the
- * button. Called by the Hand and Plans Pattern scripts.
+ * button. While a card has its button, its faces are not focusable and a
+ * flip that hides the focused face moves focus to the button. Called by
+ * every vvjf Pattern script.
  *
  * @license SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -45,19 +47,41 @@
       const title = item.querySelector('.flipbox-front .vvj-title');
       const button = document.createElement('button');
       button.type = 'button';
-      button.className = 'vvjf-btn vvjf-turn';
+      // One class per mode (vvj_core/docs/JS-RULES.md rule 11).
+      const mode =
+        root.getAttribute('data-flip-trigger') === 'hover' ? 'hover' : 'click';
+      button.className = `vvjf-btn vvjf-turn vvjf-turn--${mode}`;
       button.setAttribute('aria-pressed', 'false');
       button.setAttribute(
         'aria-label',
         title
-          ? Drupal.t('Turn over: @title', { '@title': title.textContent.trim() })
+          ? Drupal.t('Turn over: @title', {
+              '@title': title.textContent.trim(),
+            })
           : Drupal.t('Turn over'),
       );
-      button.addEventListener(
-        'click',
-        () => inner.click(),
-        { signal },
-      );
+      if (mode === 'click') {
+        button.addEventListener('click', () => inner.click(), { signal });
+      } else {
+        // Hover mode: the pointer turns the card, and the card has no click
+        // handler. Keyboard (detail 0) and touch turn it through the card's
+        // own key handler, so a mouse click never fights the hover.
+        button.addEventListener(
+          'click',
+          (event) => {
+            if (
+              event.detail !== 0 &&
+              window.matchMedia('(hover: hover)').matches
+            ) {
+              return;
+            }
+            inner.dispatchEvent(
+              new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }),
+            );
+          },
+          { signal },
+        );
+      }
       item.appendChild(button);
       const sync = () =>
         button.setAttribute(
@@ -75,5 +99,14 @@
         { once: true },
       );
     });
+    // The faces stop being focusable now that each card has a button, and
+    // become focusable again when the buttons go.
+    const refresh = () => {
+      if (typeof root.refreshFaces === 'function') {
+        root.refreshFaces();
+      }
+    };
+    refresh();
+    signal.addEventListener('abort', refresh, { once: true });
   };
 })(Drupal);
