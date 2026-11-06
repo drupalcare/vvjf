@@ -104,14 +104,14 @@ class Flipbox extends VvjStylePluginBase {
   protected function buildDimensionsSection(array &$form): void {
     $form['dimensions_section'] = [
       '#type' => 'details',
-      '#title' => $this->t('Dimensions Settings'),
+      '#title' => $this->t('Dimensions settings'),
       '#open' => TRUE,
       '#weight' => -40,
     ];
 
     $form['dimensions_section']['box_height'] = [
       '#type' => 'number',
-      '#title' => $this->t('Box Height (in pixels)'),
+      '#title' => $this->t('Box height (in pixels)'),
       '#default_value' => $this->options['box_height'],
       '#description' => $this->t('Specify the height of the flip box in pixels.'),
       '#min' => VvjfConstants::MIN_BOX_HEIGHT,
@@ -121,7 +121,7 @@ class Flipbox extends VvjStylePluginBase {
 
     $form['dimensions_section']['box_width'] = [
       '#type' => 'number',
-      '#title' => $this->t('Box Min Width (px)'),
+      '#title' => $this->t('Box min width (px)'),
       '#default_value' => $this->options['box_width'],
       '#description' => $this->t('Defines the minimum width for each grid box (flipbox). The grid automatically adjusts the number of columns to fit the available space, ensuring responsive and flexible layout. Enter "0" to disable this field.'),
       '#step' => 1,
@@ -130,7 +130,7 @@ class Flipbox extends VvjStylePluginBase {
 
     $form['dimensions_section']['grid_gap'] = [
       '#type' => 'number',
-      '#title' => $this->t('Grid Gap (px)'),
+      '#title' => $this->t('Grid gap (px)'),
       '#default_value' => $this->options['grid_gap'],
       '#description' => $this->t('Set the gap between grid in pixels.'),
       '#step' => 1,
@@ -156,14 +156,14 @@ class Flipbox extends VvjStylePluginBase {
   protected function buildBehaviorSection(array &$form): void {
     $form['behavior_section'] = [
       '#type' => 'details',
-      '#title' => $this->t('Behavior Settings'),
+      '#title' => $this->t('Behavior settings'),
       '#open' => TRUE,
       '#weight' => -30,
     ];
 
     $form['behavior_section']['flip_trigger'] = [
       '#type' => 'select',
-      '#title' => $this->t('Flip Trigger'),
+      '#title' => $this->t('Flip trigger'),
       '#options' => [
         VvjfConstants::TRIGGER_HOVER => $this->t('Hover'),
         VvjfConstants::TRIGGER_CLICK => $this->t('Click'),
@@ -174,7 +174,7 @@ class Flipbox extends VvjStylePluginBase {
 
     $form['behavior_section']['flip_direction'] = [
       '#type' => 'select',
-      '#title' => $this->t('Flip Direction'),
+      '#title' => $this->t('Flip direction'),
       '#options' => [
         VvjfConstants::DIRECTION_HORIZONTAL => $this->t('Horizontal (Y-axis)'),
         VvjfConstants::DIRECTION_VERTICAL => $this->t('Vertical (X-axis)'),
@@ -193,21 +193,21 @@ class Flipbox extends VvjStylePluginBase {
   protected function buildStyleSection(array &$form): void {
     $form['style_section'] = [
       '#type' => 'details',
-      '#title' => $this->t('Style Settings'),
+      '#title' => $this->t('Style settings'),
       '#open' => TRUE,
       '#weight' => -20,
     ];
 
     $form['style_section']['front_bg_color'] = [
       '#type' => 'color',
-      '#title' => $this->t('Front Side Background Color'),
+      '#title' => $this->t('Front side background color'),
       '#default_value' => $this->options['front_bg_color'],
       '#description' => $this->t('Select the background color for the front side of the flip box.'),
     ];
 
     $form['style_section']['back_bg_color'] = [
       '#type' => 'color',
-      '#title' => $this->t('Back Side Background Color'),
+      '#title' => $this->t('Back side background color'),
       '#default_value' => $this->options['back_bg_color'],
       '#description' => $this->t('Select the background color for the back side of the flip box.'),
     ];
@@ -222,14 +222,14 @@ class Flipbox extends VvjStylePluginBase {
   protected function buildAnimationSection(array &$form): void {
     $form['animation_section'] = [
       '#type' => 'details',
-      '#title' => $this->t('Animation Settings'),
+      '#title' => $this->t('Animation settings'),
       '#open' => TRUE,
       '#weight' => -10,
     ];
 
     $form['animation_section']['flip_speed'] = [
       '#type' => 'number',
-      '#title' => $this->t('Flip Speed (seconds)'),
+      '#title' => $this->t('Flip speed (seconds)'),
       '#default_value' => $this->options['flip_speed'],
       '#description' => $this->t('Specify the duration of the flip animation in seconds. Range: @min - @max.', [
         '@min' => VvjfConstants::MIN_FLIP_SPEED,
@@ -243,7 +243,7 @@ class Flipbox extends VvjStylePluginBase {
 
     $form['animation_section']['animation_easing'] = [
       '#type' => 'select',
-      '#title' => $this->t('Animation Easing'),
+      '#title' => $this->t('Animation easing'),
       '#options' => [
         VvjfConstants::EASING_EASE => $this->t('Ease'),
         VvjfConstants::EASING_LINEAR => $this->t('Linear'),
@@ -265,14 +265,14 @@ class Flipbox extends VvjStylePluginBase {
   protected function buildResponsiveSection(array &$form): void {
     $form['responsive_section'] = [
       '#type' => 'details',
-      '#title' => $this->t('Responsive Settings'),
+      '#title' => $this->t('Responsive settings'),
       '#open' => FALSE,
       '#weight' => 0,
     ];
 
     $form['responsive_section']['available_breakpoints'] = [
       '#type' => 'select',
-      '#title' => $this->t('Available Breakpoints for Flipbox'),
+      '#title' => $this->t('Available breakpoints for flipbox'),
       '#options' => [
         VvjfConstants::BREAKPOINT_ALL => $this->t('Active on all screens'),
         '576' => $this->t('576 px / 36 rem'),

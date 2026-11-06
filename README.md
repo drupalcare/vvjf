@@ -1,12 +1,17 @@
 # Views Vanilla JavaScript 3D Flipbox (VVJF)
 
-A vanilla-JavaScript 3D flip-card grid **Views format** for Drupal 11.3+ / 12.
+A vanilla-JavaScript 3D flip-card grid **Views format** for Drupal.
 Renders Views rows as flippable cards with hover or click triggers, configurable
 horizontal or vertical flip axis, breakpoint-gated activation, configurable
 front/back background colors, and AAA-conformant ARIA state management.
 
+- Project page: [drupal.org/project/vvjf](https://www.drupal.org/project/vvjf)
+- Issue queue:
+  [drupal.org/project/issues/vvjf](https://www.drupal.org/project/issues/vvjf)
+
 v2.0 builds on the **`drupal/vvj_core` foundation** (composer auto-installs it).
 Behavior runs in a `<vvjf-flipbox>` custom element extending `VvjElementBase`.
+
 
 ## Table of contents
 
@@ -21,6 +26,7 @@ Behavior runs in a `<vvjf-flipbox>` custom element extending `VvjElementBase`.
 - Changelog
 - Maintainers
 - License
+
 
 ## Overview
 
@@ -40,37 +46,48 @@ Behavior runs in a `<vvjf-flipbox>` custom element extending `VvjElementBase`.
   with *Use replacement tokens from the first row*
 - **Drupal admin help**: `/admin/help/vvjf`
 
+
 ## Requirements
 
 - Drupal core `^11.3 || ^12`.
 - PHP 8.3 or later.
 - Drupal core modules Views and Filter.
-- [VVJ Core](https://www.drupal.org/project/vvj_core) (`vvj_core`), installed automatically by Composer.
+- [VVJ Core](https://www.drupal.org/project/vvj_core) (`vvj_core`), installed
+  automatically by Composer.
+
 
 ## Installation
 
-1. Install with Composer: `composer require drupal/vvjf:^2.0` (it pulls `drupal/vvj_core`), or download the module and `vvj_core` from [Drupal.org](https://www.drupal.org/project/vvjf).
-2. Enable it in the admin interface or with Drush: `drush en vvjf`.
-3. Clear caches so the new plugin is available: `drush cr`.
+1. Install with Composer: `composer require drupal/vvjf:^2.0` (it pulls
+   `drupal/vvj_core`), or download the module and `vvj_core` from
+   [Drupal.org](https://www.drupal.org/project/vvjf).
+1. Enable it in the admin interface or with Drush: `drush en vvjf`.
+1. Clear caches so the new plugin is available: `drush cr`.
+
 
 ## Configuration
 
-Settings live in the format settings of the view. Place a `<div class="vvjf-separator"></div>` field (or a Custom field whose output is that markup) between the front and back fields. Everything before the separator becomes the front; everything after becomes the back.
+Settings live in the format settings of the view. Place a
+`<div class="vvjf-separator"></div>` field (or a Custom field whose output is
+that markup) between the front and back fields. Everything before the separator
+becomes the front; everything after becomes the back.
 
 For a ready-made starting point, choose a Pattern (see Patterns below).
+
 
 ## Usage
 
 1. Create or edit a View.
-2. Set **Format** to *Views Vanilla JavaScript 3D Flipbox*.
-3. Set **Show** to *Fields*.
-4. Configure the format settings (see Configuration).
-5. Configure dimensions / behavior / styling / animation / responsive in the
+1. Set **Format** to *Views Vanilla JavaScript 3D Flipbox*.
+1. Set **Show** to *Fields*.
+1. Configure the format settings (see Configuration).
+1. Configure dimensions / behavior / styling / animation / responsive in the
    format settings.
-6. Save.
+1. Save.
 
 **Sample view:** Optional config `views.view.vvjf_example` (`config/optional/`)
 installs when there is no ID conflict.
+
 
 ### Token support in Views text areas
 
@@ -86,10 +103,13 @@ v2 resolves tokens through the shared `vvj_core.token_resolver` service; syntax
 is unchanged from v1. Tokens read from the **first row** of rendered View
 fields. Complex field rewrites are not supported.
 
+
 ## Patterns
 
-A Pattern is a ready-made design for this format. One choice in the format settings sets the layout, animation,
-styling and deep linking together. Views Vanilla JavaScript 3D Flipbox ships 5 Patterns:
+A Pattern is a ready-made design for this format. One choice in the format
+settings sets the layout, animation,
+styling and deep linking together. Views Vanilla JavaScript 3D Flipbox ships 5
+Patterns:
 
 | Pattern | What it looks like | Demo page path |
 |---|---|---|
@@ -99,25 +119,36 @@ styling and deep linking together. Views Vanilla JavaScript 3D Flipbox ships 5 P
 | Figures | Number tiles, the first twice the size; the photo shows inside the digits, the numbers count up, and a tile tips back to the photo and one sentence. | `vvj/vvjf/figures` |
 | Plans | Plan cards with the second raised; a segmented control turns every card in a wave from the overview to what is included, and each card turns on its own. | `vvj/vvjf/plans` |
 
-The demo pages exist only while the optional `vvj_patterns_demo` module is enabled (see "Example views" below).
+The demo pages exist only while the optional `vvj_patterns_demo` module is
+enabled (see "Example views" below).
+
 
 ### Choosing a Pattern
 
-1. Enable the shared Patterns base, which ships inside `vvj_core`: `drush en vvj_patterns`. The "Pattern" select
+1. Enable the shared Patterns base, which ships inside `vvj_core`:
+   `drush en vvj_patterns`. The "Pattern" select
    appears in the format settings only while `vvj_patterns` is enabled.
-2. Edit the view and open the format settings.
-3. In the "Patterns" section, pick a Pattern in the "Pattern" select and save.
-4. The Pattern's settings replace the layout, animation, styling and deep linking settings of the view. You can
+1. Edit the view and open the format settings.
+1. In the "Patterns" section, pick a Pattern in the "Pattern" select and save.
+1. The Pattern's settings replace the layout, animation, styling and deep
+   linking settings of the view. You can
    change them afterwards. Pick "None" to keep your own settings.
-5. A list titled "To finish the <name> Pattern" shows what the view must supply: which fields, which markup
-   classes and how many items. Follow it; a Pattern shows its finished design only when the view matches.
+1. A list titled "To finish the <name> Pattern" shows what the view must supply:
+   which fields, which markup
+   classes and how many items. Follow it; a Pattern shows its finished design
+   only when the view matches.
+
 
 ### Example views
 
-Enable the optional `vvj_patterns_demo` module (`drush en vvj_patterns_demo`) to see every Pattern with content.
-It creates a "VVJ Slide" content type with five demo slides and pictures, plus example views titled
-"VVJ demo: <format>" for the VVJ format modules that are enabled, one page per Pattern at the paths in the table
+Enable the optional `vvj_patterns_demo` module (`drush en vvj_patterns_demo`) to
+see every Pattern with content.
+It creates a "VVJ Slide" content type with five demo slides and pictures, plus
+example views titled
+"VVJ demo: <format>" for the VVJ format modules that are enabled, one page per
+Pattern at the paths in the table
 above. Uninstalling the demo module removes the slides and pictures it created.
+
 
 ## Upgrading from 1.x
 
@@ -136,6 +167,7 @@ preserves:
 Outer rendered tag changed from `<div>` to `<vvjf-flipbox>`. Theme selectors
 targeting `.vvjf` keep matching.
 
+
 ## Troubleshooting
 
 | Symptom | Fix |
@@ -145,16 +177,21 @@ targeting `.vvjf` keep matching.
 | `drush updb` errors before `vvj_core` is enabled | Run `drush en vvj_core -y`, then `drush updb -y && drush cr`. |
 | No "Patterns" section in the format settings | Enable `vvj_patterns`: `drush en vvj_patterns`. |
 
-Report bugs and request features in the [issue queue](https://www.drupal.org/project/issues/vvjf).
+Report bugs and request features in the
+[issue queue](https://www.drupal.org/project/issues/vvjf).
+
 
 ## Changelog
 
 See [CHANGELOG.md](./CHANGELOG.md).
 
+
 ## Maintainers
 
 - Alaa Haddad - [flashwebcenter](https://www.drupal.org/u/flashwebcenter)
 
+
 ## License
 
-GPL-2.0-or-later. See the [GNU General Public License, version 2 or later](https://www.gnu.org/licenses/gpl-2.0.html).
+GPL-2.0-or-later. See the
+[GNU General Public License, version 2 or later](https://www.gnu.org/licenses/gpl-2.0.html).

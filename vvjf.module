@@ -2,7 +2,7 @@
 
 /**
  * @file
- * VVJF — Views Vanilla Javascript 3D Flipbox bootstrap.
+ * VVJF — Views Vanilla JavaScript 3D Flipbox bootstrap.
  *
  * Hooks live as OOP `#[Hook]` attribute classes under `src/Hook/`.
  *
