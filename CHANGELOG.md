@@ -9,6 +9,7 @@ rule, library name, option key, plugin ID, theme hook, JS behavior key from 1.x.
 
 ### Fixed
 
+- Help page: follows the drupal.org help text standard (translatable About and Uses sections) instead of printing README.md as raw text.
 - Pattern Board: the split-flap letters show when any part of the Board is on screen (they waited for 30% of the whole Board, which never came when the Board was taller than the screen), and the picture on the back stays an 88px square in the stacked layout.
 - Patterns Board, Hand, Figures and Plans: flip on click at every width (their breakpoint is now "all", like Rail). Below 768px or 992px it used to switch the flip off and show both faces stacked, so in a narrow front-end region the card never turned. Sites that already have the demo view keep their saved setting; set Breakpoints to All in the view to match.
 - Pattern Hand: cards keep their set width, so the text on the back is never cut off. They fan five to a row where five fit, and wrap flat and apart in narrower regions.
