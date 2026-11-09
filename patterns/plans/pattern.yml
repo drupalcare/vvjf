@@ -1,6 +1,10 @@
 label: 'Plans'
 description: 'Plan cards with the second raised; a segmented control turns every card in a wave from the overview to what is included, and each card turns on its own.'
 weight: 4
+stage: boxed
+ground: light
+placement: inner-padding
+serves: [saas, healthcare, corporate]
 options:
   flip_trigger: 'click'
   flip_direction: 'horizontal'

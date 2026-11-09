@@ -1,6 +1,10 @@
 label: 'Board'
 description: 'A departure board: one row per item, code and name in split-flap letters that cascade in; a row flips top to bottom to the detail.'
 weight: 1
+stage: boxed
+ground: dark
+placement: inner-padding
+serves: [events, government, associations]
 options:
   flip_trigger: 'click'
   flip_direction: 'vertical'

@@ -3,38 +3,38 @@
  * Pattern Board: a departure board with split-flap letters; rows flip down.
  */
 
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board { max-width: 1200px; margin: 0 auto; padding: 14px; border-radius: calc(var(--vvj-radius) + 6px); background: var(--vvj-stage-bg); color: var(--vvj-stage-color);
+.vvj-pattern.vvjf.vvj-pattern--vvjf-board { max-width: 1200px; margin: 0 auto; padding: var(--vvj-space-14, 14px); border-radius: calc(var(--vvj-radius) + 6px); background: var(--vvj-stage-bg); color: var(--vvj-stage-color);
   --vvjf-cue-back: var(--vvj-stage-color); --vvjf-cue-back-halo: var(--vvj-stage-bg); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-inner { grid-template-columns: 1fr; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-front,
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-back { flex-direction: row; align-items: center; gap: 22px; padding: 16px var(--vvjf-cue-zone) 16px 22px; border-radius: 10px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-back { flex-direction: row; align-items: center; gap: var(--vvj-space-22, 22px); padding: var(--vvj-space-16, 16px) var(--vvjf-cue-zone) var(--vvj-space-16, 16px) var(--vvj-space-22, 22px); border-radius: var(--vvj-radius-10, 10px); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-front { position: relative; min-height: calc(var(--box-height) * 1px); background: color-mix(in srgb, var(--vvj-stage-color) 6%, var(--vvj-stage-bg)); }
 /* A row grows with its letters: the front sits in the flow and sets the height (Box height is the minimum); the back still covers it. */
 .vvj-pattern--vvjf-board .flipbox-item { height: auto; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-back { background: color-mix(in srgb, var(--vvj-stage-color) 14%, var(--vvj-stage-bg)); color: var(--vvj-stage-color); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-item:hover .flipbox-front { background: color-mix(in srgb, var(--vvj-stage-color) 11%, var(--vvj-stage-bg)); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-group { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(14px, 2.5vw, 30px); width: 100%; }
-.vvj-pattern--vvjf-board :is(.vvj-kicker, .vvj-title) { display: inline-flex; flex-wrap: wrap; gap: 8px 0.6em; font: 700 clamp(16px, 2vw, 24px)/1 ui-monospace, "SF Mono", menlo, consolas, monospace; text-transform: uppercase; }
-.vvj-pattern--vvjf-board .vvj-kicker { color: var(--vvj-stage-muted); font-size: clamp(12px, 1.3vw, 16px); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-group { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(14px, 2.5cqi, 30px); width: 100%; }
+.vvj-pattern--vvjf-board :is(.vvj-kicker, .vvj-title) { display: inline-flex; flex-wrap: wrap; gap: var(--vvj-space-8, 8px) 0.6em; font: 700 clamp(16px, 2cqi, 24px)/1 var(--vvj-font-mono, monospace); text-transform: uppercase; }
+.vvj-pattern--vvjf-board .vvj-kicker { color: var(--vvj-stage-muted); font-size: clamp(12px, 1.3cqi, 16px); }
 /* Letters of one word stay together; a line breaks only between words. Each
    letter is a tile with its own seam, so no line ever crosses the gaps. */
-:where(.vvj-pattern--vvjf-board) .vvj-word > span { display: inline-flex; gap: 3px; }
+:where(.vvj-pattern--vvjf-board) .vvj-word > span { display: inline-flex; gap: var(--vvj-space-3, 3px); }
 /* The space split-text puts between words is a flex item here: it took a gap of its
    own and, at the start of a wrapped line, pushed the first word in. The row gap
    already spaces the words, and the hidden copy keeps the full text for readers. */
 :where(.vvj-pattern--vvjf-board :is(.vvj-kicker, .vvj-title)) > :not([class]) { display: none; }
-.vvj-pattern--vvjf-board .vvj-char { display: inline-grid; place-items: center; min-width: 1.15em; padding: 0.32em 0.12em; border-radius: 4px; line-height: 1;
+.vvj-pattern--vvjf-board .vvj-char { display: inline-grid; place-items: center; min-width: 1.15em; padding: 0.32em 0.12em; border-radius: var(--vvj-radius-4, 4px); line-height: 1;
   background: linear-gradient(color-mix(in srgb, var(--vvj-stage-color) 16%, var(--vvj-stage-bg)) 0 calc(50% - 0.5px), var(--vvj-stage-bg) calc(50% - 0.5px) calc(50% + 0.5px), color-mix(in srgb, var(--vvj-stage-color) 11%, var(--vvj-stage-bg)) calc(50% + 0.5px) 100%); }
 /* An 88px square in both layouts: the width keeps it square when the stacked back is a column. */
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-media { flex: 0 0 88px; width: 88px; height: 88px; border-radius: 8px; }
-.vvj-pattern--vvjf-board .vvj-summary { font-size: clamp(15px, 1.4vw, 17px); line-height: 1.45; max-width: 70ch; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-board .vvj-media { flex: 0 0 88px; width: 88px; height: 88px; border-radius: var(--vvj-radius-8, 8px); }
+.vvj-pattern--vvjf-board .vvj-summary { font-size: clamp(15px, 1.4cqi, 17px); line-height: 1.45; max-width: 70ch; }
 /* Letters flip in once, letter by letter and row by row, when the board scrolls in. */
 .vvj-pattern--vvjf-board .vvj-char { transform-origin: 50% 50%; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board:not(.vvjf-board-in) .vvj-char { transform: rotateX(-90deg); opacity: 0; }
-:where(.vvj-pattern--vvjf-board.vvjf-board-in) .vvj-char { animation: vvjf-board-flap 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) backwards; animation-delay: calc(var(--vvjf-row, 0) * 110ms + var(--vvj-i, 0) * 35ms); }
+:where(.vvj-pattern--vvjf-board.vvjf-board-in) .vvj-char { animation: vvjf-board-flap var(--vvj-dur-500, 0.5s) var(--vvj-ease-spring-strong, cubic-bezier(0.3, 1.6, 0.5, 1)) backwards; animation-delay: calc(var(--vvjf-row, 0) * 110ms + var(--vvj-i, 0) * 35ms); }
 @keyframes vvjf-board-flap { 0% { transform: rotateX(-90deg); opacity: 0; } 60% { transform: rotateX(12deg); opacity: 1; } }
 /* Stacked below the breakpoint. */
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board.vvjf-off .flipbox-front,
-.vvj-pattern.vvjf.vvj-pattern--vvjf-board.vvjf-off .flipbox-back { padding: 18px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-board.vvjf-off .flipbox-back { padding: var(--vvj-space-18, 18px); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board.vvjf-off .flipbox-back { align-items: flex-start; }
 @media (prefers-reduced-motion: reduce) { .vvj-pattern--vvjf-board .vvj-char { transform: none !important; opacity: 1 !important; } }

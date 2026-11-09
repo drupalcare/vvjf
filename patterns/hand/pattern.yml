@@ -1,6 +1,10 @@
 label: 'Hand'
 description: 'Cards fanned like a hand of playing cards; they deal in, lift when pointed at, and turn over sideways with a round turn button.'
 weight: 0
+stage: boxed
+ground: light
+placement: inner-padding
+serves: [creative, events, studio]
 options:
   flip_trigger: 'click'
   flip_direction: 'horizontal'

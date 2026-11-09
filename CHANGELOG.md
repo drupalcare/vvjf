@@ -9,6 +9,11 @@ rule, library name, option key, plugin ID, theme hook, JS behavior key from 1.x.
 
 ### Fixed
 
+- Patterns: Rail's bar reads counter, track, then both buttons, so its controls have their own place.
+- Patterns: Rail arrows point the reading way on right-to-left pages; Board uses the shared monospace variable.
+- Patterns: spacing, corner radius, type size, shadow and motion read shared `--vvj-*` variables with fallbacks, so a site or theme can adjust them in one place; a few odd values moved to the nearest step, under 10%.
+- Patterns: each Pattern states its stage, ground, placement and the kinds of site it serves best in `pattern.yml`.
+- Patterns: sizes that followed the screen width (`vw`) now follow the Pattern's own width (`cqi`), so a Pattern in a sidebar or narrow column keeps its proportions.
 - Help page: follows the drupal.org help text standard (translatable About and Uses sections) instead of printing README.md as raw text.
 - Pattern Board: the split-flap letters show when any part of the Board is on screen (they waited for 30% of the whole Board, which never came when the Board was taller than the screen), and the picture on the back stays an 88px square in the stacked layout.
 - Patterns Board, Hand, Figures and Plans: flip on click at every width (their breakpoint is now "all", like Rail). Below 768px or 992px it used to switch the flip off and show both faces stacked, so in a narrow front-end region the card never turned. Sites that already have the demo view keep their saved setting; set Breakpoints to All in the view to match.

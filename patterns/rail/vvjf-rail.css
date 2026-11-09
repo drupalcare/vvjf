@@ -3,44 +3,50 @@
  * Pattern Rail: tall portrait cards in a snapping row, with a bottom bar.
  */
 
-.vvj-pattern--vvjf-rail { max-width: 1400px; margin: 0 auto; padding: clamp(32px, 6vw, 80px) 0; background: var(--vvj-surface); }
+.vvj-pattern--vvjf-rail { max-width: 1400px; margin: 0 auto; padding: clamp(32px, 6cqi, 80px) 0; background: var(--vvj-surface); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-inner { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(calc(var(--box-width, 340) * 1px), 82%);
-  overflow-x: hidden; scroll-snap-type: x mandatory; scroll-padding-inline: 20px; padding: 8px 20px 24px; scrollbar-width: none; overscroll-behavior-x: contain; touch-action: pan-y pinch-zoom; }
+  overflow-x: hidden; scroll-snap-type: x mandatory; scroll-padding-inline: 20px; padding: var(--vvj-space-8, 8px) var(--vvj-space-20, 20px) var(--vvj-space-24, 24px); scrollbar-width: none; overscroll-behavior-x: contain; touch-action: pan-y pinch-zoom; }
 /* The row is never a user scroller (owner 2026-11-04: no horizontal scroll may become active, page or Pattern):
    `hidden` still lets the bottom bar, a swipe (vvj_patterns/scroll-strip) and keyboard focus move it, and snapping still applies. */
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-inner::-webkit-scrollbar { display: none; }
 .vvj-pattern--vvjf-rail .flipbox-item { scroll-snap-align: start; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-front,
-.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-back { border-radius: 28px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-back { border-radius: var(--vvj-radius-28, 28px); }
 .vvj-pattern--vvjf-rail .vvj-group { position: relative; height: 100%; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-media { position: absolute; inset: 0; }
-.vvj-pattern--vvjf-rail .vvj-caption { position: absolute; inset: auto 12px 12px 12px; padding: 14px 18px; border-radius: 18px; background: var(--vvj-glass-bg); color: var(--vvj-stage-color); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-caption .vvj-title { font: 600 19px/1.2 var(--vvj-font-ui); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-caption .vvj-kicker { margin: 2px 0 0; font-size: 14px; color: var(--vvj-stage-muted); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-back { justify-content: space-between; padding: 34px 30px; }
+.vvj-pattern--vvjf-rail .vvj-caption { position: absolute; inset: auto 12px 12px 12px; padding: var(--vvj-space-14, 14px) var(--vvj-space-18, 18px); border-radius: var(--vvj-radius-18, 18px); background: var(--vvj-glass-bg); color: var(--vvj-stage-color); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-caption .vvj-title { font: 600 var(--vvj-text-20, 1.25rem)/1.2 var(--vvj-font-ui); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-caption .vvj-kicker { margin: var(--vvj-space-2, 2px) 0 0; font-size: var(--vvj-text-14, 0.875rem); color: var(--vvj-stage-muted); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .flipbox-back { justify-content: space-between; padding: var(--vvj-space-36, 36px) var(--vvj-space-30, 30px); }
 /* The tall opening quote mark (::before, top left) keeps the first line of the quote below the turn cue's corner. */
-.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-back-text { margin: 0; font: 400 clamp(1.35rem, 2.2vw, 1.75rem)/1.28 var(--vvj-font-display); letter-spacing: -0.01em; text-wrap: pretty; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-back-text { margin: 0; font: 400 clamp(1.35rem, 2.2cqi, 1.75rem)/1.28 var(--vvj-font-display); letter-spacing: -0.01em; text-wrap: pretty; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-back-text::before { content: "\201C"; display: block; font-size: 3em; line-height: 0.8; color: var(--vvj-muted); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-cite { margin: 0; font-size: 15px; color: var(--vvj-muted); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvj-cite { margin: 0; font-size: var(--vvj-text-15, 0.9375rem); color: var(--vvj-muted); }
 .vvj-pattern--vvjf-rail :where(.vvj-cite) strong { display: block; color: var(--vvj-ink); }
-.vvj-pattern--vvjf-rail :where(.flipped) .vvj-back-text { animation: vvjf-rail-words 0.7s 0.35s var(--vvj-ease-out) backwards; }
+.vvj-pattern--vvjf-rail :where(.flipped) .vvj-back-text { animation: vvjf-rail-words var(--vvj-dur-700, 0.7s) var(--vvj-dur-350, 0.35s) var(--vvj-ease-out) backwards; }
 @keyframes vvjf-rail-words { from { opacity: 0; transform: translateY(14px); filter: blur(4px); } }
 @supports (animation-timeline: view()) {
   .vvj-pattern--vvjf-rail .flipbox-item { animation: vvjf-rail-in linear both; animation-timeline: view(x); animation-range: entry 0% entry 90%; }
   @keyframes vvjf-rail-in { from { opacity: 0.3; transform: scale(0.86) rotate(4deg) translateY(24px); } }
 }
 /* Bottom bar: square-round buttons, a track and the counter. */
-.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav { display: flex; align-items: center; gap: 14px; max-width: 1200px; margin: 6px auto 0; padding: 0 20px; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-btn { width: 52px; height: 52px; border-radius: 16px; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav { display: flex; align-items: center; gap: var(--vvj-space-14, 14px); max-width: 1200px; margin: var(--vvj-space-6, 6px) auto 0; padding: 0 var(--vvj-space-20, 20px); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-btn { width: 52px; height: 52px; border-radius: var(--vvj-radius-16, 16px); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-btn:hover { transform: translateY(-2px); }
 /* Hit-area guard (JS-RULES.md rule 1); ::before is the icon. */
 :where(.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-btn:hover)::after { content: ""; position: absolute; inset: -4px; }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-btn:active { transform: scale(0.92); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-btn[aria-disabled="true"] { transform: none; }
-.vvj-pattern--vvjf-rail .vvjf-rail-track { position: relative; flex: 1; height: 4px; overflow: hidden; border-radius: 4px; background: var(--vvjf-progress-track); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-rail-thumb { position: absolute; inset: 0 auto 0 0; border-radius: 4px; background: var(--vvjf-progress);
+.vvj-pattern--vvjf-rail .vvjf-rail-track { position: relative; flex: 1; height: 4px; overflow: hidden; border-radius: var(--vvj-radius-4, 4px); background: var(--vvjf-progress-track); }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-rail-thumb { position: absolute; inset: 0 auto 0 0; border-radius: var(--vvj-radius-4, 4px); background: var(--vvjf-progress);
   width: calc(var(--vvjf-rail-size, 0.3) * 100%); transform: translateX(calc(var(--vvjf-rail-p, 0) * (1 / var(--vvjf-rail-size, 0.3) - 1) * 100%)); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-rail-count { margin: 0; min-width: 3.5em; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--vvj-muted); }
 .vvj-pattern--vvjf-rail .vvjf-rail-now { color: var(--vvj-ink); }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-rail.vvj-strip--static .vvjf-railnav { display: none; }
 @media (prefers-reduced-motion: reduce) { .vvj-pattern--vvjf-rail .flipbox-item { animation: none !important; } }
+
+/* Own place (rule 11): counter, track, then both buttons at the end of the bar. */
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-rail-count { order: 1; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-rail-track { order: 2; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-prev { order: 3; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-rail .vvjf-railnav .vvjf-next { order: 4; }

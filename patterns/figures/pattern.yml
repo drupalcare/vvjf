@@ -1,6 +1,10 @@
 label: 'Figures'
 description: 'Number tiles, the first twice the size; the photo shows inside the digits, the numbers count up, and a tile tips back to the photo and one sentence.'
 weight: 3
+stage: boxed
+ground: light
+placement: inner-padding
+serves: [nonprofit, corporate, saas]
 options:
   flip_trigger: 'hover'
   flip_direction: 'vertical'

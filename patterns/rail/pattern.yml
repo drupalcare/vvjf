@@ -1,6 +1,10 @@
 label: 'Rail'
 description: 'A sideways row of tall portrait cards that snap as you scroll; a card turns to its words, and a bottom bar shows where you are.'
 weight: 2
+stage: boxed
+ground: light
+placement: inner-padding
+serves: [publication, cultural, university]
 options:
   flip_trigger: 'click'
   flip_direction: 'horizontal'
