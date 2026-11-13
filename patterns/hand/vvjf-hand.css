@@ -89,9 +89,11 @@
   flex: 0 0 min(calc(var(--box-width, 260) * 1px), 100%);
   min-width: 0;
   margin: 0 calc(var(--vvj-space-18, 18px) * -1);
-  transition: transform var(--vvj-dur-600, 0.6s) var(--vvj-ease-out);
-  transform: translateY(var(--vvjf-y, 0)) rotate(var(--vvjf-r, 0deg));
   transform-origin: 50% 120%;
+  /* stylelint-disable-next-line order/properties-order -- declaration order changes the result here (shorthand and longhand, all, or a physical and logical pair) */
+  transform: translateY(var(--vvjf-y, 0)) rotate(var(--vvjf-r, 0deg));
+  /* stylelint-disable-next-line order/properties-order -- declaration order changes the result here (shorthand and longhand, all, or a physical and logical pair) */
+  transition: transform var(--vvj-dur-600, 0.6s) var(--vvj-ease-out);
 }
 :where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 1) {
   --vvjf-r: -8deg;
@@ -148,10 +150,10 @@
 /* Where five cards do not fit in a row, the cards wrap flat and apart instead of fanning. */
 @container vvj-region (max-width: 74.99rem) {
   .vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-item {
-    margin: 0 var(--vvj-space-8, 8px);
-
     --vvjf-r: 0deg;
     --vvjf-y: 0px;
+
+    margin: 0 var(--vvj-space-8, 8px);
   }
 }
 /* Stacked below the breakpoint: one card, front over back. */

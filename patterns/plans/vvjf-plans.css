@@ -4,15 +4,15 @@
  */
 
 .vvj-pattern--vvjf-plans {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: clamp(32px, 6cqi, 80px) var(--vvj-space-20, 20px);
-  background: var(--vvj-surface);
-
   --vvjf-cue-front: var(--vvj-ink);
   --vvjf-cue-front-halo: var(--vvj-surface);
   --vvjf-cue-back: var(--vvj-stage-color);
   --vvjf-cue-back-halo: var(--vvj-stage-bg);
+
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(32px, 6cqi, 80px) var(--vvj-space-20, 20px);
+  background: var(--vvj-surface);
 }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-plans .vvjf-flipall {
   display: flex;

@@ -4,15 +4,15 @@
  */
 
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board {
+  --vvjf-cue-back: var(--vvj-stage-color);
+  --vvjf-cue-back-halo: var(--vvj-stage-bg);
+
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--vvj-space-14, 14px);
   color: var(--vvj-stage-color);
   border-radius: calc(var(--vvj-radius) + 6px);
   background: var(--vvj-stage-bg);
-
-  --vvjf-cue-back: var(--vvj-stage-color);
-  --vvjf-cue-back-halo: var(--vvj-stage-bg);
 }
 .vvj-pattern.vvjf.vvj-pattern--vvjf-board .flipbox-inner {
   grid-template-columns: 1fr;
