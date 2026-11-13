@@ -83,7 +83,8 @@
             {{ front_content|safe_html }}
           </div>
 
-          <div class="flipbox-back {{ flip_direction }}" style="--bg-color-back: {{ back_bg_color }};" role="group" aria-labelledby="{{ flip_id }}-back-{{ key }}" aria-hidden="true">
+          {# The back starts inert, so a Tab before the script runs never lands in hidden content. #}
+          <div class="flipbox-back {{ flip_direction }}" style="--bg-color-back: {{ back_bg_color }};" role="group" aria-labelledby="{{ flip_id }}-back-{{ key }}" aria-hidden="true" inert>
 
             <span id="{{ flip_id }}-back-{{ key }}" class="visually-hidden" aria-hidden="true">
               {{- 'Back Side Content'|t -}}

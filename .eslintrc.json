@@ -11,5 +11,22 @@
   // had therefore never been linted.
   "parserOptions": {
     "ecmaVersion": 2022
+  },
+  "rules": {
+    // WHY THESE METHODS ARE EXEMPT. class-methods-use-this exists to find
+    // methods that should have been static or standalone. These are neither:
+    // they are custom-element override points and private instance helpers
+    // that belong to the element's API. Making them static would break
+    // subclass overriding, because `this._x()` respects an override and
+    // `Class._x()` does not. exceptMethods is the rule's own mechanism for
+    // exactly this case.
+    "class-methods-use-this": [
+      "error",
+      {
+        "exceptMethods": [
+          "_updateAccessibility"
+        ]
+      }
+    ]
   }
 }

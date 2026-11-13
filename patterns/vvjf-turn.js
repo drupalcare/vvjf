@@ -4,7 +4,7 @@
  *
  * The button sits beside the card (not inside the clickable face), so its
  * click does not reach the card. It turns the card through the card's own
- * click handler, so vvjf keeps aria-hidden and tabindex in step, and its
+ * click handler, so vvjf keeps aria-hidden and inert in step, and its
  * aria-pressed follows the card however it was turned. Focus stays on the
  * button. While a card has its button, its faces are not focusable and a
  * flip that hides the focused face moves focus to the button. Called by

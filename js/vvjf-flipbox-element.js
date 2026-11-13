@@ -27,8 +27,6 @@
 ((Drupal) => {
   const { ElementBase, ownWidth, watchOwnWidth } = Drupal.Vvj;
 
-  const TABBABLE = 'a, button, input, select, textarea, [tabindex]';
-
   // Controls a visitor uses inside a face. A click or key press on one of
   // these does its own job and never turns the card.
   const INTERACTIVE =
@@ -66,8 +64,31 @@
   function turnButton(inner) {
     const item = inner.closest('.flipbox-item');
     return item
-      ? item.querySelector(':scope > :is(.vvjf-turn--click, .vvjf-turn--hover)')
+      ? item.querySelector(
+          ':scope > :is(.vvjf-turn--click, .vvjf-turn--hover, .vvjf-turn--base)',
+        )
       : null;
+  }
+
+  /**
+   * The name a Turn button reads for one card.
+   *
+   * @param {HTMLElement} item
+   *   The `.flipbox-item` of the card.
+   * @param {number} index
+   *   The card's position, from 1.
+   *
+   * @return {string}
+   *   A translated label that starts with the button's visible text.
+   */
+  function turnLabel(item, index) {
+    const title = item.querySelector(
+      '.flipbox-front :is(.vvj-title, h2, h3, h4, h5, h6)',
+    );
+    const text = title ? title.textContent.trim() : '';
+    return text
+      ? Drupal.t('Turn over: @title', { '@title': text })
+      : Drupal.t('Turn over card @number', { '@number': index });
   }
 
   function throttle(fn, limit) {
@@ -128,6 +149,13 @@
         this._width = ownWidth(this);
       }
 
+      // A view without a Pattern gets one real Turn button per card, so a
+      // keyboard or screen reader user meets a named button with a pressed
+      // state instead of a focusable face (Patterns add their own).
+      if (!this._patterned) {
+        this._addBaseButtons();
+      }
+
       this._applyState();
 
       if (this._patterned) {
@@ -147,6 +175,51 @@
         this._applyState();
       }, 200);
       window.addEventListener('resize', onResize, { signal: this.signal });
+    }
+
+    /**
+     * Adds a Turn button beside each card of a view without a Pattern.
+     *
+     * The button is visually hidden until it has focus, so the view looks
+     * as before for a pointer user. It turns the card through the card's
+     * own key handler, which keeps aria-hidden, inert and aria-pressed in
+     * step in both trigger modes.
+     */
+    _addBaseButtons() {
+      this._items.forEach((inner, index) => {
+        const item = inner.closest('.flipbox-item');
+        if (!item || turnButton(inner)) {
+          return;
+        }
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'vvjf-turn vvjf-turn--base';
+        button.textContent = Drupal.t('Turn over');
+        button.setAttribute('aria-label', turnLabel(item, index + 1));
+        button.setAttribute('aria-pressed', 'false');
+        button.addEventListener(
+          'click',
+          (event) => {
+            // In hover mode a mouse click comes after the pointer already
+            // turned the card; only keyboard (detail 0) and touch turn it.
+            if (
+              this._trigger === 'hover' &&
+              event.detail !== 0 &&
+              window.matchMedia('(hover: hover)').matches
+            ) {
+              return;
+            }
+            inner.dispatchEvent(
+              new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }),
+            );
+          },
+          { signal: this.signal },
+        );
+        item.appendChild(button);
+        this.signal.addEventListener('abort', () => button.remove(), {
+          once: true,
+        });
+      });
     }
 
     /**
@@ -173,6 +246,12 @@
       if (this.classList.contains('vvj-pattern')) {
         this.classList.toggle('vvjf-off', !active);
       }
+      // Both faces show below the breakpoint, so there is nothing to turn.
+      this.querySelectorAll('.flipbox-item > .vvjf-turn--base').forEach(
+        (button) => {
+          button.hidden = !active;
+        },
+      );
       if (active) {
         this._activate();
         this._setAriaForActive();
@@ -353,20 +432,19 @@
     }
 
     _setAriaForInactive() {
-      // Both sides visible, all elements tabbable, no aria-hidden.
+      // Both sides visible and usable: no aria-hidden, no inert. Controls
+      // inside keep their own authored tabindex; the script never set one.
       this._items.forEach((inner) => {
         const front = inner.querySelector('.flipbox-front');
         const back = inner.querySelector('.flipbox-back');
         if (!front || !back) {
           return;
         }
-        front.setAttribute('aria-hidden', 'false');
-        back.setAttribute('aria-hidden', 'false');
-        front.removeAttribute('tabindex');
-        back.removeAttribute('tabindex');
-      });
-      this.querySelectorAll(TABBABLE).forEach((el) => {
-        el.setAttribute('tabindex', '0');
+        [front, back].forEach((face) => {
+          face.setAttribute('aria-hidden', 'false');
+          face.inert = false;
+          face.removeAttribute('tabindex');
+        });
       });
     }
 
@@ -374,38 +452,36 @@
       if (!front || !back) {
         return;
       }
-      const frontHidden = isFlipped ? 'true' : 'false';
-      const backHidden = isFlipped ? 'false' : 'true';
-      front.setAttribute('aria-hidden', frontHidden);
-      back.setAttribute('aria-hidden', backHidden);
+      const shown = isFlipped ? back : front;
+      const hidden = isFlipped ? front : back;
       const turn = turnButton(front.parentElement);
+
+      // Show the new face first, so focus can move into it.
+      shown.setAttribute('aria-hidden', 'false');
+      shown.inert = false;
       if (turn) {
         // The Turn button is the card's one control; a face is not a
         // second, focusable copy of it.
         front.removeAttribute('tabindex');
         back.removeAttribute('tabindex');
+        turn.setAttribute('aria-pressed', isFlipped ? 'true' : 'false');
       } else {
-        front.setAttribute('tabindex', frontHidden === 'true' ? '-1' : '0');
-        back.setAttribute('tabindex', backHidden === 'true' ? '-1' : '0');
+        // Fallback for a card with no Turn button at all.
+        shown.setAttribute('tabindex', '0');
+        hidden.setAttribute('tabindex', '-1');
       }
 
-      front.querySelectorAll(TABBABLE).forEach((el) => {
-        el.setAttribute('tabindex', isFlipped ? '-1' : '0');
-      });
-      back.querySelectorAll(TABBABLE).forEach((el) => {
-        if (this._trigger === 'click') {
-          el.setAttribute('tabindex', isFlipped ? '0' : '-1');
-        } else {
-          el.setAttribute('tabindex', isFlipped ? '0' : '-1');
-        }
-      });
-
-      // Never leave focus inside the face that just became aria-hidden:
-      // move it to the Turn button, or else to the face now showing.
-      const hidden = isFlipped ? front : back;
+      // Never leave focus inside the face about to be hidden: move it to
+      // the Turn button, or else to the face now showing. This runs before
+      // `inert`, which would otherwise drop focus to the page body.
       if (hidden.contains(document.activeElement)) {
-        (turn || (isFlipped ? back : front)).focus({ preventScroll: true });
+        (turn || shown).focus({ preventScroll: true });
       }
+
+      // `inert` takes every control of the hidden face out of the Tab order
+      // and the accessibility tree without rewriting authored tabindex.
+      hidden.setAttribute('aria-hidden', 'true');
+      hidden.inert = true;
     }
   }
 

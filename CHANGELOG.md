@@ -9,6 +9,7 @@ rule, library name, option key, plugin ID, theme hook, JS behavior key from 1.x.
 
 ### Fixed
 
+- Accessibility: a view without a Pattern gets a real Turn button per card (hidden until it has focus, named after the card, with a pressed state) instead of a focusable card face with no button role; the hidden face is `inert` (the back is printed inert, so a Tab before the script runs skips it) instead of rewriting every control's tabindex, so authored tabindex values and links without an href are left alone below the breakpoint.
 - Patterns: Rail's bar reads counter, track, then both buttons, so its controls have their own place.
 - Patterns: Rail arrows point the reading way on right-to-left pages; Board uses the shared monospace variable.
 - Patterns: spacing, corner radius, type size, shadow and motion read shared `--vvj-*` variables with fallbacks, so a site or theme can adjust them in one place; a few odd values moved to the nearest step, under 10%.

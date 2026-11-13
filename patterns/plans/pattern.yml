@@ -19,6 +19,10 @@ options:
   available_breakpoints: 'all'
   enable_css: false
 features: []
+pictures:
+  vvj_image:
+    style: vvj_landscape_1200
+    responsive: false
 needs:
   - 'Row style Fields. Every field excluded except two Custom text fields: the first is the front, the second the back.'
   - 'Front: div.vvj-group > div.vvj-media (image, style vvj_landscape_1200) + p.vvj-kicker + p.vvj-title. Back: p.vvj-title + div.vvj-back-text (summary).'

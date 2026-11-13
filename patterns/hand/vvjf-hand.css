@@ -3,47 +3,170 @@
  * Pattern Hand: cards fanned like playing cards, dealt in, turned sideways.
  */
 
-.vvj-pattern--vvjf-hand { max-width: 1200px; margin: 0 auto; padding: clamp(40px, 7cqi, 96px) var(--vvj-space-20, 20px) clamp(32px, 5cqi, 64px); background: var(--vvj-surface); }
-.vvj-pattern--vvjf-hand .flipbox-item-inner { border-radius: var(--vvj-radius); box-shadow: var(--vvj-glass-shadow); }
-.vvj-pattern--vvjf-hand .flipbox-front { padding: 0; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-back { padding: var(--vvjf-cue-zone) var(--vvj-space-26, 26px) var(--vvj-space-26, 26px); gap: var(--vvj-space-14, 14px); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-group { display: flex; flex-direction: column; height: 100%; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-media { flex: 0 0 58%; }
-.vvj-pattern--vvjf-hand :where(.vvj-media) img { transition: transform var(--vvj-dur-900, 0.9s) var(--vvj-ease-out); }
-.vvj-pattern--vvjf-hand :where(.flipbox-item:hover) :where(.vvj-media) img { transform: scale(1.06); }
-.vvj-pattern--vvjf-hand .vvj-caption { padding: var(--vvj-space-18, 18px) var(--vvj-space-22, 22px) var(--vvj-space-22, 22px); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-kicker { font: 600 var(--vvj-text-12, 0.75rem)/1.2 var(--vvj-font-ui); letter-spacing: 0.18em; text-transform: uppercase; color: var(--vvj-stage-muted); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-title { margin: var(--vvj-space-8, 8px) 0 0; font: 500 clamp(1.5rem, 2.4cqi, 2rem)/1.05 var(--vvj-font-display); letter-spacing: -0.01em; }
+.vvj-pattern--vvjf-hand {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(40px, 7cqi, 96px) var(--vvj-space-20, 20px) clamp(32px, 5cqi, 64px);
+  background: var(--vvj-surface);
+}
+.vvj-pattern--vvjf-hand .flipbox-item-inner {
+  border-radius: var(--vvj-radius);
+  box-shadow: var(--vvj-glass-shadow);
+}
+.vvj-pattern--vvjf-hand .flipbox-front {
+  padding: 0;
+}
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-back {
+  padding: var(--vvjf-cue-zone) var(--vvj-space-26, 26px) var(--vvj-space-26, 26px);
+  gap: var(--vvj-space-14, 14px);
+}
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-group {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-media {
+  flex: 0 0 58%;
+}
+.vvj-pattern--vvjf-hand :where(.vvj-media) img {
+  transition: transform var(--vvj-dur-900, 0.9s) var(--vvj-ease-out);
+}
+.vvj-pattern--vvjf-hand :where(.flipbox-item:hover) :where(.vvj-media) img {
+  transform: scale(1.06);
+}
+.vvj-pattern--vvjf-hand .vvj-caption {
+  padding: var(--vvj-space-18, 18px) var(--vvj-space-22, 22px) var(--vvj-space-22, 22px);
+}
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-kicker {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vvj-stage-muted);
+  font: 600 var(--vvj-text-12, 0.75rem) / 1.2 var(--vvj-font-ui);
+}
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .vvj-title {
+  margin: var(--vvj-space-8, 8px) 0 0;
+  letter-spacing: -0.01em;
+  font: 500 clamp(1.5rem, 2.4cqi, 2rem) / 1.05 var(--vvj-font-display);
+}
 /* Ink, not muted: muted measured 3.75:1 and 4.18:1 on the card back (audit 2026-11-04). */
-.vvj-pattern--vvjf-hand .vvj-back-text { font-size: var(--vvj-text-15, 0.9375rem); line-height: 1.5; color: var(--vvj-ink); }
+.vvj-pattern--vvjf-hand .vvj-back-text {
+  color: var(--vvj-ink);
+  font-size: var(--vvj-text-15, 0.9375rem);
+  line-height: 1.5;
+}
 /* Light sweep as the back lands. */
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-back::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
-  background: linear-gradient(105deg, transparent 35%, color-mix(in srgb, var(--vvj-surface) 70%, transparent) 50%, transparent 65%); background-size: 250% 100%; }
-:where(.vvj-pattern--vvjf-hand) :where(.flipped) .flipbox-back::after { animation: vvjf-hand-sweep var(--vvj-dur-1100, 1.1s) var(--vvj-dur-450, 0.45s) var(--vvj-ease-plain-out, ease-out) both; }
-@keyframes vvjf-hand-sweep { from { opacity: 1; background-position: 120% 0; } to { opacity: 0; background-position: -60% 0; } }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand .flipbox-back::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(105deg, transparent 35%, color-mix(in sRGB, var(--vvj-surface) 70%, transparent) 50%, transparent 65%);
+  background-size: 250% 100%;
+  inset: 0;
+}
+:where(.vvj-pattern--vvjf-hand) :where(.flipped) .flipbox-back::after {
+  animation: vvjf-hand-sweep var(--vvj-dur-1100, 1.1s) var(--vvj-dur-450, 0.45s) var(--vvj-ease-plain-out, ease-out) both;
+}
+@keyframes vvjf-hand-sweep {
+  from {
+    opacity: 1;
+    background-position: 120% 0;
+  }
+  to {
+    opacity: 0;
+    background-position: -60% 0;
+  }
+}
 /* The fan: five cards to a hand at their set width, so the back text always fits; a sixth card starts the next hand below. */
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-inner { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--vvj-space-48, 48px) 0; padding: var(--vvj-space-24, 24px) 0 var(--vvj-space-8, 8px); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-item { flex: 0 0 min(calc(var(--box-width, 260) * 1px), 100%); min-width: 0; margin: 0 calc(var(--vvj-space-18, 18px) * -1); transform-origin: 50% 120%;
-  transform: translateY(var(--vvjf-y, 0)) rotate(var(--vvjf-r, 0deg)); transition: transform var(--vvj-dur-600, 0.6s) var(--vvj-ease-out); }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 1) { --vvjf-r: -8deg; --vvjf-y: 22px; --vvjf-from: 200%; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 2) { --vvjf-r: -4deg; --vvjf-y: 6px; --vvjf-from: 100%; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 3) { --vvjf-r: 0deg; --vvjf-y: 0px; --vvjf-from: 0%; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 4) { --vvjf-r: 4deg; --vvjf-y: 6px; --vvjf-from: -100%; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 5) { --vvjf-r: 8deg; --vvjf-y: 22px; --vvjf-from: -200%; }
-:where(.vvj-pattern--vvjf-hand:not(.vvjf-off)) .flipbox-item:is(:hover, :focus-within) { --vvjf-r: 0deg; --vvjf-y: -26px; z-index: 5; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-hand-in:not(.vvjf-off) .flipbox-item { animation: vvjf-hand-deal var(--vvj-dur-900, 0.9s) var(--vvj-ease-out) backwards; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 2) { animation-delay: 0.08s; }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 3) { animation-delay: var(--vvj-dur-150, 0.15s); }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 4) { animation-delay: var(--vvj-dur-250, 0.25s); }
-:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 5) { animation-delay: var(--vvj-dur-300, 0.3s); }
-@keyframes vvjf-hand-deal { from { transform: translateX(var(--vvjf-from)) translateY(60px) rotate(0deg); opacity: 0; } }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--vvj-space-48, 48px) 0;
+  padding: var(--vvj-space-24, 24px) 0 var(--vvj-space-8, 8px);
+}
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-item {
+  flex: 0 0 min(calc(var(--box-width, 260) * 1px), 100%);
+  min-width: 0;
+  margin: 0 calc(var(--vvj-space-18, 18px) * -1);
+  transition: transform var(--vvj-dur-600, 0.6s) var(--vvj-ease-out);
+  transform: translateY(var(--vvjf-y, 0)) rotate(var(--vvjf-r, 0deg));
+  transform-origin: 50% 120%;
+}
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 1) {
+  --vvjf-r: -8deg;
+  --vvjf-y: 22px;
+  --vvjf-from: 200%;
+}
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 2) {
+  --vvjf-r: -4deg;
+  --vvjf-y: 6px;
+  --vvjf-from: 100%;
+}
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 3) {
+  --vvjf-r: 0deg;
+  --vvjf-y: 0px;
+  --vvjf-from: 0%;
+}
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 4) {
+  --vvjf-r: 4deg;
+  --vvjf-y: 6px;
+  --vvjf-from: -100%;
+}
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 5) {
+  --vvjf-r: 8deg;
+  --vvjf-y: 22px;
+  --vvjf-from: -200%;
+}
+:where(.vvj-pattern--vvjf-hand:not(.vvjf-off)) .flipbox-item:is(:hover, :focus-within) {
+  --vvjf-r: 0deg;
+  --vvjf-y: -26px;
+
+  z-index: 5;
+}
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-hand-in:not(.vvjf-off) .flipbox-item {
+  animation: vvjf-hand-deal var(--vvj-dur-900, 0.9s) var(--vvj-ease-out) backwards;
+}
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 2) {
+  animation-delay: 0.08s;
+}
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 3) {
+  animation-delay: var(--vvj-dur-150, 0.15s);
+}
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 4) {
+  animation-delay: var(--vvj-dur-250, 0.25s);
+}
+:where(.vvj-pattern--vvjf-hand) .flipbox-item:nth-child(5n + 5) {
+  animation-delay: var(--vvj-dur-300, 0.3s);
+}
+@keyframes vvjf-hand-deal {
+  from {
+    transform: translateX(var(--vvjf-from)) translateY(60px) rotate(0deg);
+    opacity: 0;
+  }
+}
 /* Where five cards do not fit in a row, the cards wrap flat and apart instead of fanning. */
 @container vvj-region (max-width: 74.99rem) {
-  .vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-item { margin: 0 var(--vvj-space-8, 8px); --vvjf-r: 0deg; --vvjf-y: 0px; }
+  .vvj-pattern.vvjf.vvj-pattern--vvjf-hand:not(.vvjf-off) .flipbox-item {
+    margin: 0 var(--vvj-space-8, 8px);
+
+    --vvjf-r: 0deg;
+    --vvjf-y: 0px;
+  }
 }
 /* Stacked below the breakpoint: one card, front over back. */
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .flipbox-item-inner { box-shadow: none; }
-:where(.vvj-pattern--vvjf-hand.vvjf-off) .vvj-media { aspect-ratio: 3 / 2; }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .vvj-caption { padding: var(--vvj-space-18, 18px) var(--vvj-space-22, 22px) var(--vvj-space-20, 20px); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .flipbox-back { padding: var(--vvj-space-30, 30px) var(--vvj-space-26, 26px) var(--vvj-space-26, 26px); }
-.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .flipbox-back .vvj-title { display: none; }
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .flipbox-item-inner {
+  box-shadow: none;
+}
+:where(.vvj-pattern--vvjf-hand.vvjf-off) .vvj-media {
+  aspect-ratio: 3 / 2;
+}
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .vvj-caption {
+  padding: var(--vvj-space-18, 18px) var(--vvj-space-22, 22px) var(--vvj-space-20, 20px);
+}
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .flipbox-back {
+  padding: var(--vvj-space-30, 30px) var(--vvj-space-26, 26px) var(--vvj-space-26, 26px);
+}
+.vvj-pattern.vvjf.vvj-pattern--vvjf-hand.vvjf-off .flipbox-back .vvj-title {
+  display: none;
+}
